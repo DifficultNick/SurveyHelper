@@ -119,6 +119,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies />
+      <EntryPointSymbol>Main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,9 +153,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Classes.cpp" />
     <ClCompile Include="MainForm.cpp" />
-    <ClCompile Include="PilotSyntax.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes.h" />
@@ -295,7 +294,9 @@
     <Image Include="..\res\close_hover.png" />
     <Image Include="..\res\close_push.png" />
     <Image Include="..\res\icon\logo256.ico" />
+    <Image Include="..\res\spss_file.jpg" />
     <Image Include="close.bmp" />
+    <Image Include="spss_file.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SurveyHelper.rc" />

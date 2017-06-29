@@ -121,6 +121,9 @@
   <data name="bak_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\bak_file.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="spss_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\spss_file.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="txt_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\txt_file.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

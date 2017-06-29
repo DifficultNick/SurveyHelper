@@ -88,7 +88,7 @@
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				100)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				210)));
+				280)));
 			this->tableLayoutPanel1->Controls->Add(this->richTextBox1, 0, 2);
 			this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 1, 3);
 			this->tableLayoutPanel1->Controls->Add(this->label2, 0, 0);
@@ -99,24 +99,26 @@
 			this->tableLayoutPanel1->Controls->Add(this->button3, 1, 2);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
+			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 5;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 64)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 32)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 35)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 79)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 39)));
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 43)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 36)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(740, 491);
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 44)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(987, 604);
 			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// richTextBox1
 			// 
 			this->richTextBox1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->richTextBox1->Enabled = false;
-			this->richTextBox1->Location = System::Drawing::Point(3, 99);
+			this->richTextBox1->Location = System::Drawing::Point(4, 122);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->tableLayoutPanel1->SetRowSpan(this->richTextBox1, 2);
-			this->richTextBox1->Size = System::Drawing::Size(524, 353);
+			this->richTextBox1->Size = System::Drawing::Size(699, 434);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = L"";
 			// 
@@ -128,13 +130,14 @@
 			this->tableLayoutPanel2->Controls->Add(this->label1, 0, 0);
 			this->tableLayoutPanel2->Controls->Add(this->panel1, 0, 1);
 			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel2->Location = System::Drawing::Point(533, 134);
+			this->tableLayoutPanel2->Location = System::Drawing::Point(711, 165);
+			this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 			this->tableLayoutPanel2->RowCount = 2;
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 120)));
+			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 148)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(204, 318);
+			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 25)));
+			this->tableLayoutPanel2->Size = System::Drawing::Size(272, 391);
 			this->tableLayoutPanel2->TabIndex = 3;
 			// 
 			// label1
@@ -143,10 +146,10 @@
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(9, 12);
+			this->label1->Location = System::Drawing::Point(16, 19);
 			this->label1->Margin = System::Windows::Forms::Padding(0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(185, 95);
+			this->label1->Size = System::Drawing::Size(239, 110);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Файл будет заменён \r\nна новый.\r\nИсходный файл будет \r\nсохранён, как\r\n\"[имя файла]"
 				L".Headers.bak\".";
@@ -155,9 +158,11 @@
 				// 
 			this->panel1->AllowDrop = true;
 			this->panel1->BackColor = System::Drawing::Color::White;
-			this->panel1->Location = System::Drawing::Point(3, 123);
+			this->panel1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->panel1->Location = System::Drawing::Point(4, 152);
+			this->panel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(198, 177);
+			this->panel1->Size = System::Drawing::Size(264, 218);
 			this->panel1->TabIndex = 3;
 			this->panel1->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::panel1_DragDrop);
 			this->panel1->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::panel1_DragEnter);
@@ -169,9 +174,10 @@
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(3, 16);
+			this->label2->Location = System::Drawing::Point(4, 19);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(496, 32);
+			this->label2->Size = System::Drawing::Size(648, 40);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Введите полный путь к фалу, или нажмите \"Обзор\" для поиска файла, или перетащите "
 				L"файл на поле внизу справа.";
@@ -181,9 +187,10 @@
 			this->FilePath->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
 			this->FilePath->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->FilePath->Location = System::Drawing::Point(3, 69);
+			this->FilePath->Location = System::Drawing::Point(4, 86);
+			this->FilePath->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->FilePath->Name = L"FilePath";
-			this->FilePath->Size = System::Drawing::Size(524, 21);
+			this->FilePath->Size = System::Drawing::Size(699, 24);
 			this->FilePath->TabIndex = 5;
 			this->FilePath->TextChanged += gcnew System::EventHandler(this, &Headers::FilePath_TextChanged);
 			this->FilePath->DoubleClick += gcnew System::EventHandler(this, &Headers::FilePath_DoubleClick);
@@ -191,10 +198,10 @@
 			// button2
 			// 
 			this->button2->Anchor = System::Windows::Forms::AnchorStyles::Left;
-			this->button2->Location = System::Drawing::Point(540, 68);
-			this->button2->Margin = System::Windows::Forms::Padding(10, 3, 3, 3);
+			this->button2->Location = System::Drawing::Point(720, 84);
+			this->button2->Margin = System::Windows::Forms::Padding(13, 4, 4, 4);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(87, 23);
+			this->button2->Size = System::Drawing::Size(116, 28);
 			this->button2->TabIndex = 6;
 			this->button2->Text = L"Обзор";
 			this->button2->UseVisualStyleBackColor = true;
@@ -206,9 +213,10 @@
 			this->button1->Enabled = false;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button1->Location = System::Drawing::Point(174, 460);
+			this->button1->Location = System::Drawing::Point(232, 566);
+			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(182, 26);
+			this->button1->Size = System::Drawing::Size(243, 32);
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Показать исходные";
 			this->button1->UseVisualStyleBackColor = true;
@@ -221,9 +229,10 @@
 			this->StatusLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->StatusLabel->ForeColor = System::Drawing::Color::Red;
-			this->StatusLabel->Location = System::Drawing::Point(573, 22);
+			this->StatusLabel->Location = System::Drawing::Point(771, 28);
+			this->StatusLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->StatusLabel->Name = L"StatusLabel";
-			this->StatusLabel->Size = System::Drawing::Size(124, 19);
+			this->StatusLabel->Size = System::Drawing::Size(151, 23);
 			this->StatusLabel->TabIndex = 7;
 			this->StatusLabel->Text = L"Выберите файл";
 			// 
@@ -232,10 +241,10 @@
 			this->button3->Anchor = System::Windows::Forms::AnchorStyles::Left;
 			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button3->Location = System::Drawing::Point(540, 102);
-			this->button3->Margin = System::Windows::Forms::Padding(10, 3, 3, 3);
+			this->button3->Location = System::Drawing::Point(720, 125);
+			this->button3->Margin = System::Windows::Forms::Padding(13, 4, 4, 4);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(187, 23);
+			this->button3->Size = System::Drawing::Size(249, 28);
 			this->button3->TabIndex = 8;
 			this->button3->Text = L"Обработать";
 			this->button3->UseVisualStyleBackColor = true;
@@ -243,14 +252,16 @@
 			// 
 			// Headers
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(740, 491);
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->ClientSize = System::Drawing::Size(987, 604);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
-			this->MinimumSize = System::Drawing::Size(641, 517);
+			this->MinimumSize = System::Drawing::Size(849, 626);
 			this->Name = L"Headers";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Удаление нумерации вопросов";
