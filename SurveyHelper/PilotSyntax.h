@@ -35,19 +35,28 @@
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel2;
 		private: System::Windows::Forms::GroupBox^  groupBox1;
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel3;
-		private: System::Windows::Forms::CheckBox^  checkBox2;
-		private: System::Windows::Forms::CheckBox^  checkBox1;
+	private: System::Windows::Forms::CheckBox^  renvar;
+	private: System::Windows::Forms::CheckBox^  repl;
+
+
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel4;
-		private: System::Windows::Forms::CheckBox^  checkBox3;
-		private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::CheckBox^  selstat;
+	private: System::Windows::Forms::TextBox^  stats;
+
+
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel5;
-		private: System::Windows::Forms::CheckBox^  checkBox5;
-		private: System::Windows::Forms::CheckBox^  checkBox4;
+	private: System::Windows::Forms::CheckBox^  saveTime;
+
+	private: System::Windows::Forms::CheckBox^  cutvars;
+
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel6;
-		private: System::Windows::Forms::CheckBox^  checkBox7;
+	private: System::Windows::Forms::CheckBox^  excelExp;
+
 		private: System::Windows::Forms::Panel^  panel1;
-		private: System::Windows::Forms::RadioButton^  radioButton2;
-		private: System::Windows::Forms::RadioButton^  radioButton1;
+	private: System::Windows::Forms::RadioButton^  vals;
+
+	private: System::Windows::Forms::RadioButton^  labs;
+
 		private: System::Windows::Forms::Panel^  panel2;
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel7;
 	private: System::Windows::Forms::Label^  StatusLabel;
@@ -75,18 +84,18 @@
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->tableLayoutPanel6 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->checkBox7 = (gcnew System::Windows::Forms::CheckBox());
+			this->excelExp = (gcnew System::Windows::Forms::CheckBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
-			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->vals = (gcnew System::Windows::Forms::RadioButton());
+			this->labs = (gcnew System::Windows::Forms::RadioButton());
+			this->renvar = (gcnew System::Windows::Forms::CheckBox());
+			this->repl = (gcnew System::Windows::Forms::CheckBox());
 			this->tableLayoutPanel4 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->checkBox3 = (gcnew System::Windows::Forms::CheckBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->selstat = (gcnew System::Windows::Forms::CheckBox());
+			this->stats = (gcnew System::Windows::Forms::TextBox());
 			this->tableLayoutPanel5 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->checkBox5 = (gcnew System::Windows::Forms::CheckBox());
-			this->checkBox4 = (gcnew System::Windows::Forms::CheckBox());
+			this->saveTime = (gcnew System::Windows::Forms::CheckBox());
+			this->cutvars = (gcnew System::Windows::Forms::CheckBox());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->tableLayoutPanel7 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->StatusLabel = (gcnew System::Windows::Forms::Label());
@@ -143,10 +152,10 @@
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 			this->tableLayoutPanel2->RowCount = 3;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 45)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 234)));
+			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 203)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(842, 308);
+			this->tableLayoutPanel2->Size = System::Drawing::Size(842, 275);
 			this->tableLayoutPanel2->TabIndex = 1;
 			// 
 			// groupBox1
@@ -159,7 +168,7 @@
 			this->groupBox1->Margin = System::Windows::Forms::Padding(4);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Padding = System::Windows::Forms::Padding(4);
-			this->groupBox1->Size = System::Drawing::Size(551, 226);
+			this->groupBox1->Size = System::Drawing::Size(551, 195);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Настройки";
@@ -170,8 +179,8 @@
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				100)));
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel6, 0, 4);
-			this->tableLayoutPanel3->Controls->Add(this->checkBox2, 0, 1);
-			this->tableLayoutPanel3->Controls->Add(this->checkBox1, 0, 0);
+			this->tableLayoutPanel3->Controls->Add(this->renvar, 0, 1);
+			this->tableLayoutPanel3->Controls->Add(this->repl, 0, 0);
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel4, 0, 2);
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel5, 0, 3);
 			this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -186,7 +195,7 @@
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 34)));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 34)));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 34)));
-			this->tableLayoutPanel3->Size = System::Drawing::Size(543, 202);
+			this->tableLayoutPanel3->Size = System::Drawing::Size(543, 171);
 			this->tableLayoutPanel3->TabIndex = 0;
 			// 
 			// tableLayoutPanel6
@@ -196,7 +205,7 @@
 				305)));
 			this->tableLayoutPanel6->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
-			this->tableLayoutPanel6->Controls->Add(this->checkBox7, 0, 0);
+			this->tableLayoutPanel6->Controls->Add(this->excelExp, 0, 0);
 			this->tableLayoutPanel6->Controls->Add(this->panel1, 1, 0);
 			this->tableLayoutPanel6->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel6->Location = System::Drawing::Point(0, 136);
@@ -204,85 +213,83 @@
 			this->tableLayoutPanel6->Name = L"tableLayoutPanel6";
 			this->tableLayoutPanel6->RowCount = 1;
 			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel6->Size = System::Drawing::Size(543, 66);
+			this->tableLayoutPanel6->Size = System::Drawing::Size(543, 35);
 			this->tableLayoutPanel6->TabIndex = 6;
 			// 
-			// checkBox7
+			// excelExp
 			// 
-			this->checkBox7->AutoSize = true;
-			this->checkBox7->Checked = true;
-			this->checkBox7->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->checkBox7->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->checkBox7->Location = System::Drawing::Point(4, 41);
-			this->checkBox7->Margin = System::Windows::Forms::Padding(4);
-			this->checkBox7->Name = L"checkBox7";
-			this->checkBox7->Size = System::Drawing::Size(297, 21);
-			this->checkBox7->TabIndex = 6;
-			this->checkBox7->Text = L"Экспортировать в Excel";
-			this->checkBox7->UseVisualStyleBackColor = true;
+			this->excelExp->AutoSize = true;
+			this->excelExp->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->excelExp->Location = System::Drawing::Point(4, 10);
+			this->excelExp->Margin = System::Windows::Forms::Padding(4);
+			this->excelExp->Name = L"excelExp";
+			this->excelExp->Size = System::Drawing::Size(297, 21);
+			this->excelExp->TabIndex = 6;
+			this->excelExp->Text = L"Экспортировать в Excel";
+			this->excelExp->UseVisualStyleBackColor = true;
 			// 
 			// panel1
 			// 
-			this->panel1->Controls->Add(this->radioButton2);
-			this->panel1->Controls->Add(this->radioButton1);
+			this->panel1->Controls->Add(this->vals);
+			this->panel1->Controls->Add(this->labs);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel1->Location = System::Drawing::Point(305, 0);
 			this->panel1->Margin = System::Windows::Forms::Padding(0);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(238, 66);
+			this->panel1->Size = System::Drawing::Size(238, 35);
 			this->panel1->TabIndex = 7;
 			// 
-			// radioButton2
+			// vals
 			// 
-			this->radioButton2->AutoSize = true;
-			this->radioButton2->Location = System::Drawing::Point(103, 10);
-			this->radioButton2->Margin = System::Windows::Forms::Padding(4);
-			this->radioButton2->Name = L"radioButton2";
-			this->radioButton2->Size = System::Drawing::Size(94, 21);
-			this->radioButton2->TabIndex = 1;
-			this->radioButton2->TabStop = true;
-			this->radioButton2->Text = L"Значения";
-			this->radioButton2->UseVisualStyleBackColor = true;
+			this->vals->AutoSize = true;
+			this->vals->Location = System::Drawing::Point(103, 7);
+			this->vals->Margin = System::Windows::Forms::Padding(4);
+			this->vals->Name = L"vals";
+			this->vals->Size = System::Drawing::Size(94, 21);
+			this->vals->TabIndex = 1;
+			this->vals->Text = L"Значения";
+			this->vals->UseVisualStyleBackColor = true;
 			// 
-			// radioButton1
+			// labs
 			// 
-			this->radioButton1->AutoSize = true;
-			this->radioButton1->Location = System::Drawing::Point(4, 10);
-			this->radioButton1->Margin = System::Windows::Forms::Padding(4);
-			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(70, 21);
-			this->radioButton1->TabIndex = 0;
-			this->radioButton1->TabStop = true;
-			this->radioButton1->Text = L"Метки";
-			this->radioButton1->UseVisualStyleBackColor = true;
+			this->labs->AutoSize = true;
+			this->labs->Checked = true;
+			this->labs->Location = System::Drawing::Point(4, 7);
+			this->labs->Margin = System::Windows::Forms::Padding(4);
+			this->labs->Name = L"labs";
+			this->labs->Size = System::Drawing::Size(70, 21);
+			this->labs->TabIndex = 0;
+			this->labs->TabStop = true;
+			this->labs->Text = L"Метки";
+			this->labs->UseVisualStyleBackColor = true;
 			// 
-			// checkBox2
+			// renvar
 			// 
-			this->checkBox2->AutoSize = true;
-			this->checkBox2->Checked = true;
-			this->checkBox2->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->checkBox2->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->checkBox2->Location = System::Drawing::Point(4, 43);
-			this->checkBox2->Margin = System::Windows::Forms::Padding(4);
-			this->checkBox2->Name = L"checkBox2";
-			this->checkBox2->Size = System::Drawing::Size(535, 21);
-			this->checkBox2->TabIndex = 3;
-			this->checkBox2->Text = L"Переименовать переменные pre_sex и pre_age_1";
-			this->checkBox2->UseVisualStyleBackColor = true;
+			this->renvar->AutoSize = true;
+			this->renvar->Checked = true;
+			this->renvar->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->renvar->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->renvar->Location = System::Drawing::Point(4, 43);
+			this->renvar->Margin = System::Windows::Forms::Padding(4);
+			this->renvar->Name = L"renvar";
+			this->renvar->Size = System::Drawing::Size(535, 21);
+			this->renvar->TabIndex = 3;
+			this->renvar->Text = L"Переименовать переменные pre_sex и pre_age_1";
+			this->renvar->UseVisualStyleBackColor = true;
 			// 
-			// checkBox1
+			// repl
 			// 
-			this->checkBox1->AutoSize = true;
-			this->checkBox1->Checked = true;
-			this->checkBox1->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->checkBox1->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->checkBox1->Location = System::Drawing::Point(4, 9);
-			this->checkBox1->Margin = System::Windows::Forms::Padding(4);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(535, 21);
-			this->checkBox1->TabIndex = 0;
-			this->checkBox1->Text = L"Заменить \"@\" на \"_\"";
-			this->checkBox1->UseVisualStyleBackColor = true;
+			this->repl->AutoSize = true;
+			this->repl->Checked = true;
+			this->repl->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->repl->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->repl->Location = System::Drawing::Point(4, 9);
+			this->repl->Margin = System::Windows::Forms::Padding(4);
+			this->repl->Name = L"repl";
+			this->repl->Size = System::Drawing::Size(535, 21);
+			this->repl->TabIndex = 0;
+			this->repl->Text = L"Заменить \"@\" на \"_\"";
+			this->repl->UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel4
 			// 
@@ -291,8 +298,8 @@
 				305)));
 			this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				246)));
-			this->tableLayoutPanel4->Controls->Add(this->checkBox3, 0, 0);
-			this->tableLayoutPanel4->Controls->Add(this->textBox1, 1, 0);
+			this->tableLayoutPanel4->Controls->Add(this->selstat, 0, 0);
+			this->tableLayoutPanel4->Controls->Add(this->stats, 1, 0);
 			this->tableLayoutPanel4->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel4->Location = System::Drawing::Point(0, 68);
 			this->tableLayoutPanel4->Margin = System::Windows::Forms::Padding(0);
@@ -303,29 +310,29 @@
 			this->tableLayoutPanel4->TabIndex = 4;
 			this->toolTip1->SetToolTip(this->tableLayoutPanel4, L"Статусы через запятую");
 			// 
-			// checkBox3
+			// selstat
 			// 
-			this->checkBox3->AutoSize = true;
-			this->checkBox3->Checked = true;
-			this->checkBox3->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->checkBox3->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->checkBox3->Location = System::Drawing::Point(4, 9);
-			this->checkBox3->Margin = System::Windows::Forms::Padding(4);
-			this->checkBox3->Name = L"checkBox3";
-			this->checkBox3->Size = System::Drawing::Size(297, 21);
-			this->checkBox3->TabIndex = 4;
-			this->checkBox3->Text = L"Выбрать статусы:";
-			this->checkBox3->UseVisualStyleBackColor = true;
+			this->selstat->AutoSize = true;
+			this->selstat->Checked = true;
+			this->selstat->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->selstat->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->selstat->Location = System::Drawing::Point(4, 9);
+			this->selstat->Margin = System::Windows::Forms::Padding(4);
+			this->selstat->Name = L"selstat";
+			this->selstat->Size = System::Drawing::Size(297, 21);
+			this->selstat->TabIndex = 4;
+			this->selstat->Text = L"Выбрать статусы:";
+			this->selstat->UseVisualStyleBackColor = true;
 			// 
-			// textBox1
+			// stats
 			// 
-			this->textBox1->Dock = System::Windows::Forms::DockStyle::Left;
-			this->textBox1->Location = System::Drawing::Point(309, 4);
-			this->textBox1->Margin = System::Windows::Forms::Padding(4);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(209, 23);
-			this->textBox1->TabIndex = 5;
-			this->textBox1->Text = L"18";
+			this->stats->Dock = System::Windows::Forms::DockStyle::Left;
+			this->stats->Location = System::Drawing::Point(309, 4);
+			this->stats->Margin = System::Windows::Forms::Padding(4);
+			this->stats->Name = L"stats";
+			this->stats->Size = System::Drawing::Size(209, 23);
+			this->stats->TabIndex = 5;
+			this->stats->Text = L"18";
 			// 
 			// tableLayoutPanel5
 			// 
@@ -334,8 +341,8 @@
 				305)));
 			this->tableLayoutPanel5->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				100)));
-			this->tableLayoutPanel5->Controls->Add(this->checkBox5, 0, 0);
-			this->tableLayoutPanel5->Controls->Add(this->checkBox4, 0, 0);
+			this->tableLayoutPanel5->Controls->Add(this->saveTime, 0, 0);
+			this->tableLayoutPanel5->Controls->Add(this->cutvars, 0, 0);
 			this->tableLayoutPanel5->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel5->Location = System::Drawing::Point(0, 102);
 			this->tableLayoutPanel5->Margin = System::Windows::Forms::Padding(0);
@@ -345,31 +352,31 @@
 			this->tableLayoutPanel5->Size = System::Drawing::Size(543, 34);
 			this->tableLayoutPanel5->TabIndex = 5;
 			// 
-			// checkBox5
+			// saveTime
 			// 
-			this->checkBox5->AutoSize = true;
-			this->checkBox5->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->checkBox5->Location = System::Drawing::Point(309, 9);
-			this->checkBox5->Margin = System::Windows::Forms::Padding(4);
-			this->checkBox5->Name = L"checkBox5";
-			this->checkBox5->Size = System::Drawing::Size(230, 21);
-			this->checkBox5->TabIndex = 7;
-			this->checkBox5->Text = L"Оставить Start и End";
-			this->checkBox5->UseVisualStyleBackColor = true;
+			this->saveTime->AutoSize = true;
+			this->saveTime->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->saveTime->Location = System::Drawing::Point(309, 9);
+			this->saveTime->Margin = System::Windows::Forms::Padding(4);
+			this->saveTime->Name = L"saveTime";
+			this->saveTime->Size = System::Drawing::Size(230, 21);
+			this->saveTime->TabIndex = 7;
+			this->saveTime->Text = L"Оставить Start и End";
+			this->saveTime->UseVisualStyleBackColor = true;
 			// 
-			// checkBox4
+			// cutvars
 			// 
-			this->checkBox4->AutoSize = true;
-			this->checkBox4->Checked = true;
-			this->checkBox4->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->checkBox4->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->checkBox4->Location = System::Drawing::Point(4, 9);
-			this->checkBox4->Margin = System::Windows::Forms::Padding(4);
-			this->checkBox4->Name = L"checkBox4";
-			this->checkBox4->Size = System::Drawing::Size(297, 21);
-			this->checkBox4->TabIndex = 6;
-			this->checkBox4->Text = L"Отрезать технические переменные";
-			this->checkBox4->UseVisualStyleBackColor = true;
+			this->cutvars->AutoSize = true;
+			this->cutvars->Checked = true;
+			this->cutvars->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->cutvars->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->cutvars->Location = System::Drawing::Point(4, 9);
+			this->cutvars->Margin = System::Windows::Forms::Padding(4);
+			this->cutvars->Name = L"cutvars";
+			this->cutvars->Size = System::Drawing::Size(297, 21);
+			this->cutvars->TabIndex = 6;
+			this->cutvars->Text = L"Отрезать технические переменные";
+			this->cutvars->UseVisualStyleBackColor = true;
 			// 
 			// panel2
 			// 
@@ -377,10 +384,10 @@
 			this->tableLayoutPanel2->SetColumnSpan(this->panel2, 2);
 			this->panel2->Controls->Add(this->tableLayoutPanel7);
 			this->panel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel2->Location = System::Drawing::Point(0, 279);
+			this->panel2->Location = System::Drawing::Point(0, 248);
 			this->panel2->Margin = System::Windows::Forms::Padding(0);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(842, 29);
+			this->panel2->Size = System::Drawing::Size(842, 27);
 			this->panel2->TabIndex = 1;
 			// 
 			// tableLayoutPanel7
@@ -398,14 +405,14 @@
 			this->tableLayoutPanel7->Name = L"tableLayoutPanel7";
 			this->tableLayoutPanel7->RowCount = 1;
 			this->tableLayoutPanel7->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel7->Size = System::Drawing::Size(842, 29);
+			this->tableLayoutPanel7->Size = System::Drawing::Size(842, 27);
 			this->tableLayoutPanel7->TabIndex = 0;
 			// 
 			// StatusLabel
 			// 
 			this->StatusLabel->AutoSize = true;
 			this->StatusLabel->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->StatusLabel->Location = System::Drawing::Point(4, 8);
+			this->StatusLabel->Location = System::Drawing::Point(4, 6);
 			this->StatusLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 4);
 			this->StatusLabel->Name = L"StatusLabel";
 			this->StatusLabel->Size = System::Drawing::Size(423, 17);
@@ -418,7 +425,7 @@
 			this->progressBar1->Location = System::Drawing::Point(435, 4);
 			this->progressBar1->Margin = System::Windows::Forms::Padding(4);
 			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(403, 21);
+			this->progressBar1->Size = System::Drawing::Size(403, 19);
 			this->progressBar1->TabIndex = 1;
 			// 
 			// panel3
@@ -454,10 +461,10 @@
 			this->panel4->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->panel4->BackColor = System::Drawing::Color::White;
 			this->panel4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->panel4->Location = System::Drawing::Point(568, 53);
+			this->panel4->Location = System::Drawing::Point(568, 49);
 			this->panel4->Margin = System::Windows::Forms::Padding(4);
 			this->panel4->Name = L"panel4";
-			this->panel4->Size = System::Drawing::Size(264, 218);
+			this->panel4->Size = System::Drawing::Size(264, 195);
 			this->panel4->TabIndex = 4;
 			// 
 			// button2
@@ -479,7 +486,7 @@
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(842, 308);
+			this->ClientSize = System::Drawing::Size(842, 275);
 			this->Controls->Add(this->tableLayoutPanel2);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -517,18 +524,97 @@
 
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e)
 	{
+		progressBar1->Value = 0;
+		StatusLabel->Text = "Выберите файл";
+
 		if ( !File::Exists(FilePath->Text) )
 		{
 			ShowMessage("Сначала выберите файл!", Forms::MessageBoxIcon::Exclamation);
 			return;
 		}
 
-		StatusLabel->Text = "Сбор сведений...";
+		if ( selstat->Checked && !Regex::IsMatch(stats->Text, "^(\\d{1,3}\\s*,?\\s*)*(\\d{1,3}\\s*)+$") )
+		{
+			ShowWarning("Неверно указан список статусов!");
+			return;
+		}
+
+		StatusLabel->Text = "Загрузка файла...";
 		
 		List<String^>^ fStr = gcnew List<String^>(ReadFile(FilePath->Text));
+
+		progressBar1->Value = 30;
+		StatusLabel->Text = "Сбор сведений...";
+
 		String^ s = ListToString(fStr, "\n");
+		String^ delimiter = repl->Checked ? "_" : ( s->Contains("@") ? "@" : "_");
 		String^ vars = s->Remove(s->IndexOf("var lab"));
-		String^ lastTech = vars->Remove(0, vars->LastIndexOf("\npre_data") + 1);
-		lastTech = lastTech->Remove(lastTech->IndexOf(" "));
+		int eof = s->IndexOf("val lab");
+		eof = s->IndexOf("\n.\n", eof) + 3;
+		String^ res = s->Remove(eof);
+		String^ add = "";
+		String^ fp = Regex::Replace(FilePath->Text, "\\.sps$", "");
+		String^ dv = "";
+
+		progressBar1->Value = 40;
+		StatusLabel->Text = "Добавление команд...";
+
+		// промежуточное сохранение
+		add += "\n\nsave outfile \"" + fp + ".sav\" /zcompressed.";
+		add += "\nget file \"" + fp + ".sav\".";
+
+		// переименование
+		if ( renvar->Checked ) add += "\n\nrename variables(pre_sex pre_age" + delimiter + "1 = sex age).";
+
+		//выбор статусов
+		if ( selstat->Checked )
+		{
+			String^ statuses = Regex::Replace(stats->Text, "[^\\d,]", "");
+			if (CountSubStrings(statuses, ",") > 0)
+				add += "\n\nselect if any(Status, " + statuses->Replace(",", ", ") + ").";
+			else add += "\n\nselect if Status = " + statuses + ".";
+		}
+
+		// drop
+		if ( cutvars->Checked )
+		{
+			String^ lastTech = vars->Remove(0, vars->LastIndexOf("\npre_data") + 1);
+			lastTech = lastTech->Remove(lastTech->IndexOf(" "));
+			dv = " /drop GlobalID to " + ( saveTime->Checked ? "Page Status to " : "" ) + lastTech;
+		}
+
+		// финальное сохранение
+		add += "\n\nsave outfile \"" + fp + "_Client.sav\"" + dv + ".";
+		add += "\nget file \"" + fp + "_Client.sav\".";
+
+		// export
+		if ( excelExp->Checked )
+		{
+			add += "\n\nSAVE TRANSLATE OUTFILE=\"" + fp + "_Client.xlsx\"\n";
+			add += "/TYPE = XLS\n";
+			add += "/VERSION = 12\n";
+			add += "/MAP\n";
+			add += "/REPLACE\n";
+			add += "/FIELDNAMES\n";
+			add += "/CELLS = " + ( labs->Checked ? "LABELS" : "VALUES") + ".";
+		}
+
+		res += add + "\n\n" + s->Remove(0, eof + 1);
+
+		progressBar1->Value = 60;
+
+		if ( repl )
+		{
+			StatusLabel->Text = "Замена @...";
+			res = res->Replace("@", "_");
+		}
+
+		progressBar1->Value = 80;
+		StatusLabel->Text = "Сохранение файла...";
+
+		WriteFile(fp + ".sps", res->Split('\n'), ".bak");
+
+		progressBar1->Value = 100;
+		StatusLabel->Text = "Готово!";
 	}
 };
