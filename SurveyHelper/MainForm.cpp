@@ -1,5 +1,5 @@
 #include "Updater.h"
-#define _currentVersion "2.6"
+#define _currentVersion "3.0"
 
 
 using namespace System;

@@ -249,6 +249,7 @@
     <EmbeddedResource Include="PilotSyntax.resx">
       <DependentUpon>PilotSyntax.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PilotSyntax.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PilotSyntax.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Problems.resx">
       <DependentUpon>Problems.h</DependentUpon>
