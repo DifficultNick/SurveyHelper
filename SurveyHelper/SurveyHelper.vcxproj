@@ -296,9 +296,7 @@
     <Image Include="..\res\close_hover.png" />
     <Image Include="..\res\close_push.png" />
     <Image Include="..\res\icon\logo256.ico" />
-    <Image Include="..\res\spss_file.jpg" />
     <Image Include="close.bmp" />
-    <Image Include="spss_file.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SurveyHelper.rc" />

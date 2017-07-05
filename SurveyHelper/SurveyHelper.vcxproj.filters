@@ -162,12 +162,6 @@
     <Image Include="..\res\close_push.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
-    <Image Include="spss_file.bmp">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
-    <Image Include="..\res\spss_file.jpg">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SurveyHelper.rc">
