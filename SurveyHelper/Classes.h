@@ -269,21 +269,12 @@ public ref struct ProjectResources
 	public: ProjectResources()
 	{
 		Assembly^ assembly = Assembly::GetExecutingAssembly();
-		ResourceManager ^rm = gcnew ResourceManager(assembly->GetName()->Name + ".Resources", assembly);
-		Res = gcnew Dictionary<String^, System::Object^>();
-		Resources::ResXResourceReader^ rsxr = gcnew ResXResourceReader("Resources.resx");
-		System::Collections::IEnumerator^ myEnum = rsxr->GetEnumerator();
-		while ( myEnum->MoveNext() )
-		{
-			DictionaryEntry^ d = safe_cast<DictionaryEntry^>(myEnum->Current);
-			Res->Add(d->Key->ToString(), d->Value);
-		}
+		res = gcnew ResourceManager(assembly->GetName()->Name + ".Resources", assembly);
 	}
 
 	public: System::Object^ Get(String^ ResName)
 	{
-		if ( !Res->ContainsKey(ResName) ) return nullptr;
-		return Res[ResName];
+		return res->GetObject(ResName);
 	}
 
 	public: Drawing::Image^ GetImage(String^ ResName)
@@ -292,8 +283,7 @@ public ref struct ProjectResources
 	}
 
 	private:
-
-		Dictionary<String^, System::Object^>^ Res;
+		ResourceManager ^res;
 };
 
 

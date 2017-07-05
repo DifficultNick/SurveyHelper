@@ -270,6 +270,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <SubType>Designer</SubType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </EmbeddedResource>
     <EmbeddedResource Include="SliderType.resx">
       <DependentUpon>SliderType.h</DependentUpon>
