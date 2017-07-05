@@ -74,7 +74,7 @@ public:
 		ExtendUi->Add("ClickText", "SelectedFontColor=\"black\" SelectedBackgroundColor=\"orange\"");
 		//ExtendUi->Add("Ball", "");
 		ExtendUi->Add("Picture", "");
-		ExtendUi->Add("Scale", "LabelStart=\"Совсем не нравится\" LabelEnd=\"Очень нравится\" Orientation=\"Horizontal\" Gradient=\"1\" GradientReverse=\"0\"");
+		ExtendUi->Add("Scale", "LabelStart=\"Совершенно не согласен\" LabelEnd=\"Полностью согласен\" Orientation=\"Horizontal\" Gradient=\"1\" GradientReverse=\"0\"");
 
 		// список типов для каждого Extend
 		CompTypes->Add("ContentOnly", gcnew List<String^>(gcnew array<String^> {"RadioButton", "CheckBox"}));
@@ -377,10 +377,10 @@ private:
 		this->panel1->Controls->Add(this->groupBox2);
 		this->panel1->Controls->Add(this->groupBox1);
 		this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->panel1->Location = System::Drawing::Point(3, 2);
-		this->panel1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->panel1->Location = System::Drawing::Point(2, 2);
+		this->panel1->Margin = System::Windows::Forms::Padding(2);
 		this->panel1->Name = L"panel1";
-		this->panel1->Size = System::Drawing::Size(1267, 88);
+		this->panel1->Size = System::Drawing::Size(951, 71);
 		this->panel1->TabIndex = 0;
 		// 
 		// ClearButton
@@ -388,10 +388,10 @@ private:
 		this->ClearButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 		this->ClearButton->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"ClearButton.BackgroundImage")));
 		this->ClearButton->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-		this->ClearButton->Location = System::Drawing::Point(1207, 42);
-		this->ClearButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->ClearButton->Location = System::Drawing::Point(905, 34);
+		this->ClearButton->Margin = System::Windows::Forms::Padding(2);
 		this->ClearButton->Name = L"ClearButton";
-		this->ClearButton->Size = System::Drawing::Size(40, 37);
+		this->ClearButton->Size = System::Drawing::Size(30, 30);
 		this->ClearButton->TabIndex = 0;
 		this->toolTip1->SetToolTip(this->ClearButton, L"(F9) Очистить всё");
 		this->ClearButton->UseVisualStyleBackColor = true;
@@ -402,10 +402,10 @@ private:
 		this->RefreshButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 		this->RefreshButton->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"RefreshButton.BackgroundImage")));
 		this->RefreshButton->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-		this->RefreshButton->Location = System::Drawing::Point(1207, 5);
-		this->RefreshButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->RefreshButton->Location = System::Drawing::Point(905, 4);
+		this->RefreshButton->Margin = System::Windows::Forms::Padding(2);
 		this->RefreshButton->Name = L"RefreshButton";
-		this->RefreshButton->Size = System::Drawing::Size(40, 37);
+		this->RefreshButton->Size = System::Drawing::Size(30, 30);
 		this->RefreshButton->TabIndex = 0;
 		this->toolTip1->SetToolTip(this->RefreshButton, L"(F5) Сгенерировать (обновить) XML");
 		this->RefreshButton->UseVisualStyleBackColor = true;
@@ -422,11 +422,11 @@ private:
 		this->groupBox2->Controls->Add(this->VarButton);
 		this->groupBox2->Controls->Add(this->SepText);
 		this->groupBox2->ForeColor = System::Drawing::Color::White;
-		this->groupBox2->Location = System::Drawing::Point(357, -1);
-		this->groupBox2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->groupBox2->Location = System::Drawing::Point(268, -1);
+		this->groupBox2->Margin = System::Windows::Forms::Padding(2);
 		this->groupBox2->Name = L"groupBox2";
-		this->groupBox2->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
-		this->groupBox2->Size = System::Drawing::Size(752, 80);
+		this->groupBox2->Padding = System::Windows::Forms::Padding(2);
+		this->groupBox2->Size = System::Drawing::Size(564, 65);
 		this->groupBox2->TabIndex = 2;
 		this->groupBox2->TabStop = false;
 		this->groupBox2->Text = L"Общие настройки";
@@ -437,10 +437,10 @@ private:
 		this->Isolate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->Isolate->ForeColor = System::Drawing::Color::Black;
-		this->Isolate->Location = System::Drawing::Point(557, 21);
-		this->Isolate->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->Isolate->Location = System::Drawing::Point(418, 17);
+		this->Isolate->Margin = System::Windows::Forms::Padding(2);
 		this->Isolate->Name = L"Isolate";
-		this->Isolate->Size = System::Drawing::Size(78, 21);
+		this->Isolate->Size = System::Drawing::Size(64, 17);
 		this->Isolate->TabIndex = 10;
 		this->Isolate->Text = L"Isolate";
 		this->toolTip1->SetToolTip(this->Isolate, L"Добавлять Isolate к ответам с Reset=\"true\"");
@@ -452,10 +452,9 @@ private:
 		this->MixIdText->Enabled = false;
 		this->MixIdText->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->MixIdText->Location = System::Drawing::Point(557, 47);
-		this->MixIdText->Margin = System::Windows::Forms::Padding(4);
+		this->MixIdText->Location = System::Drawing::Point(418, 38);
 		this->MixIdText->Name = L"MixIdText";
-		this->MixIdText->Size = System::Drawing::Size(171, 24);
+		this->MixIdText->Size = System::Drawing::Size(129, 21);
 		this->MixIdText->TabIndex = 9;
 		// 
 		// cMixId
@@ -464,10 +463,10 @@ private:
 		this->cMixId->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->cMixId->ForeColor = System::Drawing::Color::Black;
-		this->cMixId->Location = System::Drawing::Point(476, 50);
-		this->cMixId->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->cMixId->Location = System::Drawing::Point(357, 41);
+		this->cMixId->Margin = System::Windows::Forms::Padding(2);
 		this->cMixId->Name = L"cMixId";
-		this->cMixId->Size = System::Drawing::Size(71, 21);
+		this->cMixId->Size = System::Drawing::Size(60, 17);
 		this->cMixId->TabIndex = 8;
 		this->cMixId->Text = L"MixId:";
 		this->cMixId->UseVisualStyleBackColor = true;
@@ -479,10 +478,10 @@ private:
 		this->cMix->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->cMix->ForeColor = System::Drawing::Color::Black;
-		this->cMix->Location = System::Drawing::Point(476, 21);
-		this->cMix->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->cMix->Location = System::Drawing::Point(357, 17);
+		this->cMix->Margin = System::Windows::Forms::Padding(2);
 		this->cMix->Name = L"cMix";
-		this->cMix->Size = System::Drawing::Size(53, 21);
+		this->cMix->Size = System::Drawing::Size(45, 17);
 		this->cMix->TabIndex = 7;
 		this->cMix->Text = L"Mix";
 		this->cMix->UseVisualStyleBackColor = true;
@@ -496,10 +495,10 @@ private:
 		this->SetUnion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->SetUnion->ForeColor = System::Drawing::Color::Black;
-		this->SetUnion->Location = System::Drawing::Point(15, 47);
-		this->SetUnion->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->SetUnion->Location = System::Drawing::Point(11, 38);
+		this->SetUnion->Margin = System::Windows::Forms::Padding(2);
 		this->SetUnion->Name = L"SetUnion";
-		this->SetUnion->Size = System::Drawing::Size(167, 27);
+		this->SetUnion->Size = System::Drawing::Size(125, 22);
 		this->SetUnion->TabIndex = 6;
 		this->SetUnion->Text = L"Настройка Union";
 		this->SetUnion->UseVisualStyleBackColor = false;
@@ -512,10 +511,10 @@ private:
 		this->adVar->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->adVar->ForeColor = System::Drawing::Color::Black;
-		this->adVar->Location = System::Drawing::Point(225, 53);
-		this->adVar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->adVar->Location = System::Drawing::Point(169, 43);
+		this->adVar->Margin = System::Windows::Forms::Padding(2);
 		this->adVar->Name = L"adVar";
-		this->adVar->Size = System::Drawing::Size(132, 21);
+		this->adVar->Size = System::Drawing::Size(107, 17);
 		this->adVar->TabIndex = 6;
 		this->adVar->Text = L"Добавить Var";
 		this->adVar->UseVisualStyleBackColor = true;
@@ -529,10 +528,10 @@ private:
 		this->VarButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->VarButton->ForeColor = System::Drawing::Color::Black;
-		this->VarButton->Location = System::Drawing::Point(15, 17);
-		this->VarButton->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->VarButton->Location = System::Drawing::Point(11, 14);
+		this->VarButton->Margin = System::Windows::Forms::Padding(2);
 		this->VarButton->Name = L"VarButton";
-		this->VarButton->Size = System::Drawing::Size(167, 27);
+		this->VarButton->Size = System::Drawing::Size(125, 22);
 		this->VarButton->TabIndex = 5;
 		this->VarButton->Text = L"Настройка Var";
 		this->VarButton->UseVisualStyleBackColor = false;
@@ -546,10 +545,10 @@ private:
 		this->SepText->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->SepText->ForeColor = System::Drawing::Color::Black;
-		this->SepText->Location = System::Drawing::Point(225, 21);
-		this->SepText->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->SepText->Location = System::Drawing::Point(169, 17);
+		this->SepText->Margin = System::Windows::Forms::Padding(2);
 		this->SepText->Name = L"SepText";
-		this->SepText->Size = System::Drawing::Size(206, 21);
+		this->SepText->Size = System::Drawing::Size(170, 17);
 		this->SepText->TabIndex = 2;
 		this->SepText->Text = L"Текст отдельным тэгом";
 		this->toolTip1->SetToolTip(this->SepText, L"Выносить атрибут Text в отдельный \r\nтег <Text>");
@@ -563,11 +562,11 @@ private:
 		this->groupBox1->Controls->Add(this->radioItem);
 		this->groupBox1->Controls->Add(this->radioAnswer);
 		this->groupBox1->ForeColor = System::Drawing::Color::White;
-		this->groupBox1->Location = System::Drawing::Point(3, -1);
-		this->groupBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->groupBox1->Location = System::Drawing::Point(2, -1);
+		this->groupBox1->Margin = System::Windows::Forms::Padding(2);
 		this->groupBox1->Name = L"groupBox1";
-		this->groupBox1->Padding = System::Windows::Forms::Padding(3, 2, 3, 2);
-		this->groupBox1->Size = System::Drawing::Size(340, 80);
+		this->groupBox1->Padding = System::Windows::Forms::Padding(2);
+		this->groupBox1->Size = System::Drawing::Size(255, 65);
 		this->groupBox1->TabIndex = 0;
 		this->groupBox1->TabStop = false;
 		this->groupBox1->Text = L"Тип элементов";
@@ -578,10 +577,10 @@ private:
 		this->radioBlock->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->radioBlock->ForeColor = System::Drawing::Color::Black;
-		this->radioBlock->Location = System::Drawing::Point(163, 49);
-		this->radioBlock->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->radioBlock->Location = System::Drawing::Point(122, 40);
+		this->radioBlock->Margin = System::Windows::Forms::Padding(2);
 		this->radioBlock->Name = L"radioBlock";
-		this->radioBlock->Size = System::Drawing::Size(139, 21);
+		this->radioBlock->Size = System::Drawing::Size(114, 17);
 		this->radioBlock->TabIndex = 4;
 		this->radioBlock->Text = L"Блок вопросов";
 		this->radioBlock->UseVisualStyleBackColor = true;
@@ -593,10 +592,10 @@ private:
 		this->radioUnion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->radioUnion->ForeColor = System::Drawing::Color::Black;
-		this->radioUnion->Location = System::Drawing::Point(163, 21);
-		this->radioUnion->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->radioUnion->Location = System::Drawing::Point(122, 17);
+		this->radioUnion->Margin = System::Windows::Forms::Padding(2);
 		this->radioUnion->Name = L"radioUnion";
-		this->radioUnion->Size = System::Drawing::Size(128, 21);
+		this->radioUnion->Size = System::Drawing::Size(104, 17);
 		this->radioUnion->TabIndex = 3;
 		this->radioUnion->Text = L"Union вопрос";
 		this->radioUnion->UseVisualStyleBackColor = true;
@@ -608,10 +607,10 @@ private:
 		this->radioItem->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->radioItem->ForeColor = System::Drawing::Color::Black;
-		this->radioItem->Location = System::Drawing::Point(19, 49);
-		this->radioItem->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->radioItem->Location = System::Drawing::Point(14, 40);
+		this->radioItem->Margin = System::Windows::Forms::Padding(2);
 		this->radioItem->Name = L"radioItem";
-		this->radioItem->Size = System::Drawing::Size(98, 21);
+		this->radioItem->Size = System::Drawing::Size(79, 17);
 		this->radioItem->TabIndex = 1;
 		this->radioItem->Text = L"List Items";
 		this->radioItem->UseVisualStyleBackColor = true;
@@ -624,10 +623,10 @@ private:
 		this->radioAnswer->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->radioAnswer->ForeColor = System::Drawing::Color::Black;
-		this->radioAnswer->Location = System::Drawing::Point(19, 21);
-		this->radioAnswer->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->radioAnswer->Location = System::Drawing::Point(14, 17);
+		this->radioAnswer->Margin = System::Windows::Forms::Padding(2);
 		this->radioAnswer->Name = L"radioAnswer";
-		this->radioAnswer->Size = System::Drawing::Size(89, 21);
+		this->radioAnswer->Size = System::Drawing::Size(72, 17);
 		this->radioAnswer->TabIndex = 0;
 		this->radioAnswer->TabStop = true;
 		this->radioAnswer->Text = L"Answers";
@@ -640,7 +639,7 @@ private:
 		this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 			50)));
 		this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-			19)));
+			14)));
 		this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 			50)));
 		this->tableLayoutPanel1->Controls->Add(this->panel1, 0, 0);
@@ -650,15 +649,15 @@ private:
 		this->tableLayoutPanel1->Controls->Add(this->button2, 1, 2);
 		this->tableLayoutPanel1->Controls->Add(this->panel2, 0, 1);
 		this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->tableLayoutPanel1->Location = System::Drawing::Point(0, 28);
-		this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(3, 2, 3, 0);
+		this->tableLayoutPanel1->Location = System::Drawing::Point(0, 24);
+		this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(2, 2, 2, 0);
 		this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 		this->tableLayoutPanel1->RowCount = 4;
-		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 92)));
-		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 31)));
+		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 75)));
+		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 25)));
 		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 118)));
-		this->tableLayoutPanel1->Size = System::Drawing::Size(1273, 607);
+		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 96)));
+		this->tableLayoutPanel1->Size = System::Drawing::Size(955, 492);
 		this->tableLayoutPanel1->TabIndex = 0;
 		// 
 		// TextMemo2
@@ -667,10 +666,10 @@ private:
 		this->TextMemo2->Dock = System::Windows::Forms::DockStyle::Fill;
 		this->TextMemo2->Font = (gcnew System::Drawing::Font(L"Bookman Old Style", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->TextMemo2->Location = System::Drawing::Point(649, 125);
-		this->TextMemo2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->TextMemo2->Location = System::Drawing::Point(486, 102);
+		this->TextMemo2->Margin = System::Windows::Forms::Padding(2);
 		this->TextMemo2->Name = L"TextMemo2";
-		this->TextMemo2->Size = System::Drawing::Size(621, 362);
+		this->TextMemo2->Size = System::Drawing::Size(467, 292);
 		this->TextMemo2->TabIndex = 5;
 		this->TextMemo2->Text = L"";
 		this->TextMemo2->WordWrap = false;
@@ -686,47 +685,47 @@ private:
 				this->выделитьКурсивомiToolStripMenuItem, this->MakeBold, this->MakeColor, this->выделитьДругимЦветомToolStripMenuItem, this->customTextToolStripMenuItem
 		});
 		this->XMLMenu->Name = L"XMLMenu";
-		this->XMLMenu->Size = System::Drawing::Size(261, 160);
+		this->XMLMenu->Size = System::Drawing::Size(214, 136);
 		// 
 		// добавитьHintToolStripMenuItem
 		// 
 		this->добавитьHintToolStripMenuItem->Name = L"добавитьHintToolStripMenuItem";
-		this->добавитьHintToolStripMenuItem->Size = System::Drawing::Size(260, 26);
+		this->добавитьHintToolStripMenuItem->Size = System::Drawing::Size(213, 22);
 		this->добавитьHintToolStripMenuItem->Text = L"Добавить Hint";
 		this->добавитьHintToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::добавитьHintToolStripMenuItem_Click);
 		// 
 		// выделитьКурсивомiToolStripMenuItem
 		// 
 		this->выделитьКурсивомiToolStripMenuItem->Name = L"выделитьКурсивомiToolStripMenuItem";
-		this->выделитьКурсивомiToolStripMenuItem->Size = System::Drawing::Size(260, 26);
+		this->выделитьКурсивомiToolStripMenuItem->Size = System::Drawing::Size(213, 22);
 		this->выделитьКурсивомiToolStripMenuItem->Text = L"Выделить курсивом <i>";
 		this->выделитьКурсивомiToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::выделитьКурсивомiToolStripMenuItem_Click);
 		// 
 		// MakeBold
 		// 
 		this->MakeBold->Name = L"MakeBold";
-		this->MakeBold->Size = System::Drawing::Size(260, 26);
+		this->MakeBold->Size = System::Drawing::Size(213, 22);
 		this->MakeBold->Text = L"Выделить жирным <b>";
 		this->MakeBold->Click += gcnew System::EventHandler(this, &MainForm::MakeBold_Click);
 		// 
 		// MakeColor
 		// 
 		this->MakeColor->Name = L"MakeColor";
-		this->MakeColor->Size = System::Drawing::Size(260, 26);
+		this->MakeColor->Size = System::Drawing::Size(213, 22);
 		this->MakeColor->Text = L"Выделить синим <u>";
 		this->MakeColor->Click += gcnew System::EventHandler(this, &MainForm::MakeColor_Click);
 		// 
 		// выделитьДругимЦветомToolStripMenuItem
 		// 
 		this->выделитьДругимЦветомToolStripMenuItem->Name = L"выделитьДругимЦветомToolStripMenuItem";
-		this->выделитьДругимЦветомToolStripMenuItem->Size = System::Drawing::Size(260, 26);
+		this->выделитьДругимЦветомToolStripMenuItem->Size = System::Drawing::Size(213, 22);
 		this->выделитьДругимЦветомToolStripMenuItem->Text = L"Выделить другим цветом";
 		this->выделитьДругимЦветомToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::выделитьДругимЦветомToolStripMenuItem_Click);
 		// 
 		// customTextToolStripMenuItem
 		// 
 		this->customTextToolStripMenuItem->Name = L"customTextToolStripMenuItem";
-		this->customTextToolStripMenuItem->Size = System::Drawing::Size(260, 26);
+		this->customTextToolStripMenuItem->Size = System::Drawing::Size(213, 22);
 		this->customTextToolStripMenuItem->Text = L"CustomText";
 		this->customTextToolStripMenuItem->ToolTipText = L"Добавляет тег <CustomText2>\r\nс подтегами <style> и <script>";
 		this->customTextToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::customTextToolStripMenuItem_Click);
@@ -761,12 +760,12 @@ private:
 		dataGridViewCellStyle3->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
 		this->dataGridView1->DefaultCellStyle = dataGridViewCellStyle3;
 		this->dataGridView1->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->dataGridView1->Location = System::Drawing::Point(3, 125);
-		this->dataGridView1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->dataGridView1->Location = System::Drawing::Point(2, 102);
+		this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
 		this->dataGridView1->Name = L"dataGridView1";
 		this->dataGridView1->RowHeadersVisible = false;
 		this->dataGridView1->RowTemplate->Height = 24;
-		this->dataGridView1->Size = System::Drawing::Size(621, 362);
+		this->dataGridView1->Size = System::Drawing::Size(466, 292);
 		this->dataGridView1->TabIndex = 9;
 		this->dataGridView1->CellBeginEdit += gcnew System::Windows::Forms::DataGridViewCellCancelEventHandler(this, &MainForm::dataGridView1_CellBeginEdit);
 		this->dataGridView1->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MainForm::dataGridView1_CellEndEdit);
@@ -816,40 +815,40 @@ private:
 				this->delCurrentRow, this->addRow, this->RefreshNums, this->CleanTxt
 		});
 		this->GridMenu->Name = L"GridMenu";
-		this->GridMenu->Size = System::Drawing::Size(276, 160);
+		this->GridMenu->Size = System::Drawing::Size(224, 136);
 		// 
 		// sortId
 		// 
 		this->sortId->Name = L"sortId";
-		this->sortId->Size = System::Drawing::Size(275, 26);
+		this->sortId->Size = System::Drawing::Size(223, 22);
 		this->sortId->Text = L"Сортировать отдельно Id";
 		this->sortId->Click += gcnew System::EventHandler(this, &MainForm::sortId_Click);
 		// 
 		// sortText
 		// 
 		this->sortText->Name = L"sortText";
-		this->sortText->Size = System::Drawing::Size(275, 26);
+		this->sortText->Size = System::Drawing::Size(223, 22);
 		this->sortText->Text = L"Сортировать Text отдельно";
 		this->sortText->Click += gcnew System::EventHandler(this, &MainForm::sortText_Click);
 		// 
 		// delCurrentRow
 		// 
 		this->delCurrentRow->Name = L"delCurrentRow";
-		this->delCurrentRow->Size = System::Drawing::Size(275, 26);
+		this->delCurrentRow->Size = System::Drawing::Size(223, 22);
 		this->delCurrentRow->Text = L"Удалить текущую строку";
 		this->delCurrentRow->Click += gcnew System::EventHandler(this, &MainForm::delCurrentRow_Click);
 		// 
 		// addRow
 		// 
 		this->addRow->Name = L"addRow";
-		this->addRow->Size = System::Drawing::Size(275, 26);
+		this->addRow->Size = System::Drawing::Size(223, 22);
 		this->addRow->Text = L"Добавить строку";
 		this->addRow->Click += gcnew System::EventHandler(this, &MainForm::addRow_Click);
 		// 
 		// RefreshNums
 		// 
 		this->RefreshNums->Name = L"RefreshNums";
-		this->RefreshNums->Size = System::Drawing::Size(275, 26);
+		this->RefreshNums->Size = System::Drawing::Size(223, 22);
 		this->RefreshNums->Text = L"Обновить нумерацию";
 		this->RefreshNums->ToolTipText = L"Пронумеровать все элементы по порядку";
 		this->RefreshNums->Click += gcnew System::EventHandler(this, &MainForm::RefreshNums_Click);
@@ -857,7 +856,7 @@ private:
 		// CleanTxt
 		// 
 		this->CleanTxt->Name = L"CleanTxt";
-		this->CleanTxt->Size = System::Drawing::Size(275, 26);
+		this->CleanTxt->Size = System::Drawing::Size(223, 22);
 		this->CleanTxt->Text = L"Убрать лишнее";
 		this->CleanTxt->ToolTipText = L"Очищает текст в в полеXML от лишних \r\nсимволов.\r\nПосле этого действия стоит внима"
 			L"тельно \r\nперечитать результат.";
@@ -868,10 +867,10 @@ private:
 		this->tableLayoutPanel1->SetColumnSpan(this->StatusBar, 3);
 		this->StatusBar->Controls->Add(this->tableLayoutPanel2);
 		this->StatusBar->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->StatusBar->Location = System::Drawing::Point(3, 491);
-		this->StatusBar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->StatusBar->Location = System::Drawing::Point(2, 398);
+		this->StatusBar->Margin = System::Windows::Forms::Padding(2);
 		this->StatusBar->Name = L"StatusBar";
-		this->StatusBar->Size = System::Drawing::Size(1267, 114);
+		this->StatusBar->Size = System::Drawing::Size(951, 92);
 		this->StatusBar->TabIndex = 7;
 		// 
 		// tableLayoutPanel2
@@ -883,23 +882,22 @@ private:
 		this->tableLayoutPanel2->Controls->Add(this->tableLayoutPanel4, 0, 0);
 		this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
 		this->tableLayoutPanel2->Location = System::Drawing::Point(0, 0);
-		this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4);
 		this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 		this->tableLayoutPanel2->RowCount = 2;
 		this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 33.34F)));
 		this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 66.66F)));
-		this->tableLayoutPanel2->Size = System::Drawing::Size(1267, 114);
+		this->tableLayoutPanel2->Size = System::Drawing::Size(951, 92);
 		this->tableLayoutPanel2->TabIndex = 11;
 		// 
 		// tableLayoutPanel3
 		// 
 		this->tableLayoutPanel3->ColumnCount = 4;
 		this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-			243)));
+			182)));
 		this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-			289)));
+			217)));
 		this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-			267)));
+			200)));
 		this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle()));
 		this->tableLayoutPanel3->Controls->Add(this->ExtendString, 2, 1);
 		this->tableLayoutPanel3->Controls->Add(this->adQuestion, 0, 0);
@@ -908,14 +906,14 @@ private:
 		this->tableLayoutPanel3->Controls->Add(this->checkBox3, 0, 1);
 		this->tableLayoutPanel3->Controls->Add(this->QuestionTypes, 1, 0);
 		this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->tableLayoutPanel3->Location = System::Drawing::Point(4, 38);
-		this->tableLayoutPanel3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+		this->tableLayoutPanel3->Location = System::Drawing::Point(3, 30);
+		this->tableLayoutPanel3->Margin = System::Windows::Forms::Padding(3, 0, 3, 0);
 		this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
-		this->tableLayoutPanel3->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+		this->tableLayoutPanel3->Padding = System::Windows::Forms::Padding(4, 0, 0, 0);
 		this->tableLayoutPanel3->RowCount = 2;
 		this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 		this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-		this->tableLayoutPanel3->Size = System::Drawing::Size(1259, 76);
+		this->tableLayoutPanel3->Size = System::Drawing::Size(945, 62);
 		this->tableLayoutPanel3->TabIndex = 9;
 		// 
 		// ExtendString
@@ -924,10 +922,10 @@ private:
 		this->ExtendString->Dock = System::Windows::Forms::DockStyle::Fill;
 		this->ExtendString->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->ExtendString->Location = System::Drawing::Point(541, 42);
-		this->ExtendString->Margin = System::Windows::Forms::Padding(4, 4, 0, 4);
+		this->ExtendString->Location = System::Drawing::Point(406, 34);
+		this->ExtendString->Margin = System::Windows::Forms::Padding(3, 3, 0, 3);
 		this->ExtendString->Name = L"ExtendString";
-		this->ExtendString->Size = System::Drawing::Size(718, 24);
+		this->ExtendString->Size = System::Drawing::Size(540, 21);
 		this->ExtendString->TabIndex = 8;
 		this->ExtendString->WordWrap = false;
 		this->ExtendString->TextChanged += gcnew System::EventHandler(this, &MainForm::ExtendString_TextChanged);
@@ -940,11 +938,11 @@ private:
 		this->adQuestion->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->adQuestion->ForeColor = System::Drawing::Color::Black;
-		this->adQuestion->Location = System::Drawing::Point(8, 2);
-		this->adQuestion->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->adQuestion->Location = System::Drawing::Point(6, 2);
+		this->adQuestion->Margin = System::Windows::Forms::Padding(2);
 		this->adQuestion->Name = L"adQuestion";
-		this->adQuestion->Padding = System::Windows::Forms::Padding(0, 4, 0, 0);
-		this->adQuestion->Size = System::Drawing::Size(172, 25);
+		this->adQuestion->Padding = System::Windows::Forms::Padding(0, 3, 0, 0);
+		this->adQuestion->Size = System::Drawing::Size(138, 20);
 		this->adQuestion->TabIndex = 2;
 		this->adQuestion->Text = L"Добавить Question";
 		this->adQuestion->UseVisualStyleBackColor = true;
@@ -957,11 +955,11 @@ private:
 		this->QuestionHeader->Dock = System::Windows::Forms::DockStyle::Fill;
 		this->QuestionHeader->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->QuestionHeader->Location = System::Drawing::Point(541, 4);
-		this->QuestionHeader->Margin = System::Windows::Forms::Padding(4, 4, 0, 4);
+		this->QuestionHeader->Location = System::Drawing::Point(406, 3);
+		this->QuestionHeader->Margin = System::Windows::Forms::Padding(3, 3, 0, 3);
 		this->QuestionHeader->Multiline = true;
 		this->QuestionHeader->Name = L"QuestionHeader";
-		this->QuestionHeader->Size = System::Drawing::Size(718, 30);
+		this->QuestionHeader->Size = System::Drawing::Size(540, 25);
 		this->QuestionHeader->TabIndex = 4;
 		this->QuestionHeader->TextChanged += gcnew System::EventHandler(this, &MainForm::QuestionHeader_TextChanged);
 		this->QuestionHeader->DoubleClick += gcnew System::EventHandler(this, &MainForm::TextBox_Click);
@@ -981,10 +979,9 @@ private:
 				L"ClickTest", L"ClickText", L"ComboBox", L"ContentOnly", L"DragItem", L"Picture", L"Scale", L"Shape", L"Slider", L"Sortable",
 				L"Stars", L"VideoPlayer"
 		});
-		this->ExtendTypes->Location = System::Drawing::Point(252, 42);
-		this->ExtendTypes->Margin = System::Windows::Forms::Padding(4);
+		this->ExtendTypes->Location = System::Drawing::Point(189, 34);
 		this->ExtendTypes->Name = L"ExtendTypes";
-		this->ExtendTypes->Size = System::Drawing::Size(224, 25);
+		this->ExtendTypes->Size = System::Drawing::Size(169, 21);
 		this->ExtendTypes->TabIndex = 7;
 		this->ExtendTypes->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ExtendTypes_SelectedIndexChanged);
 		// 
@@ -994,10 +991,10 @@ private:
 		this->checkBox3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->checkBox3->ForeColor = System::Drawing::Color::Black;
-		this->checkBox3->Location = System::Drawing::Point(8, 40);
-		this->checkBox3->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+		this->checkBox3->Location = System::Drawing::Point(6, 33);
+		this->checkBox3->Margin = System::Windows::Forms::Padding(2);
 		this->checkBox3->Name = L"checkBox3";
-		this->checkBox3->Size = System::Drawing::Size(123, 21);
+		this->checkBox3->Size = System::Drawing::Size(99, 17);
 		this->checkBox3->TabIndex = 6;
 		this->checkBox3->Text = L"Расширение";
 		this->checkBox3->UseVisualStyleBackColor = true;
@@ -1014,10 +1011,9 @@ private:
 			L"CheckBox", L"RadioButton", L"Text", L"Memo",
 				L"Integer", L"Number", L"File"
 		});
-		this->QuestionTypes->Location = System::Drawing::Point(252, 4);
-		this->QuestionTypes->Margin = System::Windows::Forms::Padding(4);
+		this->QuestionTypes->Location = System::Drawing::Point(189, 3);
 		this->QuestionTypes->Name = L"QuestionTypes";
-		this->QuestionTypes->Size = System::Drawing::Size(224, 25);
+		this->QuestionTypes->Size = System::Drawing::Size(169, 21);
 		this->QuestionTypes->TabIndex = 5;
 		this->QuestionTypes->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::PerformanceUpdate);
 		// 
@@ -1025,21 +1021,20 @@ private:
 		// 
 		this->tableLayoutPanel4->ColumnCount = 3;
 		this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-			249)));
+			187)));
 		this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-			288)));
+			216)));
 		this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-			997)));
+			748)));
 		this->tableLayoutPanel4->Controls->Add(this->PageId, 1, 0);
 		this->tableLayoutPanel4->Controls->Add(this->adParent, 0, 0);
 		this->tableLayoutPanel4->Controls->Add(this->pageHeader, 2, 0);
 		this->tableLayoutPanel4->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->tableLayoutPanel4->Location = System::Drawing::Point(4, 4);
-		this->tableLayoutPanel4->Margin = System::Windows::Forms::Padding(4);
+		this->tableLayoutPanel4->Location = System::Drawing::Point(3, 3);
 		this->tableLayoutPanel4->Name = L"tableLayoutPanel4";
 		this->tableLayoutPanel4->RowCount = 1;
-		this->tableLayoutPanel4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 31)));
-		this->tableLayoutPanel4->Size = System::Drawing::Size(1259, 30);
+		this->tableLayoutPanel4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 25)));
+		this->tableLayoutPanel4->Size = System::Drawing::Size(945, 24);
 		this->tableLayoutPanel4->TabIndex = 10;
 		// 
 		// PageId
@@ -1049,10 +1044,9 @@ private:
 		this->PageId->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::CustomSource;
 		this->PageId->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->PageId->Location = System::Drawing::Point(253, 4);
-		this->PageId->Margin = System::Windows::Forms::Padding(4);
+		this->PageId->Location = System::Drawing::Point(190, 3);
 		this->PageId->Name = L"PageId";
-		this->PageId->Size = System::Drawing::Size(145, 24);
+		this->PageId->Size = System::Drawing::Size(110, 21);
 		this->PageId->TabIndex = 3;
 		this->PageId->Text = L"Id";
 		this->PageId->WordWrap = false;
@@ -1070,10 +1064,10 @@ private:
 		this->adParent->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->adParent->ForeColor = System::Drawing::Color::Black;
-		this->adParent->Location = System::Drawing::Point(8, 5);
-		this->adParent->Margin = System::Windows::Forms::Padding(8, 2, 3, 2);
+		this->adParent->Location = System::Drawing::Point(6, 4);
+		this->adParent->Margin = System::Windows::Forms::Padding(6, 2, 2, 2);
 		this->adParent->Name = L"adParent";
-		this->adParent->Size = System::Drawing::Size(144, 21);
+		this->adParent->Size = System::Drawing::Size(117, 17);
 		this->adParent->TabIndex = 1;
 		this->adParent->Text = L"Добавить Page";
 		this->adParent->UseVisualStyleBackColor = true;
@@ -1085,11 +1079,11 @@ private:
 		this->pageHeader->Dock = System::Windows::Forms::DockStyle::Fill;
 		this->pageHeader->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->pageHeader->Location = System::Drawing::Point(541, 0);
-		this->pageHeader->Margin = System::Windows::Forms::Padding(4, 0, 0, 0);
+		this->pageHeader->Location = System::Drawing::Point(406, 0);
+		this->pageHeader->Margin = System::Windows::Forms::Padding(3, 0, 0, 0);
 		this->pageHeader->Multiline = true;
 		this->pageHeader->Name = L"pageHeader";
-		this->pageHeader->Size = System::Drawing::Size(993, 31);
+		this->pageHeader->Size = System::Drawing::Size(745, 25);
 		this->pageHeader->TabIndex = 4;
 		this->pageHeader->TextChanged += gcnew System::EventHandler(this, &MainForm::pageHeader_TextChanged);
 		this->pageHeader->DoubleClick += gcnew System::EventHandler(this, &MainForm::TextBox_Click);
@@ -1101,10 +1095,10 @@ private:
 		// 
 		this->button2->Cursor = System::Windows::Forms::Cursors::Hand;
 		this->button2->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->button2->Location = System::Drawing::Point(627, 123);
+		this->button2->Location = System::Drawing::Point(470, 100);
 		this->button2->Margin = System::Windows::Forms::Padding(0);
 		this->button2->Name = L"button2";
-		this->button2->Size = System::Drawing::Size(19, 366);
+		this->button2->Size = System::Drawing::Size(14, 296);
 		this->button2->TabIndex = 10;
 		this->button2->Text = L"<";
 		this->button2->UseVisualStyleBackColor = true;
@@ -1119,10 +1113,10 @@ private:
 		this->panel2->Controls->Add(this->repeatName);
 		this->panel2->Controls->Add(this->adRepeat);
 		this->panel2->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->panel2->Location = System::Drawing::Point(4, 92);
-		this->panel2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+		this->panel2->Location = System::Drawing::Point(3, 75);
+		this->panel2->Margin = System::Windows::Forms::Padding(3, 0, 3, 0);
 		this->panel2->Name = L"panel2";
-		this->panel2->Size = System::Drawing::Size(1265, 31);
+		this->panel2->Size = System::Drawing::Size(949, 25);
 		this->panel2->TabIndex = 11;
 		// 
 		// features
@@ -1132,20 +1126,18 @@ private:
 		this->features->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 		this->features->FormattingEnabled = true;
 		this->features->Items->AddRange(gcnew cli::array< System::Object^  >(1) { L"Дополнительные возможности" });
-		this->features->Location = System::Drawing::Point(863, 2);
-		this->features->Margin = System::Windows::Forms::Padding(4);
+		this->features->Location = System::Drawing::Point(647, 2);
 		this->features->Name = L"features";
-		this->features->Size = System::Drawing::Size(396, 24);
+		this->features->Size = System::Drawing::Size(298, 21);
 		this->features->TabIndex = 4;
 		this->features->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::features_SelectedIndexChanged);
 		// 
 		// label1
 		// 
 		this->label1->AutoSize = true;
-		this->label1->Location = System::Drawing::Point(368, 7);
-		this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+		this->label1->Location = System::Drawing::Point(276, 6);
 		this->label1->Name = L"label1";
-		this->label1->Size = System::Drawing::Size(80, 17);
+		this->label1->Size = System::Drawing::Size(64, 13);
 		this->label1->TabIndex = 3;
 		this->label1->Text = L"с текстом :";
 		// 
@@ -1154,10 +1146,9 @@ private:
 		this->repeatText->Enabled = false;
 		this->repeatText->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->repeatText->Location = System::Drawing::Point(461, 2);
-		this->repeatText->Margin = System::Windows::Forms::Padding(4);
+		this->repeatText->Location = System::Drawing::Point(346, 2);
 		this->repeatText->Name = L"repeatText";
-		this->repeatText->Size = System::Drawing::Size(308, 24);
+		this->repeatText->Size = System::Drawing::Size(232, 21);
 		this->repeatText->TabIndex = 2;
 		// 
 		// repeatName
@@ -1167,10 +1158,9 @@ private:
 		this->repeatName->Enabled = false;
 		this->repeatName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->repeatName->Location = System::Drawing::Point(189, 2);
-		this->repeatName->Margin = System::Windows::Forms::Padding(4);
+		this->repeatName->Location = System::Drawing::Point(142, 2);
 		this->repeatName->Name = L"repeatName";
-		this->repeatName->Size = System::Drawing::Size(171, 24);
+		this->repeatName->Size = System::Drawing::Size(129, 21);
 		this->repeatName->TabIndex = 1;
 		this->repeatName->TextChanged += gcnew System::EventHandler(this, &MainForm::repeatName_TextChanged);
 		// 
@@ -1179,10 +1169,9 @@ private:
 		this->adRepeat->AutoSize = true;
 		this->adRepeat->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
-		this->adRepeat->Location = System::Drawing::Point(11, 6);
-		this->adRepeat->Margin = System::Windows::Forms::Padding(4);
+		this->adRepeat->Location = System::Drawing::Point(8, 5);
 		this->adRepeat->Name = L"adRepeat";
-		this->adRepeat->Size = System::Drawing::Size(167, 21);
+		this->adRepeat->Size = System::Drawing::Size(133, 17);
 		this->adRepeat->TabIndex = 0;
 		this->adRepeat->Text = L"Добавить элементы:";
 		this->toolTip1->SetToolTip(this->adRepeat, L"Добавляет элементы из указанного списка или \r\nуказанное количество элементов с ук"
@@ -1197,8 +1186,8 @@ private:
 		this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->MenuParam, this->дополнительноToolStripMenuItem });
 		this->menuStrip1->Location = System::Drawing::Point(0, 0);
 		this->menuStrip1->Name = L"menuStrip1";
-		this->menuStrip1->Padding = System::Windows::Forms::Padding(5, 2, 0, 2);
-		this->menuStrip1->Size = System::Drawing::Size(1273, 28);
+		this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
+		this->menuStrip1->Size = System::Drawing::Size(955, 24);
 		this->menuStrip1->TabIndex = 1;
 		this->menuStrip1->Text = L"menuStrip1";
 		// 
@@ -1211,7 +1200,7 @@ private:
 				this->устранениеПроблемToolStripMenuItem
 		});
 		this->MenuParam->Name = L"MenuParam";
-		this->MenuParam->Size = System::Drawing::Size(102, 24);
+		this->MenuParam->Size = System::Drawing::Size(83, 20);
 		this->MenuParam->Text = L"Параметры";
 		// 
 		// AutoNumId
@@ -1220,7 +1209,7 @@ private:
 		this->AutoNumId->CheckOnClick = true;
 		this->AutoNumId->CheckState = System::Windows::Forms::CheckState::Checked;
 		this->AutoNumId->Name = L"AutoNumId";
-		this->AutoNumId->Size = System::Drawing::Size(297, 26);
+		this->AutoNumId->Size = System::Drawing::Size(242, 22);
 		this->AutoNumId->Text = L"Выделение Id";
 		this->AutoNumId->ToolTipText = L"Автоматическое выделение номера";
 		// 
@@ -1228,7 +1217,7 @@ private:
 		// 
 		this->FirstUp->CheckOnClick = true;
 		this->FirstUp->Name = L"FirstUp";
-		this->FirstUp->Size = System::Drawing::Size(297, 26);
+		this->FirstUp->Size = System::Drawing::Size(242, 22);
 		this->FirstUp->Text = L"Заглавная первая буква";
 		// 
 		// GetPageId
@@ -1237,14 +1226,14 @@ private:
 		this->GetPageId->CheckOnClick = true;
 		this->GetPageId->CheckState = System::Windows::Forms::CheckState::Checked;
 		this->GetPageId->Name = L"GetPageId";
-		this->GetPageId->Size = System::Drawing::Size(297, 26);
+		this->GetPageId->Size = System::Drawing::Size(242, 22);
 		this->GetPageId->Text = L"Заменять PageId на QuestionId";
 		this->GetPageId->ToolTipText = L"При изменении текста поля заголовка вопроса";
 		// 
 		// toolStripSeparator2
 		// 
 		this->toolStripSeparator2->Name = L"toolStripSeparator2";
-		this->toolStripSeparator2->Size = System::Drawing::Size(294, 6);
+		this->toolStripSeparator2->Size = System::Drawing::Size(239, 6);
 		// 
 		// toolStripMenuItem1
 		// 
@@ -1254,7 +1243,7 @@ private:
 				this->missFirst
 		});
 		this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
-		this->toolStripMenuItem1->Size = System::Drawing::Size(297, 26);
+		this->toolStripMenuItem1->Size = System::Drawing::Size(242, 22);
 		this->toolStripMenuItem1->Text = L"Табуляция";
 		this->toolStripMenuItem1->ToolTipText = L"Количество символов табуляции,";
 		// 
@@ -1263,13 +1252,13 @@ private:
 		this->tabs->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 		this->tabs->Items->AddRange(gcnew cli::array< System::Object^  >(5) { L"0", L"1", L"2", L"3", L"4" });
 		this->tabs->Name = L"tabs";
-		this->tabs->Size = System::Drawing::Size(121, 28);
+		this->tabs->Size = System::Drawing::Size(121, 23);
 		// 
 		// missFirst
 		// 
 		this->missFirst->CheckOnClick = true;
 		this->missFirst->Name = L"missFirst";
-		this->missFirst->Size = System::Drawing::Size(285, 26);
+		this->missFirst->Size = System::Drawing::Size(230, 22);
 		this->missFirst->Text = L"Не добавлять перед первым";
 		// 
 		// CopyBuf
@@ -1278,7 +1267,7 @@ private:
 		this->CopyBuf->CheckOnClick = true;
 		this->CopyBuf->CheckState = System::Windows::Forms::CheckState::Checked;
 		this->CopyBuf->Name = L"CopyBuf";
-		this->CopyBuf->Size = System::Drawing::Size(297, 26);
+		this->CopyBuf->Size = System::Drawing::Size(242, 22);
 		this->CopyBuf->Text = L"Копировать в буфер";
 		this->CopyBuf->ToolTipText = L"Копировать результат генерации XML";
 		// 
@@ -1286,7 +1275,7 @@ private:
 		// 
 		this->spaceBefore->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->spaceCount });
 		this->spaceBefore->Name = L"spaceBefore";
-		this->spaceBefore->Size = System::Drawing::Size(297, 26);
+		this->spaceBefore->Size = System::Drawing::Size(242, 22);
 		this->spaceBefore->Text = L"Добавлять отступ в начале";
 		// 
 		// spaceCount
@@ -1294,17 +1283,17 @@ private:
 		this->spaceCount->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 		this->spaceCount->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"0", L"1", L"2", L"3" });
 		this->spaceCount->Name = L"spaceCount";
-		this->spaceCount->Size = System::Drawing::Size(121, 28);
+		this->spaceCount->Size = System::Drawing::Size(121, 23);
 		// 
 		// toolStripSeparator1
 		// 
 		this->toolStripSeparator1->Name = L"toolStripSeparator1";
-		this->toolStripSeparator1->Size = System::Drawing::Size(294, 6);
+		this->toolStripSeparator1->Size = System::Drawing::Size(239, 6);
 		// 
 		// устранениеПроблемToolStripMenuItem
 		// 
 		this->устранениеПроблемToolStripMenuItem->Name = L"устранениеПроблемToolStripMenuItem";
-		this->устранениеПроблемToolStripMenuItem->Size = System::Drawing::Size(297, 26);
+		this->устранениеПроблемToolStripMenuItem->Size = System::Drawing::Size(242, 22);
 		this->устранениеПроблемToolStripMenuItem->Text = L"Остальные настройки";
 		this->устранениеПроблемToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::устранениеПроблемToolStripMenuItem_Click);
 		// 
@@ -1316,13 +1305,13 @@ private:
 				this->DelDileIds, this->преобразованияToolStripMenuItem, this->синтаксисSPSSБазыToolStripMenuItem, this->сообщитьОбОшибкеToolStripMenuItem
 		});
 		this->дополнительноToolStripMenuItem->Name = L"дополнительноToolStripMenuItem";
-		this->дополнительноToolStripMenuItem->Size = System::Drawing::Size(132, 24);
+		this->дополнительноToolStripMenuItem->Size = System::Drawing::Size(107, 20);
 		this->дополнительноToolStripMenuItem->Text = L"Дополнительно";
 		// 
 		// заменаВФайлеToolStripMenuItem
 		// 
 		this->заменаВФайлеToolStripMenuItem->Name = L"заменаВФайлеToolStripMenuItem";
-		this->заменаВФайлеToolStripMenuItem->Size = System::Drawing::Size(235, 26);
+		this->заменаВФайлеToolStripMenuItem->Size = System::Drawing::Size(196, 22);
 		this->заменаВФайлеToolStripMenuItem->Text = L"Замена в файле";
 		this->заменаВФайлеToolStripMenuItem->ToolTipText = L"Построчная замена в файле";
 		this->заменаВФайлеToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::заменаВФайлеToolStripMenuItem_Click);
@@ -1330,7 +1319,7 @@ private:
 		// DelDileIds
 		// 
 		this->DelDileIds->Name = L"DelDileIds";
-		this->DelDileIds->Size = System::Drawing::Size(235, 26);
+		this->DelDileIds->Size = System::Drawing::Size(196, 22);
 		this->DelDileIds->Text = L"Удалить Id из файла";
 		this->DelDileIds->ToolTipText = L"Удалить нумерацию в заголовках вопросов";
 		this->DelDileIds->Click += gcnew System::EventHandler(this, &MainForm::DelDileIds_Click);
@@ -1338,21 +1327,21 @@ private:
 		// преобразованияToolStripMenuItem
 		// 
 		this->преобразованияToolStripMenuItem->Name = L"преобразованияToolStripMenuItem";
-		this->преобразованияToolStripMenuItem->Size = System::Drawing::Size(235, 26);
+		this->преобразованияToolStripMenuItem->Size = System::Drawing::Size(196, 22);
 		this->преобразованияToolStripMenuItem->Text = L"Преобразования";
 		this->преобразованияToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::преобразованияToolStripMenuItem_Click);
 		// 
 		// синтаксисSPSSБазыToolStripMenuItem
 		// 
 		this->синтаксисSPSSБазыToolStripMenuItem->Name = L"синтаксисSPSSБазыToolStripMenuItem";
-		this->синтаксисSPSSБазыToolStripMenuItem->Size = System::Drawing::Size(235, 26);
+		this->синтаксисSPSSБазыToolStripMenuItem->Size = System::Drawing::Size(196, 22);
 		this->синтаксисSPSSБазыToolStripMenuItem->Text = L"База SPSS";
 		this->синтаксисSPSSБазыToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::синтаксисSPSSБазыToolStripMenuItem_Click);
 		// 
 		// сообщитьОбОшибкеToolStripMenuItem
 		// 
 		this->сообщитьОбОшибкеToolStripMenuItem->Name = L"сообщитьОбОшибкеToolStripMenuItem";
-		this->сообщитьОбОшибкеToolStripMenuItem->Size = System::Drawing::Size(235, 26);
+		this->сообщитьОбОшибкеToolStripMenuItem->Size = System::Drawing::Size(196, 22);
 		this->сообщитьОбОшибкеToolStripMenuItem->Text = L"Сообщить об ошибке";
 		this->сообщитьОбОшибкеToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::сообщитьОбОшибкеToolStripMenuItem_Click);
 		// 
@@ -1378,26 +1367,25 @@ private:
 		this->versLabel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 		this->versLabel->AutoSize = true;
 		this->versLabel->BackColor = System::Drawing::SystemColors::MenuBar;
-		this->versLabel->Location = System::Drawing::Point(1155, 4);
-		this->versLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+		this->versLabel->Location = System::Drawing::Point(866, 3);
 		this->versLabel->Name = L"versLabel";
-		this->versLabel->Size = System::Drawing::Size(56, 17);
+		this->versLabel->Size = System::Drawing::Size(44, 13);
 		this->versLabel->TabIndex = 2;
 		this->versLabel->Text = L"Версия";
 		// 
 		// MainForm
 		// 
-		this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+		this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 		this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 		this->BackColor = System::Drawing::Color::DarkGray;
-		this->ClientSize = System::Drawing::Size(1273, 635);
+		this->ClientSize = System::Drawing::Size(955, 516);
 		this->Controls->Add(this->versLabel);
 		this->Controls->Add(this->tableLayoutPanel1);
 		this->Controls->Add(this->menuStrip1);
 		this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 		this->MainMenuStrip = this->menuStrip1;
-		this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-		this->MinimumSize = System::Drawing::Size(1210, 460);
+		this->Margin = System::Windows::Forms::Padding(2);
+		this->MinimumSize = System::Drawing::Size(912, 381);
 		this->Name = L"MainForm";
 		this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 		this->Text = L"SurveyHelper";
@@ -1507,6 +1495,7 @@ private:
 			if ( s == "Slider" ) s = Slider::Get();
 						
 			if ( ExtendUi->ContainsKey(s) ) ExtendString->Text = ExtendUi[s];
+			if ( s == "Scale" && IsNumber(repeatName->Text) ) ExtendString->Text = Regex::Replace(ExtendString->Text, "Label(Start|End)=[\"'][^\"']+[\"']", "");
 
 			if ( CompTypes->ContainsKey(s) )//&& !CompTypes[s]->Contains(QuestionTypes->SelectedItem->ToString()) )
 				QuestionTypes->SelectedIndex = QuestionTypes->Items->IndexOf(List<String^>(CompTypes[s])[0]);
@@ -2041,7 +2030,7 @@ private:
 				return;
 			}
 			hintForm->ShowDialog();
-			String^ hint = hintForm->richTextBox1->Text;
+			String^ hint = hintForm->richTextBox1->Text->Replace("\n", "[br]");
 			int from = newText->IndexOf(">", newText->IndexOf("<Question") + 8);
 
 			if ( radioUnion->Checked )
@@ -2052,7 +2041,22 @@ private:
 			}
 			else
 			{
-				newText = newText->Remove(from) + " Hint=\"" + hint + "\"" + newText->Remove(0, from);
+				if ( radioBlock->Checked )
+				{
+					String^ hnt = "[div class=\"question-hint\"]" + hint + "[/div]";
+					if ( Regex::IsMatch(newText, "<Page[^(<Repeat))]+<Header") )
+					{
+						from = newText->IndexOf("</", newText->IndexOf("<Header"));
+					}
+					else
+					{
+						hnt = "\n" + gcnew String('\t', StrToInt(tabs->SelectedItem->ToString()) + 1) + "<Header>" + hnt + "</Header>";
+						from = newText->IndexOf(">", newText->IndexOf("<Page")) + 1;
+					}
+					newText = newText->Insert(from, hnt);
+				}
+				else
+					newText = newText->Insert(from, " Hint=\"" + hint + "\"");
 			}
 			TextMemo2->Text = newText;
 			if ( CopyBuf->Checked ) CopyToBuffer(gcnew List<String^>(TextMemo2->Lines));

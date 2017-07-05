@@ -239,6 +239,7 @@
     <EmbeddedResource Include="HintForm.resx">
       <DependentUpon>HintForm.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">HintForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">HintForm.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
