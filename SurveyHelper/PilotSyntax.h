@@ -430,6 +430,7 @@
 			this->progressBar1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->progressBar1->Name = L"progressBar1";
 			this->progressBar1->Size = System::Drawing::Size(404, 17);
+			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
 			this->progressBar1->TabIndex = 1;
 			// 
 			// panel3
