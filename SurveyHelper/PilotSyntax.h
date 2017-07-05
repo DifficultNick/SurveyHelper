@@ -128,7 +128,7 @@
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
 			this->tableLayoutPanel1->Location = System::Drawing::Point(860, 139);
-			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 2;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
@@ -150,7 +150,7 @@
 			this->tableLayoutPanel2->Controls->Add(this->button2, 1, 0);
 			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel2->Location = System::Drawing::Point(0, 0);
-			this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 			this->tableLayoutPanel2->RowCount = 3;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 46)));
@@ -167,9 +167,9 @@
 			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->groupBox1->Location = System::Drawing::Point(4, 50);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox1->Margin = System::Windows::Forms::Padding(4);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox1->Padding = System::Windows::Forms::Padding(4);
 			this->groupBox1->Size = System::Drawing::Size(590, 195);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
@@ -189,7 +189,7 @@
 			this->tableLayoutPanel3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->tableLayoutPanel3->Location = System::Drawing::Point(4, 20);
-			this->tableLayoutPanel3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tableLayoutPanel3->Margin = System::Windows::Forms::Padding(4);
 			this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
 			this->tableLayoutPanel3->RowCount = 5;
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 34)));
@@ -223,7 +223,7 @@
 			this->excelExp->AutoSize = true;
 			this->excelExp->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->excelExp->Location = System::Drawing::Point(4, 10);
-			this->excelExp->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->excelExp->Margin = System::Windows::Forms::Padding(4);
 			this->excelExp->Name = L"excelExp";
 			this->excelExp->Size = System::Drawing::Size(297, 21);
 			this->excelExp->TabIndex = 6;
@@ -245,7 +245,7 @@
 			// 
 			this->vals->AutoSize = true;
 			this->vals->Location = System::Drawing::Point(103, 7);
-			this->vals->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->vals->Margin = System::Windows::Forms::Padding(4);
 			this->vals->Name = L"vals";
 			this->vals->Size = System::Drawing::Size(94, 21);
 			this->vals->TabIndex = 1;
@@ -257,7 +257,7 @@
 			this->labs->AutoSize = true;
 			this->labs->Checked = true;
 			this->labs->Location = System::Drawing::Point(4, 7);
-			this->labs->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->labs->Margin = System::Windows::Forms::Padding(4);
 			this->labs->Name = L"labs";
 			this->labs->Size = System::Drawing::Size(70, 21);
 			this->labs->TabIndex = 0;
@@ -272,7 +272,7 @@
 			this->renvar->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->renvar->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->renvar->Location = System::Drawing::Point(4, 43);
-			this->renvar->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->renvar->Margin = System::Windows::Forms::Padding(4);
 			this->renvar->Name = L"renvar";
 			this->renvar->Size = System::Drawing::Size(574, 21);
 			this->renvar->TabIndex = 3;
@@ -286,7 +286,7 @@
 			this->repl->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->repl->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->repl->Location = System::Drawing::Point(4, 9);
-			this->repl->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->repl->Margin = System::Windows::Forms::Padding(4);
 			this->repl->Name = L"repl";
 			this->repl->Size = System::Drawing::Size(574, 21);
 			this->repl->TabIndex = 0;
@@ -299,7 +299,7 @@
 			this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				305)));
 			this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				276)));
+				277)));
 			this->tableLayoutPanel4->Controls->Add(this->selstat, 0, 0);
 			this->tableLayoutPanel4->Controls->Add(this->stats, 1, 0);
 			this->tableLayoutPanel4->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -318,7 +318,7 @@
 			this->selstat->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->selstat->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->selstat->Location = System::Drawing::Point(4, 9);
-			this->selstat->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->selstat->Margin = System::Windows::Forms::Padding(4);
 			this->selstat->Name = L"selstat";
 			this->selstat->Size = System::Drawing::Size(297, 21);
 			this->selstat->TabIndex = 4;
@@ -329,7 +329,7 @@
 			// 
 			this->stats->Dock = System::Windows::Forms::DockStyle::Left;
 			this->stats->Location = System::Drawing::Point(309, 4);
-			this->stats->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->stats->Margin = System::Windows::Forms::Padding(4);
 			this->stats->Name = L"stats";
 			this->stats->Size = System::Drawing::Size(209, 23);
 			this->stats->TabIndex = 5;
@@ -359,7 +359,7 @@
 			this->saveTime->AutoSize = true;
 			this->saveTime->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->saveTime->Location = System::Drawing::Point(309, 9);
-			this->saveTime->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->saveTime->Margin = System::Windows::Forms::Padding(4);
 			this->saveTime->Name = L"saveTime";
 			this->saveTime->Size = System::Drawing::Size(269, 21);
 			this->saveTime->TabIndex = 7;
@@ -373,7 +373,7 @@
 			this->cutvars->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->cutvars->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->cutvars->Location = System::Drawing::Point(4, 9);
-			this->cutvars->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->cutvars->Margin = System::Windows::Forms::Padding(4);
 			this->cutvars->Name = L"cutvars";
 			this->cutvars->Size = System::Drawing::Size(297, 21);
 			this->cutvars->TabIndex = 6;
@@ -404,7 +404,7 @@
 			this->tableLayoutPanel7->Controls->Add(this->progressBar1, 1, 0);
 			this->tableLayoutPanel7->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel7->Location = System::Drawing::Point(0, 0);
-			this->tableLayoutPanel7->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tableLayoutPanel7->Margin = System::Windows::Forms::Padding(4);
 			this->tableLayoutPanel7->Name = L"tableLayoutPanel7";
 			this->tableLayoutPanel7->RowCount = 1;
 			this->tableLayoutPanel7->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
@@ -427,7 +427,7 @@
 			// 
 			this->progressBar1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->progressBar1->Location = System::Drawing::Point(435, 4);
-			this->progressBar1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->progressBar1->Margin = System::Windows::Forms::Padding(4);
 			this->progressBar1->Name = L"progressBar1";
 			this->progressBar1->Size = System::Drawing::Size(404, 17);
 			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
@@ -439,7 +439,7 @@
 			this->panel3->Controls->Add(this->FilePath);
 			this->panel3->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->panel3->Location = System::Drawing::Point(4, 4);
-			this->panel3->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel3->Margin = System::Windows::Forms::Padding(4);
 			this->panel3->Name = L"panel3";
 			this->panel3->Size = System::Drawing::Size(590, 38);
 			this->panel3->TabIndex = 2;
@@ -471,7 +471,7 @@
 			this->panel4->BackColor = System::Drawing::Color::White;
 			this->panel4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->panel4->Location = System::Drawing::Point(611, 54);
-			this->panel4->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel4->Margin = System::Windows::Forms::Padding(4);
 			this->panel4->Name = L"panel4";
 			this->panel4->Size = System::Drawing::Size(219, 186);
 			this->panel4->TabIndex = 4;
@@ -509,7 +509,7 @@
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"PilotSyntax";
