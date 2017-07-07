@@ -368,18 +368,23 @@ static String^ Translate(String^ str)
 
 
 // òðàíñëèò-çàìåíà ñèìâîëîâ
-static String^ ImproveQuestionIdLanguage(String^ s)
+static String^ ImprovePropertyLanguage(String^ s)
 {
 	String^ rus = "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞß";
-	rus += rus->ToLower() + "-\\|/?!#*&\"'.,";
+	rus += rus->ToLower();
 	String^ eng = "ABBGDEEZZIYKLMHOPPCTYFXCCSSQQQAUA";
-	eng += eng->ToLower() + "_______________";
+	eng += eng->ToLower();
 	String^ res = "";
-
+	String^ tmp = "";
 	for ( int i = 0; i < s->Length; i++ )
-		if ( rus->Contains(s[i].ToString()) )
-			res += eng[rus->IndexOf(s[i])];
-		else res += s[i];
+	{
+		tmp = s[i].ToString();
+		if ( rus->Contains(tmp) )
+			res += eng[rus->IndexOf(tmp)];
+		else
+			if ( !Regex::IsMatch(tmp, "^[\\d_A-Za-z]$") ) res += "_";
+			else res += s[i];
+	}
 
 	return res;
 }

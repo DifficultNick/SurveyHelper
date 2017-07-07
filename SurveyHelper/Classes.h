@@ -1005,7 +1005,7 @@ public:
 	String^ Extend;
 	String^ PageHeader;
 	String^ DummyAtributes;
-	String^ QuestionId; // маска Id Вопросов
+	String^ QuestionId;// маска Id Вопросов
 	//AdditionalAnswer^ NothingAnswer;
 	//AdditionalAnswer^ RefuseAnswer;
 
@@ -1182,7 +1182,7 @@ public:
 		if ( CombineQuestions )
 		{
 			resD->Add("\t<Repeat List=\"" + QuestionListId + "\">");
-			resD->Add("\t\t<Question Id=\"" + QuestionId + "_@ID\" Type=\"" + QuestionType + "\"><Text>@Text</Text></Question>");
+			resD->Add("\t\t<Question Id=\"" + QuestionId + "_@ID\"" + ( QuestionType != "" ? (" Type=\"" + QuestionType + "\"") : "") + "><Text>@Text</Text></Question>");
 			resD->Add("\t</Repeat>");
 		}
 		else
@@ -1227,9 +1227,13 @@ public:
 			}
 			else
 			{
-				for ( int i = 0; i < resA->Count; i++ )
-					resA[i] = "\t\t" + resA[i];
-				resD->AddRange(resA);
+				if ( resA->Count == 0 ) resD->Add("\t\t<Answer Id=\"1\"/>");
+				else
+				{
+					for ( int i = 0; i < resA->Count; i++ )
+						resA[i] = "\t\t" + resA[i];
+					resD->AddRange(resA);
+				}
 			}
 		}
 		catch ( Exception^ e )
