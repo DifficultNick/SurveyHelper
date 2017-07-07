@@ -102,6 +102,7 @@ public ref struct HeaderList
 };
 
 
+// результаты проверки на недопустимые символы
 public ref struct CheckSyntaxResult
 {
 public:
@@ -219,7 +220,7 @@ static int Min(int a, int b)
 	else return (a > b) ? a : b;
 }
 
-
+// проверка на недопустимые символы
 static CheckSyntaxResult^ CheckSyntax(List<String^>^ Strings)
 {
 	CheckSyntaxResult^ res = gcnew CheckSyntaxResult();
@@ -262,7 +263,7 @@ static CheckSyntaxResult^ CheckSyntax(List<String^>^ Strings)
 	return res;
 }
 
-
+// проверка на недопустимые символы
 static CheckSyntaxResult^ CheckSyntax(String^ str)
 {
 	CheckSyntaxResult^ res = gcnew CheckSyntaxResult();
@@ -366,6 +367,7 @@ static String^ Translate(String^ str)
 }
 
 
+// транслит-замена символов
 static String^ ImproveQuestionIdLanguage(String^ s)
 {
 	String^ rus = "јЅ¬√ƒ≈®∆«»… ЋћЌќѕ–—“”‘’÷„ЎўЏџ№Ёёя";
@@ -566,6 +568,7 @@ static void CopyToBuffer(List<String^>^ lst)
 }
 
 
+// копирование в буфер обмена
 static void CopyToBuffer(String^ lst)
 {
 	try
@@ -580,6 +583,7 @@ static void CopyToBuffer(String^ lst)
 }
 
 
+// возвращает из строки только [\d-]
 static int StrToInt(String^ str)
 {
 	int res;
@@ -700,7 +704,7 @@ static String^ GetQuestionId(String^ s)
 }
 
 
-
+// возвращает строку с первой заглавной буквой
 static String^ RiseFirstLetter(String^ s)
 {
 	if ( s == nullptr || s->Length < 2 ) return s;
@@ -772,10 +776,10 @@ static bool WriteFile(String^ FileName, array<String^>^ Str, System::Text::Encod
 }
 
 
+// если файл с именем FileName уже существует, то он перемещаетс€ в FileName + bactxt
 static bool WriteFile(String^ FileName, array<String^>^ Str, String^ bactxt)
 {
-	if ( File::Exists(FileName) ) File::Copy(FileName, FileName + bactxt, true);
-	
+	if ( File::Exists(FileName) ) File::Move(FileName, FileName + bactxt);
 	return WriteFile(FileName, Str);
 }
 
@@ -843,33 +847,21 @@ static String^ ListToString(List<int>^ str, String^ devide)
 
 static List<String^>^ StringToList(String^ str, Char separator)
 {
-	//Char sep = Char(separator[0]);
-	List<String^>^ res = gcnew List<String^>(str->Split(separator));
-	/*String^ tmp = str;
-	int i = str->IndexOf(separator);
-
-	while ( i > -1 )
-	{
-		res->Add(tmp->Remove(i));
-		tmp = tmp->Remove(0, i+separator->Length);
-		i = tmp->IndexOf(separator);
-	}
-
-	if ( tmp->Length > 0 ) res->Add(tmp);*/
-
-	return res;
+	return gcnew List<String^>(str->Split(separator));
 }
 
 //выделение части строки
 static String^ TakePart(String^ s, int from, int to)
 {
 	if ( from > to || s == nullptr ) return "";
-	array<wchar_t>^ destination = gcnew array<wchar_t>(to - from+1);
+	/*array<wchar_t>^ destination = gcnew array<wchar_t>(to - from+1);
 	s->CopyTo(from, destination, 0, to - from);
-	return gcnew String(destination);
+	return gcnew String(destination);*/
+	return s->Remove(to)->Remove(0, from);
 }
 
 
+// удаление Id из заголовков вопрсов
 static HeaderList^ RemoveHeaders(String^ FilePath)
 {
 	List<String^>^ fStr = gcnew List<String^>(ReadFile(FilePath));
@@ -957,14 +949,6 @@ static void ExportToExcel(String^ text, String^ FilePath)
 }
 
 
-static String^ Crypt(String^ str)
-{
-	wchar_t a = str[0]; //номер
-	String ^s = gcnew String(a, 1); // символ
-	s += a; // добавить
-	return str;
-}
-
 // очищает текст от лишних символов
 static String^ CleanText(String^ str)
 {
@@ -1041,6 +1025,7 @@ static List<String^>^ SortListByLength(List<String^>^ list)
 }
 
 
+// запись bin файлов
 static bool StructFileWrite(String^ filePath, Object^ data)
 {
 	try
@@ -1059,6 +1044,7 @@ static bool StructFileWrite(String^ filePath, Object^ data)
 }
 
 
+// чтение bin файлов
 static Object^ StructFileRead(String^ filePath)
 {
 	Object^ res = gcnew Object();
