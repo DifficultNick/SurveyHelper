@@ -10,13 +10,21 @@
 
 	public ref class PilotSyntax: public System::Windows::Forms::Form
 	{
-		public:
-			ProjectResources^ rsc = gcnew ProjectResources();
+		private:
+			Settings^ sets = gcnew Settings();
+	private: System::Windows::Forms::CheckBox^  autoRun;
+			 ProjectResources^ rsc = gcnew ProjectResources();
 
-		PilotSyntax(void)
+		public: PilotSyntax()
 		{
 			InitializeComponent();
 			this->panel4->BackgroundImage = rsc->GetImage("waiting_for_file");
+			String^ dd = "_";
+			sets->Read("SPSS");
+			if ( sets->isWritten("Delimeter") ) dd = sets->Get("Delimeter");
+			delimeter->Text = dd;
+			repl->Checked = sets->Get("Replace", true);
+			autoRun->Checked = sets->Get("AutoRun", true);
 		}
 
 		protected:
@@ -70,7 +78,10 @@
 	private: System::Windows::Forms::Panel^  panel4;
 	private: System::Windows::Forms::Button^  button2;
 		private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
-		private: System::ComponentModel::IContainer^  components;
+	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel8;
+	private: System::Windows::Forms::TextBox^  delimeter;
+
+	private: System::ComponentModel::IContainer^  components;
 
 
 
@@ -90,13 +101,15 @@
 			this->vals = (gcnew System::Windows::Forms::RadioButton());
 			this->labs = (gcnew System::Windows::Forms::RadioButton());
 			this->renvar = (gcnew System::Windows::Forms::CheckBox());
-			this->repl = (gcnew System::Windows::Forms::CheckBox());
 			this->tableLayoutPanel4 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->selstat = (gcnew System::Windows::Forms::CheckBox());
 			this->stats = (gcnew System::Windows::Forms::TextBox());
 			this->tableLayoutPanel5 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->saveTime = (gcnew System::Windows::Forms::CheckBox());
 			this->cutvars = (gcnew System::Windows::Forms::CheckBox());
+			this->tableLayoutPanel8 = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->delimeter = (gcnew System::Windows::Forms::TextBox());
+			this->repl = (gcnew System::Windows::Forms::CheckBox());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->tableLayoutPanel7 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->StatusLabel = (gcnew System::Windows::Forms::Label());
@@ -108,6 +121,7 @@
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->autoRun = (gcnew System::Windows::Forms::CheckBox());
 			this->tableLayoutPanel2->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel3->SuspendLayout();
@@ -115,6 +129,7 @@
 			this->panel1->SuspendLayout();
 			this->tableLayoutPanel4->SuspendLayout();
 			this->tableLayoutPanel5->SuspendLayout();
+			this->tableLayoutPanel8->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->tableLayoutPanel7->SuspendLayout();
 			this->panel3->SuspendLayout();
@@ -144,20 +159,21 @@
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				245)));
 			this->tableLayoutPanel2->Controls->Add(this->groupBox1, 0, 1);
-			this->tableLayoutPanel2->Controls->Add(this->panel2, 0, 2);
+			this->tableLayoutPanel2->Controls->Add(this->panel2, 0, 3);
 			this->tableLayoutPanel2->Controls->Add(this->panel3, 0, 0);
 			this->tableLayoutPanel2->Controls->Add(this->panel4, 1, 1);
 			this->tableLayoutPanel2->Controls->Add(this->button2, 1, 0);
+			this->tableLayoutPanel2->Controls->Add(this->autoRun, 0, 2);
 			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel2->Location = System::Drawing::Point(0, 0);
 			this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
-			this->tableLayoutPanel2->RowCount = 3;
+			this->tableLayoutPanel2->RowCount = 4;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 46)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 203)));
+			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(843, 274);
+			this->tableLayoutPanel2->Size = System::Drawing::Size(843, 303);
 			this->tableLayoutPanel2->TabIndex = 1;
 			// 
 			// groupBox1
@@ -182,9 +198,9 @@
 				100)));
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel6, 0, 4);
 			this->tableLayoutPanel3->Controls->Add(this->renvar, 0, 1);
-			this->tableLayoutPanel3->Controls->Add(this->repl, 0, 0);
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel4, 0, 2);
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel5, 0, 3);
+			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel8, 0, 0);
 			this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
@@ -279,20 +295,6 @@
 			this->renvar->Text = L"Переименовать переменные pre_sex и pre_age_1";
 			this->renvar->UseVisualStyleBackColor = true;
 			// 
-			// repl
-			// 
-			this->repl->AutoSize = true;
-			this->repl->Checked = true;
-			this->repl->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->repl->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->repl->Location = System::Drawing::Point(4, 9);
-			this->repl->Margin = System::Windows::Forms::Padding(4);
-			this->repl->Name = L"repl";
-			this->repl->Size = System::Drawing::Size(574, 21);
-			this->repl->TabIndex = 0;
-			this->repl->Text = L"Заменить \"@\" на \"_\"";
-			this->repl->UseVisualStyleBackColor = true;
-			// 
 			// tableLayoutPanel4
 			// 
 			this->tableLayoutPanel4->ColumnCount = 2;
@@ -380,16 +382,57 @@
 			this->cutvars->Text = L"Отрезать технические переменные";
 			this->cutvars->UseVisualStyleBackColor = true;
 			// 
+			// tableLayoutPanel8
+			// 
+			this->tableLayoutPanel8->ColumnCount = 2;
+			this->tableLayoutPanel8->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				305)));
+			this->tableLayoutPanel8->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				273)));
+			this->tableLayoutPanel8->Controls->Add(this->delimeter, 1, 0);
+			this->tableLayoutPanel8->Controls->Add(this->repl, 0, 0);
+			this->tableLayoutPanel8->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->tableLayoutPanel8->Location = System::Drawing::Point(3, 0);
+			this->tableLayoutPanel8->Margin = System::Windows::Forms::Padding(3, 0, 3, 0);
+			this->tableLayoutPanel8->Name = L"tableLayoutPanel8";
+			this->tableLayoutPanel8->RowCount = 1;
+			this->tableLayoutPanel8->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+			this->tableLayoutPanel8->Size = System::Drawing::Size(576, 34);
+			this->tableLayoutPanel8->TabIndex = 7;
+			// 
+			// delimeter
+			// 
+			this->delimeter->Location = System::Drawing::Point(308, 3);
+			this->delimeter->MaxLength = 1;
+			this->delimeter->Name = L"delimeter";
+			this->delimeter->Size = System::Drawing::Size(35, 23);
+			this->delimeter->TabIndex = 0;
+			this->delimeter->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->toolTip1->SetToolTip(this->delimeter, L"Разделитель");
+			// 
+			// repl
+			// 
+			this->repl->AutoSize = true;
+			this->repl->Checked = true;
+			this->repl->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->repl->Location = System::Drawing::Point(4, 4);
+			this->repl->Margin = System::Windows::Forms::Padding(4);
+			this->repl->Name = L"repl";
+			this->repl->Size = System::Drawing::Size(142, 21);
+			this->repl->TabIndex = 0;
+			this->repl->Text = L"Заменить \"@\" на";
+			this->repl->UseVisualStyleBackColor = true;
+			// 
 			// panel2
 			// 
 			this->panel2->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->tableLayoutPanel2->SetColumnSpan(this->panel2, 2);
 			this->panel2->Controls->Add(this->tableLayoutPanel7);
 			this->panel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel2->Location = System::Drawing::Point(0, 249);
+			this->panel2->Location = System::Drawing::Point(0, 277);
 			this->panel2->Margin = System::Windows::Forms::Padding(0);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(843, 25);
+			this->panel2->Size = System::Drawing::Size(843, 26);
 			this->panel2->TabIndex = 1;
 			// 
 			// tableLayoutPanel7
@@ -408,7 +451,7 @@
 			this->tableLayoutPanel7->Name = L"tableLayoutPanel7";
 			this->tableLayoutPanel7->RowCount = 1;
 			this->tableLayoutPanel7->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel7->Size = System::Drawing::Size(843, 25);
+			this->tableLayoutPanel7->Size = System::Drawing::Size(843, 26);
 			this->tableLayoutPanel7->TabIndex = 0;
 			// 
 			// StatusLabel
@@ -416,7 +459,7 @@
 			this->StatusLabel->AutoSize = true;
 			this->StatusLabel->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->StatusLabel->ForeColor = System::Drawing::Color::Gray;
-			this->StatusLabel->Location = System::Drawing::Point(4, 4);
+			this->StatusLabel->Location = System::Drawing::Point(4, 5);
 			this->StatusLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 4);
 			this->StatusLabel->Name = L"StatusLabel";
 			this->StatusLabel->Size = System::Drawing::Size(423, 17);
@@ -429,9 +472,10 @@
 			this->progressBar1->Location = System::Drawing::Point(435, 4);
 			this->progressBar1->Margin = System::Windows::Forms::Padding(4);
 			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(404, 17);
+			this->progressBar1->Size = System::Drawing::Size(404, 18);
 			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
 			this->progressBar1->TabIndex = 1;
+			this->toolTip1->SetToolTip(this->progressBar1, L"Процесс выполнения");
 			// 
 			// panel3
 			// 
@@ -462,11 +506,11 @@
 			this->FilePath->Name = L"FilePath";
 			this->FilePath->Size = System::Drawing::Size(439, 22);
 			this->FilePath->TabIndex = 0;
+			this->FilePath->TextChanged += gcnew System::EventHandler(this, &PilotSyntax::FilePath_TextChanged);
 			this->FilePath->DoubleClick += gcnew System::EventHandler(this, &PilotSyntax::FilePath_DoubleClick);
 			// 
 			// panel4
 			// 
-			this->panel4->AllowDrop = true;
 			this->panel4->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->panel4->BackColor = System::Drawing::Color::White;
 			this->panel4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
@@ -475,13 +519,11 @@
 			this->panel4->Name = L"panel4";
 			this->panel4->Size = System::Drawing::Size(219, 186);
 			this->panel4->TabIndex = 4;
-			this->panel4->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &PilotSyntax::panel4_DragDrop);
-			this->panel4->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &PilotSyntax::panel4_DragEnter);
-			this->panel4->DragLeave += gcnew System::EventHandler(this, &PilotSyntax::panel4_DragLeave);
 			// 
 			// button2
 			// 
 			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button2->Enabled = false;
 			this->button2->Location = System::Drawing::Point(652, 7);
 			this->button2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button2->Name = L"button2";
@@ -500,11 +542,26 @@
 			this->openFileDialog1->DefaultExt = L"sps";
 			this->openFileDialog1->Filter = L"Файл spss-синтаксиса|*.sps";
 			// 
+			// autoRun
+			// 
+			this->autoRun->AutoSize = true;
+			this->autoRun->Checked = true;
+			this->autoRun->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->autoRun->Location = System::Drawing::Point(12, 252);
+			this->autoRun->Margin = System::Windows::Forms::Padding(12, 3, 3, 3);
+			this->autoRun->Name = L"autoRun";
+			this->autoRun->Size = System::Drawing::Size(192, 21);
+			this->autoRun->TabIndex = 6;
+			this->autoRun->Text = L"Открыть по завершении";
+			this->toolTip1->SetToolTip(this->autoRun, L"Открыть файл .sps при успешном выполнении");
+			this->autoRun->UseVisualStyleBackColor = true;
+			// 
 			// PilotSyntax
 			// 
+			this->AllowDrop = true;
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(843, 274);
+			this->ClientSize = System::Drawing::Size(843, 303);
 			this->Controls->Add(this->tableLayoutPanel2);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -515,7 +572,13 @@
 			this->Name = L"PilotSyntax";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Синтаксис для SPSS базы";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &PilotSyntax::PilotSyntax_FormClosing);
+			this->Shown += gcnew System::EventHandler(this, &PilotSyntax::PilotSyntax_Shown);
+			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &PilotSyntax::FormDragDrop);
+			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &PilotSyntax::FormDragEnter);
+			this->DragLeave += gcnew System::EventHandler(this, &PilotSyntax::FormDragLeave);
 			this->tableLayoutPanel2->ResumeLayout(false);
+			this->tableLayoutPanel2->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
 			this->tableLayoutPanel3->ResumeLayout(false);
 			this->tableLayoutPanel3->PerformLayout();
@@ -527,6 +590,8 @@
 			this->tableLayoutPanel4->PerformLayout();
 			this->tableLayoutPanel5->ResumeLayout(false);
 			this->tableLayoutPanel5->PerformLayout();
+			this->tableLayoutPanel8->ResumeLayout(false);
+			this->tableLayoutPanel8->PerformLayout();
 			this->panel2->ResumeLayout(false);
 			this->tableLayoutPanel7->ResumeLayout(false);
 			this->tableLayoutPanel7->PerformLayout();
@@ -548,12 +613,16 @@
 		if ( !File::Exists(FilePath->Text) )
 		{
 			ShowMessage("Сначала выберите файл!", Forms::MessageBoxIcon::Exclamation);
+			ResetAll(true);
 			return;
 		}
 
 		if ( selstat->Checked && !Regex::IsMatch(stats->Text, "^(\\d{1,3}\\s*,?\\s*)*(\\d{1,3}\\s*)+$") )
 		{
 			ShowWarning("Неверно указан список статусов!");
+			progressBar1->Value = 0;
+			StatusLabel->Text = "Укажите список статусов";
+			Update();
 			return;
 		}
 
@@ -574,10 +643,11 @@
 			if ( s->IndexOf("val lab") < 0 || vrInd < 0 )
 			{
 				ShowWarning("Содержимое файла не распознано, как SPSS синтаксис!");
+				ResetAll(false);
 				return;
 			}
 
-			String^ delimiter = repl->Checked ? "_" : ( s->Contains("@") ? "@" : "_");
+			String^ del = repl->Checked ? delimeter->Text : "@";
 			String^ vars = s->Remove(vrInd);
 			String^ add = "";
 			String^ fp = Regex::Replace(FilePath->Text, "\\.sps$", "");
@@ -600,7 +670,7 @@
 			add += "\nget file \"" + fp + ".sav\".";
 
 			// переименование
-			if ( renvar->Checked ) add += "\n\nrename variables(pre_sex pre_age" + delimiter + "1 = sex age).";
+			if ( renvar->Checked ) add += "\n\nrename variables(pre_sex pre_age" + del + "1 = sex age).";
 
 			//выбор статусов
 			if ( selstat->Checked )
@@ -641,11 +711,12 @@
 
 			progressBar1->Value = 60;
 
+			// замена @
 			if ( repl )
 			{
 				StatusLabel->Text = "Замена @...";
 				Update();
-				res = res->Replace("@", "_");
+				res = res->Replace("@", del);
 			}
 
 			progressBar1->Value = 80;
@@ -657,16 +728,17 @@
 			progressBar1->Value = 100;
 			StatusLabel->Text = "Готово!";
 			Update();
+			ShowMessage("Готово!", MessageBoxIcon::Asterisk);
+			this->Close();
+			if ( autoRun->Checked ) Run(fp + load + ".sps");
 		}
 		catch ( Exception^ e )
 		{
 			ShowError(429, "Ошибка обработки файла.\n\nПодробнее:\n" + e->ToString());
 		}
 	}
-
-
-
-	private: System::Void panel4_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
+	
+	private: System::Void FormDragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
 	{
 		if ( e->Data->GetDataPresent(DataFormats::FileDrop) )
 		{
@@ -676,48 +748,16 @@
 		}
 	}
 
-	private: System::Void panel4_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
+	private: System::Void FormDragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
 	{
 		if ( e->Data->GetDataPresent(DataFormats::FileDrop) ) FilePath->Text = ((array<String^>^)e->Data->GetData(DataFormats::FileDrop))[0];
 	}
 
-	private: System::Void panel4_DragLeave(System::Object^  sender, System::EventArgs^  e)
+	private: System::Void FormDragLeave(System::Object^  sender, System::EventArgs^  e)
 	{
-		if ( !File::Exists(FilePath->Text) ) panel4->BackgroundImage = rsc->GetImage("waiting_for_file");
-		else SelectImage(FilePath->Text);
+		if ( !File::Exists(FilePath->Text) ) ResetAll(true);
+		else UpdateAll();
 	}
-
-
-	void SelectImage(String^ ex)
-	{
-		try
-		{
-			if ( ex == nullptr || String::IsNullOrEmpty(ex) )
-			{
-				panel1->BackgroundImage = rsc->GetImage("unknown_file");
-				return;
-			}
-
-			String^ ext = Path::GetExtension(ex)->ToUpper();
-
-			if ( ext->Contains("XML") )
-				panel4->BackgroundImage = rsc->GetImage("xml_file");
-			else if ( ext->Contains("BAK") )
-				panel4->BackgroundImage = rsc->GetImage("bak_file");
-			else if ( ext->Contains("TXT") )
-				panel4->BackgroundImage = rsc->GetImage("txt_file");
-			else if(ext->Contains("SPS"))
-				panel4->BackgroundImage = rsc->GetImage("spss_file");
-			else 
-				panel4->BackgroundImage = rsc->GetImage("unknown_file");
-		}
-		catch ( Exception^ e )
-		{
-			ShowError(335, "Ошибка в ресурсах приложения");
-			
-		}
-	}
-
 
 	private: System::Void FilePath_DoubleClick(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -729,8 +769,83 @@
 		if ( openFileDialog1->ShowDialog() == Forms::DialogResult::OK )
 		{
 			FilePath->Text = openFileDialog1->FileName;
-			SelectImage(FilePath->Text);
+			UpdateAll();
 		}
 	}
 
+	private: System::Void FilePath_TextChanged(System::Object^  sender, System::EventArgs^  e)
+	{
+		FilePath->Text = Regex::Replace(FilePath->Text, "^[\"'](?<path>.+)[\"']$", "${path}");
+		if ( File::Exists(FilePath->Text) )
+			UpdateAll();
+		else ResetAll(false);
+	}
+
+
+
+
+	private: void SelectImage(String^ ex)
+	{
+		try
+		{
+			if ( ex == nullptr || String::IsNullOrEmpty(ex) )
+			{
+				panel4->BackgroundImage = rsc->GetImage("unknown_file");
+				return;
+			}
+
+			String^ ext = Path::GetExtension(ex)->ToUpper();
+
+			if ( ext->Contains("XML") )
+				panel4->BackgroundImage = rsc->GetImage("xml_file");
+			else if ( ext->Contains("BAK") )
+				panel4->BackgroundImage = rsc->GetImage("bak_file");
+			else if ( ext->Contains("TXT") )
+				panel4->BackgroundImage = rsc->GetImage("txt_file");
+			else if ( ext->Contains("SPS") )
+				panel4->BackgroundImage = rsc->GetImage("spss_file");
+			else
+				panel4->BackgroundImage = rsc->GetImage("unknown_file");
+		}
+		catch ( Exception^ e )
+		{
+			ShowError(335, "Ошибка в ресурсах приложения");
+
+		}
+	}
+
+	private: System::Void ResetAll(bool clearPath)
+	{
+		if ( clearPath )
+		{
+			FilePath->Text = "";
+			panel4->BackgroundImage = rsc->GetImage("waiting_for_file");
+		}
+		button2->Enabled = false;
+		progressBar1->Value = 0;
+		StatusLabel->Text = "Выберите файл";
+		Update();
+	}
+
+	private: System::Void UpdateAll()
+	{
+		SelectImage(FilePath->Text);
+		button2->Enabled = true;
+		StatusLabel->Text = "Нажмитt \"Создать\"";
+		Update();
+	}
+
+	private: System::Void PilotSyntax_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
+	{
+		sets->Clear();
+		sets->Set("Delimeter", delimeter->Text);
+		sets->Set("Replace", repl->Checked);
+		sets->Set("AutoRun", autoRun->Checked);
+		sets->Save("SPSS");
+	}
+
+	private: System::Void PilotSyntax_Shown(System::Object^  sender, System::EventArgs^  e)
+	{
+		ResetAll(true);
+	}
 };

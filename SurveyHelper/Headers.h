@@ -69,6 +69,9 @@
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->tableLayoutPanel2->SuspendLayout();
+			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::FormDragDrop);
+			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::FormDragEnter);
+			this->DragLeave += gcnew System::EventHandler(this, &Headers::FormDragLeave);
 			this->SuspendLayout();
 			// 
 			// openFileDialog1
@@ -93,7 +96,7 @@
 			this->tableLayoutPanel1->Controls->Add(this->button3, 1, 2);
 			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
-			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 5;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 79)));
@@ -109,7 +112,7 @@
 			this->richTextBox1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->richTextBox1->Enabled = false;
 			this->richTextBox1->Location = System::Drawing::Point(4, 122);
-			this->richTextBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(4);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->tableLayoutPanel1->SetRowSpan(this->richTextBox1, 2);
 			this->richTextBox1->Size = System::Drawing::Size(699, 434);
@@ -125,7 +128,7 @@
 			this->tableLayoutPanel2->Controls->Add(this->panel1, 0, 1);
 			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel2->Location = System::Drawing::Point(711, 165);
-			this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 			this->tableLayoutPanel2->RowCount = 2;
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 148)));
@@ -150,17 +153,13 @@
 				// 
 				// panel1
 				// 
-			this->panel1->AllowDrop = true;
 			this->panel1->BackColor = System::Drawing::Color::White;
 			this->panel1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->panel1->Location = System::Drawing::Point(4, 152);
-			this->panel1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->panel1->Margin = System::Windows::Forms::Padding(4);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(264, 218);
 			this->panel1->TabIndex = 3;
-			this->panel1->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::panel1_DragDrop);
-			this->panel1->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::panel1_DragEnter);
-			this->panel1->DragLeave += gcnew System::EventHandler(this, &Headers::panel1_DragLeave);
 			// 
 			// label2
 			// 
@@ -182,7 +181,7 @@
 			this->FilePath->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->FilePath->Location = System::Drawing::Point(4, 86);
-			this->FilePath->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->FilePath->Margin = System::Windows::Forms::Padding(4);
 			this->FilePath->Name = L"FilePath";
 			this->FilePath->Size = System::Drawing::Size(699, 24);
 			this->FilePath->TabIndex = 5;
@@ -208,7 +207,7 @@
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->button1->Location = System::Drawing::Point(232, 566);
-			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button1->Margin = System::Windows::Forms::Padding(4);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(243, 32);
 			this->button1->TabIndex = 1;
@@ -246,13 +245,13 @@
 			// 
 			// Headers
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->AllowDrop = true;
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(987, 604);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(849, 626);
@@ -269,7 +268,7 @@
 #pragma endregion
 
 
-private: System::Void panel1_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
+private: System::Void FormDragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
 {
 	if ( e->Data->GetDataPresent(DataFormats::FileDrop) )
 	{
@@ -280,7 +279,7 @@ private: System::Void panel1_DragEnter(System::Object^  sender, System::Windows:
 }
 
 
-private: System::Void panel1_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
+private: System::Void FormDragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
 {
 	if ( e->Data->GetDataPresent(DataFormats::FileDrop) ) FilePath->Text = ((array<String^>^)e->Data->GetData(DataFormats::FileDrop))[0];
 }
@@ -294,6 +293,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 
 private: System::Void FilePath_TextChanged(System::Object^  sender, System::EventArgs^  e)
 {
+	FilePath->Text = Regex::Replace(FilePath->Text, "^[\"'](?<path>.+)[\"']$", "${path}");
 	if (File::Exists(FilePath->Text)) StatusLabel->Text = "Нажмите \"Обработать\"";
 }
 
@@ -344,7 +344,7 @@ private: System::Void FilePath_DoubleClick(System::Object^  sender, System::Even
 }
 
 
-private: System::Void panel1_DragLeave(System::Object^  sender, System::EventArgs^  e)
+private: System::Void FormDragLeave(System::Object^  sender, System::EventArgs^  e)
 {
 	if ( !File::Exists(FilePath->Text) ) this->panel1->BackgroundImage = rsc->GetImage("waiting_for_file");
 	else SelectImage(FilePath->Text);
