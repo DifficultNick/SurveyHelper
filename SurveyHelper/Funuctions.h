@@ -781,10 +781,10 @@ static bool WriteFile(String^ FileName, array<String^>^ Str, System::Text::Encod
 }
 
 
-// если файл с именем FileName уже существует, то он перемещается в FileName + bactxt
+// если файл с именем FileName уже существует, то он перемещается в FileName + bactxt (старый заменяется)
 static bool WriteFile(String^ FileName, array<String^>^ Str, String^ bactxt)
 {
-	if ( File::Exists(FileName) ) File::Move(FileName, FileName + bactxt);
+	if ( File::Exists(FileName) ) File::Copy(FileName, FileName + bactxt, true);
 	return WriteFile(FileName, Str);
 }
 
