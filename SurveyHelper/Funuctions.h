@@ -1009,6 +1009,18 @@ static List<String^>^ CleanText(List<String^>^ strs)
 }
 
 
+static void Run(String^ Path, String^ args)
+{
+	if ( File::Exists(Path) )
+		Diagnostics::Process::Start(Path, args);
+}
+
+static void Run(String^ Path)
+{
+	if ( File::Exists(Path) )
+		Diagnostics::Process::Start(Path);
+}
+
 static String^ GetDefaultBrowserPath()
 {
 	return Microsoft::Win32::Registry::ClassesRoot->OpenSubKey("http\\shell\\open\\command", false)->GetValue("")->ToString()->Split(gcnew array<wchar_t> { '"' })[1];
@@ -1017,7 +1029,7 @@ static String^ GetDefaultBrowserPath()
 static void OpenUrl(String^ url, bool isFile = true)
 {
 	String^ s = isFile ? "file:///" : "";
-	Diagnostics::Process::Start(GetDefaultBrowserPath(), s + url);
+	Run(GetDefaultBrowserPath(), s + url);
 }
 
 
