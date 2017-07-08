@@ -2353,7 +2353,6 @@ private:
 			res = TextMemo2->Text->Remove( ind );
 			res += "<Ui Isolate=\"1\"/>";
 			res += TextMemo2->Text->Remove(0, ind);
-			if ( QuestionTypes->SelectedItem->ToString() == "RadioButton" ) res = res->Replace(" Reset=\"true\"", "");
 			TextMemo2->Text = res;
 		}
 
