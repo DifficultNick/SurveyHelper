@@ -831,7 +831,7 @@
 	{
 		SelectImage(FilePath->Text);
 		button2->Enabled = true;
-		StatusLabel->Text = "Нажмитt \"Создать\"";
+		StatusLabel->Text = "Нажмите \"Создать\"";
 		Update();
 	}
 
