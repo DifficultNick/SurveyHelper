@@ -119,9 +119,9 @@
 			this->FilePath = (gcnew System::Windows::Forms::TextBox());
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->autoRun = (gcnew System::Windows::Forms::CheckBox());
 			this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->autoRun = (gcnew System::Windows::Forms::CheckBox());
 			this->tableLayoutPanel2->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel3->SuspendLayout();
@@ -533,15 +533,6 @@
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &PilotSyntax::button2_Click);
 			// 
-			// toolTip1
-			// 
-			this->toolTip1->IsBalloon = true;
-			// 
-			// openFileDialog1
-			// 
-			this->openFileDialog1->DefaultExt = L"sps";
-			this->openFileDialog1->Filter = L"Файл spss-синтаксиса|*.sps";
-			// 
 			// autoRun
 			// 
 			this->autoRun->AutoSize = true;
@@ -555,6 +546,15 @@
 			this->autoRun->Text = L"Открыть по завершении";
 			this->toolTip1->SetToolTip(this->autoRun, L"Открыть файл .sps при успешном выполнении");
 			this->autoRun->UseVisualStyleBackColor = true;
+			// 
+			// toolTip1
+			// 
+			this->toolTip1->IsBalloon = true;
+			// 
+			// openFileDialog1
+			// 
+			this->openFileDialog1->DefaultExt = L"sps";
+			this->openFileDialog1->Filter = L"Файл spss-синтаксиса|*.sps";
 			// 
 			// PilotSyntax
 			// 
@@ -659,7 +659,13 @@
 			Update();
 
 			//путь в GET DATA
-			s = Regex::Replace(s, "GET DATA\\s*/TYPE\\s*=\\s*TXT\\s*\n/FILE\\s*=\\s*['\"][^'\"]+['\"]", "GET DATA  /TYPE = TXT\n/FILE = \"" + fp + ".txt\"");
+			String^ txtP = GetTxtPath(fp);
+			if ( txtP == "" )
+			{
+				ResetAll(false);
+				return;
+			}
+			s = Regex::Replace(s, "GET DATA\\s*/TYPE\\s*=\\s*TXT\\s*\n/FILE\\s*=\\s*['\"][^'\"]+['\"]", "GET DATA  /TYPE = TXT\n/FILE = \"" + txtP + "\"");
 
 			int eof = s->IndexOf("val lab");
 			eof = s->IndexOf("\n.\n", eof) + 3;
@@ -735,6 +741,7 @@
 		catch ( Exception^ e )
 		{
 			ShowError(429, "Ошибка обработки файла.\n\nПодробнее:\n" + e->ToString());
+			ResetAll(false);
 		}
 	}
 	
@@ -847,5 +854,25 @@
 	private: System::Void PilotSyntax_Shown(System::Object^  sender, System::EventArgs^  e)
 	{
 		ResetAll(true);
+	}
+
+	private: String^ GetTxtPath(String^ path)
+	{
+		List<String^>^ files = gcnew List<String^>(Directory::GetFiles(Path::GetDirectoryName(path), "*.txt"));
+		if ( files->Count == 0 )
+		{
+			ShowWarning("В папке расположения указанного файла не найдено ни одного файла с расширением .txt!");
+			return "";
+		}
+		
+		if ( files->Count == 1 ) return files[0];
+
+		files->Sort(gcnew StringLengthAsc());
+		String^ projId = Regex::Replace(path, "^.*\\\\(?<id>\\d+)[^\\\\\\d]*$", "${id}");
+		for ( int i = 0; i < files->Count; i++ )
+			if ( Path::GetFileName(files[i])->Contains(projId) )
+				return files[i];
+		ShowWarning("Так как в папке содержится несколько txt файлов и ни один из них не содержит Id проекта в имени, то убедитесь в том, что в GET DATA указан путь к нужному файлу.");
+		return files[0];
 	}
 };

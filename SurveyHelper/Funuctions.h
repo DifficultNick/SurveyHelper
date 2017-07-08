@@ -22,16 +22,15 @@ static String^ ListToString(List<String^>^ str, String^ devide);
 
 
 // —ортировка строк по убыванию длины
-public ref class StringLengthComp: System::Collections::Generic::IComparer<String^>
+public ref class StringLengthDesc: System::Collections::Generic::IComparer<String^>
 {
 public:
-	StringLengthComp()
-	{
-	};
+	// —ортировка строк по убыванию длины
+	StringLengthDesc()
+	{};
 
-	~StringLengthComp()
-	{
-	};
+	~StringLengthDesc()
+	{};
 
 	virtual int Compare(String^ x, String^ y)
 	{
@@ -45,6 +44,33 @@ public:
 		return y->Length.CompareTo(x->Length);
 	}
 };
+
+
+
+// —ортировка строк по возрастанию длины
+public ref class StringLengthAsc: System::Collections::Generic::IComparer<String^>
+{
+public:
+	// —ортировка строк по возрастанию длины
+	StringLengthAsc()
+	{};
+	~StringLengthAsc()
+	{};
+
+	virtual int Compare(String^ y, String^ x)
+	{
+		if ( x == nullptr )
+			if ( y == nullptr )
+				return 0;
+			else
+				return 1;
+
+		if ( y == nullptr ) return -1;
+		return y->Length.CompareTo(x->Length);
+	}
+};
+
+
 
 // сортировка строк таблицы по длине строки в €чейке
 public ref class DataGridViewColumnSort: System::Collections::IComparer
@@ -1037,7 +1063,7 @@ static void OpenUrl(String^ url, bool isFile = true)
 static List<String^>^ SortListByLength(List<String^>^ list)
 {
 	List<String^>^ res = list;
-	res->Sort(gcnew StringLengthComp());
+	res->Sort(gcnew StringLengthDesc());
 	return res;
 }
 
