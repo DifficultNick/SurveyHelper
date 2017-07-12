@@ -609,6 +609,21 @@
 		LoadToTable(tmp);
 	}
 
+
+	public: void Clear()
+	{
+		SafeSymbols->Checked = false;
+		CurrentChanging = true;
+		dataGridView1->Rows->Clear();
+		while ( dataGridView1->ColumnCount > 0 )
+		{
+			dataGridView1->Columns->RemoveAt(0);
+		}
+
+		if ( dataGridView1->ColumnCount < 1 ) AddColumn();
+		CurrentChanging = false;
+	}
+
 #pragma endregion
 
 	
@@ -789,16 +804,7 @@
 	// очистка таблицы
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		SafeSymbols->Checked = false;
-		CurrentChanging = true;
-		dataGridView1->Rows->Clear();
-		while ( dataGridView1->ColumnCount > 0 )
-		{
-			dataGridView1->Columns->RemoveAt(0);
-		}
-			
-		if ( dataGridView1->ColumnCount < 1 ) AddColumn();
-		CurrentChanging = false;
+		Clear();
 	}
 
 	

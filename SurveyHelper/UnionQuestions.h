@@ -324,6 +324,13 @@
 		if ( cUnionMixId->Checked ) cUnionMix->Checked = false;
 	}
 
+
+	public: void Clear()
+	{
+		dataGridView1->Rows->Clear();
+	}
+
+
 	private: System::Void cUnionMix_CheckStateChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		if ( cUnionMix->Checked ) cUnionMixId->Checked = false;
@@ -522,7 +529,7 @@
 	// очистка таблицы
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		dataGridView1->Rows->Clear();
+		Clear();
 	}
 	
 };
