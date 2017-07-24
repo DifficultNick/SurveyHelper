@@ -125,31 +125,32 @@ public:
 				 this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 0);
 				 this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel3, 1, 0);
 				 this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-				 this->tableLayoutPanel1->Location = System::Drawing::Point(0, 24);
+				 this->tableLayoutPanel1->Location = System::Drawing::Point(0, 28);
+				 this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4);
 				 this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 				 this->tableLayoutPanel1->RowCount = 2;
-				 this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 30)));
+				 this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 37)));
 				 this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-				 this->tableLayoutPanel1->Size = System::Drawing::Size(776, 318);
+				 this->tableLayoutPanel1->Size = System::Drawing::Size(1035, 393);
 				 this->tableLayoutPanel1->TabIndex = 0;
 				 // 
 				 // sourceText
 				 // 
 				 this->sourceText->Dock = System::Windows::Forms::DockStyle::Fill;
-				 this->sourceText->Location = System::Drawing::Point(3, 33);
-				 this->sourceText->Margin = System::Windows::Forms::Padding(3, 3, 7, 3);
+				 this->sourceText->Location = System::Drawing::Point(4, 41);
+				 this->sourceText->Margin = System::Windows::Forms::Padding(4, 4, 9, 4);
 				 this->sourceText->Name = L"sourceText";
-				 this->sourceText->Size = System::Drawing::Size(378, 282);
+				 this->sourceText->Size = System::Drawing::Size(504, 348);
 				 this->sourceText->TabIndex = 1;
 				 this->sourceText->Text = L"";
 				 // 
 				 // resultTex
 				 // 
 				 this->resultTex->Dock = System::Windows::Forms::DockStyle::Fill;
-				 this->resultTex->Location = System::Drawing::Point(395, 33);
-				 this->resultTex->Margin = System::Windows::Forms::Padding(7, 3, 3, 3);
+				 this->resultTex->Location = System::Drawing::Point(526, 41);
+				 this->resultTex->Margin = System::Windows::Forms::Padding(9, 4, 4, 4);
 				 this->resultTex->Name = L"resultTex";
-				 this->resultTex->Size = System::Drawing::Size(378, 282);
+				 this->resultTex->Size = System::Drawing::Size(505, 348);
 				 this->resultTex->TabIndex = 0;
 				 this->resultTex->Text = L"";
 				 // 
@@ -157,17 +158,18 @@ public:
 				 // 
 				 this->tableLayoutPanel2->ColumnCount = 2;
 				 this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-					 144)));
+					 192)));
 				 this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 100)));
 				 this->tableLayoutPanel2->Controls->Add(this->convertType, 1, 0);
 				 this->tableLayoutPanel2->Controls->Add(this->label1, 0, 0);
 				 this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-				 this->tableLayoutPanel2->Location = System::Drawing::Point(3, 3);
+				 this->tableLayoutPanel2->Location = System::Drawing::Point(4, 4);
+				 this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4);
 				 this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 				 this->tableLayoutPanel2->RowCount = 1;
 				 this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-				 this->tableLayoutPanel2->Size = System::Drawing::Size(382, 24);
+				 this->tableLayoutPanel2->Size = System::Drawing::Size(509, 29);
 				 this->tableLayoutPanel2->TabIndex = 3;
 				 // 
 				 // convertType
@@ -181,9 +183,10 @@ public:
 					 L"Val lab из Answer / Item", L"Val lab из таблицы",
 						 L"Таблица из Answer / Item", L"Диапазон переменных", L"Список возрастных групп", L"Val lab из возрастных групп"
 				 });
-				 this->convertType->Location = System::Drawing::Point(147, 3);
+				 this->convertType->Location = System::Drawing::Point(196, 4);
+				 this->convertType->Margin = System::Windows::Forms::Padding(4);
 				 this->convertType->Name = L"convertType";
-				 this->convertType->Size = System::Drawing::Size(232, 21);
+				 this->convertType->Size = System::Drawing::Size(308, 24);
 				 this->convertType->TabIndex = 0;
 				 this->toolTip1->SetToolTip(this->convertType, L"Выберите нужное действие");
 				 // 
@@ -192,10 +195,10 @@ public:
 				 this->label1->AutoSize = true;
 				 this->label1->Dock = System::Windows::Forms::DockStyle::Left;
 				 this->label1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-				 this->label1->Location = System::Drawing::Point(3, 3);
-				 this->label1->Margin = System::Windows::Forms::Padding(3);
+				 this->label1->Location = System::Drawing::Point(4, 4);
+				 this->label1->Margin = System::Windows::Forms::Padding(4);
 				 this->label1->Name = L"label1";
-				 this->label1->Size = System::Drawing::Size(116, 18);
+				 this->label1->Size = System::Drawing::Size(151, 21);
 				 this->label1->TabIndex = 1;
 				 this->label1->Text = L"Тип преобразования:";
 				 this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -210,20 +213,21 @@ public:
 				 this->tableLayoutPanel3->Controls->Add(this->genButton, 0, 0);
 				 this->tableLayoutPanel3->Controls->Add(this->button2, 1, 0);
 				 this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
-				 this->tableLayoutPanel3->Location = System::Drawing::Point(391, 3);
+				 this->tableLayoutPanel3->Location = System::Drawing::Point(521, 4);
+				 this->tableLayoutPanel3->Margin = System::Windows::Forms::Padding(4);
 				 this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
 				 this->tableLayoutPanel3->RowCount = 1;
 				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 24)));
-				 this->tableLayoutPanel3->Size = System::Drawing::Size(382, 24);
+				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 29)));
+				 this->tableLayoutPanel3->Size = System::Drawing::Size(510, 29);
 				 this->tableLayoutPanel3->TabIndex = 4;
 				 // 
 				 // genButton
 				 // 
-				 this->genButton->Location = System::Drawing::Point(3, 0);
-				 this->genButton->Margin = System::Windows::Forms::Padding(3, 0, 0, 0);
+				 this->genButton->Location = System::Drawing::Point(4, 0);
+				 this->genButton->Margin = System::Windows::Forms::Padding(4, 0, 0, 0);
 				 this->genButton->Name = L"genButton";
-				 this->genButton->Size = System::Drawing::Size(109, 24);
+				 this->genButton->Size = System::Drawing::Size(145, 29);
 				 this->genButton->TabIndex = 0;
 				 this->genButton->Text = L"Преобразовать";
 				 this->genButton->UseVisualStyleBackColor = true;
@@ -232,10 +236,10 @@ public:
 				 // button2
 				 // 
 				 this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-				 this->button2->Location = System::Drawing::Point(271, 0);
+				 this->button2->Location = System::Drawing::Point(362, 0);
 				 this->button2->Margin = System::Windows::Forms::Padding(0);
 				 this->button2->Name = L"button2";
-				 this->button2->Size = System::Drawing::Size(111, 24);
+				 this->button2->Size = System::Drawing::Size(148, 29);
 				 this->button2->TabIndex = 1;
 				 this->button2->Text = L"Справка";
 				 this->button2->UseVisualStyleBackColor = true;
@@ -246,10 +250,10 @@ public:
 				 this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 				 this->button1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.BackgroundImage")));
 				 this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-				 this->button1->Location = System::Drawing::Point(745, -1);
+				 this->button1->Location = System::Drawing::Point(993, -1);
 				 this->button1->Margin = System::Windows::Forms::Padding(0);
 				 this->button1->Name = L"button1";
-				 this->button1->Size = System::Drawing::Size(28, 25);
+				 this->button1->Size = System::Drawing::Size(37, 31);
 				 this->button1->TabIndex = 2;
 				 this->toolTip1->SetToolTip(this->button1, L"Сохранить результат");
 				 this->button1->UseVisualStyleBackColor = true;
@@ -257,10 +261,12 @@ public:
 				 // 
 				 // menuStrip1
 				 // 
+				 this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
 				 this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->параметрыToolStripMenuItem });
 				 this->menuStrip1->Location = System::Drawing::Point(0, 0);
 				 this->menuStrip1->Name = L"menuStrip1";
-				 this->menuStrip1->Size = System::Drawing::Size(776, 24);
+				 this->menuStrip1->Padding = System::Windows::Forms::Padding(8, 2, 0, 2);
+				 this->menuStrip1->Size = System::Drawing::Size(1035, 28);
 				 this->menuStrip1->TabIndex = 1;
 				 this->menuStrip1->Text = L"menuStrip1";
 				 // 
@@ -272,7 +278,7 @@ public:
 						 this->separatorToolStripMenuItem
 				 });
 				 this->параметрыToolStripMenuItem->Name = L"параметрыToolStripMenuItem";
-				 this->параметрыToolStripMenuItem->Size = System::Drawing::Size(83, 20);
+				 this->параметрыToolStripMenuItem->Size = System::Drawing::Size(102, 24);
 				 this->параметрыToolStripMenuItem->Text = L"Параметры";
 				 // 
 				 // bufToolStripMenuItem
@@ -281,7 +287,7 @@ public:
 				 this->bufToolStripMenuItem->CheckOnClick = true;
 				 this->bufToolStripMenuItem->CheckState = System::Windows::Forms::CheckState::Checked;
 				 this->bufToolStripMenuItem->Name = L"bufToolStripMenuItem";
-				 this->bufToolStripMenuItem->Size = System::Drawing::Size(186, 22);
+				 this->bufToolStripMenuItem->Size = System::Drawing::Size(227, 26);
 				 this->bufToolStripMenuItem->Text = L"Копировать в буфер";
 				 this->bufToolStripMenuItem->ToolTipText = L"Копировать результат в буфер обмена сразу после выполнения преобразования";
 				 // 
@@ -293,7 +299,7 @@ public:
 						 this->customSep
 				 });
 				 this->separatorToolStripMenuItem->Name = L"separatorToolStripMenuItem";
-				 this->separatorToolStripMenuItem->Size = System::Drawing::Size(186, 22);
+				 this->separatorToolStripMenuItem->Size = System::Drawing::Size(227, 26);
 				 this->separatorToolStripMenuItem->Text = L"Разделитель";
 				 // 
 				 // separatorsItem
@@ -305,26 +311,27 @@ public:
 						 L"Запятая"
 				 });
 				 this->separatorsItem->Name = L"separatorsItem";
-				 this->separatorsItem->Size = System::Drawing::Size(121, 23);
+				 this->separatorsItem->Size = System::Drawing::Size(121, 28);
 				 this->separatorsItem->SelectedIndexChanged += gcnew System::EventHandler(this, &SurveyConverter::separatorsItem_SelectedIndexChanged);
 				 // 
 				 // customSep
 				 // 
 				 this->customSep->Name = L"customSep";
-				 this->customSep->Size = System::Drawing::Size(120, 23);
+				 this->customSep->Size = System::Drawing::Size(120, 27);
 				 this->customSep->Text = L"Другой разделитель";
 				 this->customSep->Click += gcnew System::EventHandler(this, &SurveyConverter::customSep_Click);
 				 // 
 				 // SurveyConverter
 				 // 
-				 this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+				 this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				 this->BackColor = System::Drawing::SystemColors::AppWorkspace;
-				 this->ClientSize = System::Drawing::Size(776, 342);
+				 this->ClientSize = System::Drawing::Size(1035, 421);
 				 this->Controls->Add(this->button1);
 				 this->Controls->Add(this->tableLayoutPanel1);
 				 this->Controls->Add(this->menuStrip1);
-				 this->MinimumSize = System::Drawing::Size(600, 300);
+				 this->Margin = System::Windows::Forms::Padding(4);
+				 this->MinimumSize = System::Drawing::Size(794, 359);
 				 this->Name = L"SurveyConverter";
 				 this->ShowIcon = false;
 				 this->ShowInTaskbar = false;
@@ -433,12 +440,12 @@ public:
 					if ( !child->Attributes["Id"] ) return "Не удалось определить Id элемента";
 					if ( txt == "" ) return "Не удалось определить метку для элемента " + child->Attributes["Id"]->Value + " переменной " + vn;
 					if ( !child->PreviousSibling || child->PreviousSibling->Name != "Answer" && child->PreviousSibling->Name != "Item" ) res += "val lab \n";
-					res += child->Attributes["Id"]->Value + " '" + txt->Replace("'", "\"") + "'\n";
+					res += child->Attributes["Id"]->Value + " '" + txt->Replace("'", "\"")->Trim() + "'\n";
 					continue;
 				}
 				else
 				{
-					return "Элемент " + child->Name + " не должен быть родительским!";
+					return "Элемент <" + child->Name + "> не должен быть родительским!";
 				}
 
 				// Parsing
@@ -450,7 +457,7 @@ public:
 					else if ( item->SelectNodes("Text")[0] ) txt = item->SelectNodes("Text")[0]->InnerText;
 					if ( !item->Attributes["Id"] ) return "Не удалось определить Id элемента";
 					if ( txt == "" ) return "Не удалось определить метку для элемента " + item->Attributes["Id"]->Value + " переменной " + vn;
-					res += item->Attributes["Id"]->Value + " '" + txt->Replace("'", "\"") + "'\n";
+					res += item->Attributes["Id"]->Value + " '" + txt->Replace("'", "\"")->Trim() + "'\n";
 				}
 				res += ".\n";
 			}
@@ -712,12 +719,15 @@ public:
 	String^ ValLabFromTable(String^ xmlBody)
 	{
 		List<String^>^ data = StringToList(xmlBody, '\n');
+		List<String^>^ res = gcnew List<String^>();
 		for ( int i = 0; i < data->Count; i++ )
 		{
+			if ( Regex::IsMatch(data[i], "^\\s*$") ) continue;
 			data[i] = data[i]->Replace("'", "\"");
-			data[i] = Regex::Replace(data[i], "((?<num>\\d+)\\s+(?<text>.+))|((?<text>.+)\\s+(?<num>\\d+))", "${num} '${text}'");
+			data[i] = Regex::Replace(data[i], "((?<num>\\d+)\\t+(?<text>.+))|((?<text>.+[^\\s])\\t+(?<num>\\d+))\\s*", "${num} '${text}'");
+			res->Add(data[i]);
 		}
-		return "val lab\n" + ListToString(data, "\n") + ".";
+		return "val lab\n" + ListToString(res, "\n") + ".";
 	}
 
 

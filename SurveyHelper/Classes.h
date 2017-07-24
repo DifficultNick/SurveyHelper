@@ -927,12 +927,12 @@ public:
 		}
 		Elements::AddText(t, separated, mustClear, sp, a);
 		// доп атрибуты Answer
-		if ( AutoTags ) AditionalAtribs = InvokeAditionalAtribs(text);
+		if ( AutoTags ) AditionalAtribs = InvokeAdditionalAttributes(text);
 	}
 
 
 	// например, Type="Text"
-	Dictionary<int, String^>^ InvokeAditionalAtribs(List<String^>^ txt)
+	Dictionary<int, String^>^ InvokeAdditionalAttributes(List<String^>^ txt)
 	{
 		Dictionary<int, String^>^ res = gcnew Dictionary<int, String^>();
 		if ( txt == nullptr || txt->Count < 1 ) return res;
