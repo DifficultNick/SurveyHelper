@@ -33,7 +33,6 @@ public ref class Updater : public System::Windows::Forms::Form
 		MainForm^ MForm;
 		bool LateToExit = false;
 private: System::Windows::Forms::Button^  button1;
-public:
 
 public:
 	System::ComponentModel::ComponentResourceManager^  Resources = (gcnew System::ComponentModel::ComponentResourceManager(Updater::typeid));
@@ -196,9 +195,9 @@ private:
 			
 			Settings^ sets = gcnew Settings();
 
-			if ( sets->Read("MainForm") > 0 && sets->Get("DontUpdate", true) ) goto run;
+			if ( sets->Read("MainForm") > 0 && sets->Get("DontUpdate", true) ) goto fail;
 
-			sets->Read("");			
+			sets->Read("");
 			
 			FTP^ c = gcnew FTP(_host, "", _user, _password);
 
