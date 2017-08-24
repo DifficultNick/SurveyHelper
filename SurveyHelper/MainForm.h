@@ -684,8 +684,7 @@ private:
 		// XMLMenu
 		// 
 		this->XMLMenu->ImageScalingSize = System::Drawing::Size(20, 20);
-		this->XMLMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6)
-		{
+		this->XMLMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 			this->добавитьHintToolStripMenuItem,
 				this->выделитьКурсивомiToolStripMenuItem, this->MakeBold, this->MakeColor, this->выделитьДругимЦветомToolStripMenuItem, this->customTextToolStripMenuItem
 		});
@@ -749,8 +748,7 @@ private:
 		dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
 		this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 		this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-		this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4)
-		{
+		this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
 			this->IdItem,
 				this->TextItem, this->GotId, this->Counter
 		});
@@ -814,8 +812,7 @@ private:
 		// GridMenu
 		// 
 		this->GridMenu->ImageScalingSize = System::Drawing::Size(20, 20);
-		this->GridMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6)
-		{
+		this->GridMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 			this->sortId, this->sortText,
 				this->delCurrentRow, this->addRow, this->RefreshNums, this->CleanTxt
 		});
@@ -977,8 +974,7 @@ private:
 		this->ExtendTypes->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->ExtendTypes->FormattingEnabled = true;
-		this->ExtendTypes->Items->AddRange(gcnew cli::array< System::Object^  >(15)
-		{
+		this->ExtendTypes->Items->AddRange(gcnew cli::array< System::Object^  >(15) {
 			L"-------------", L"AudioPlayer", L"Calendar",
 				L"ClickTest", L"ClickText", L"ComboBox", L"ContentOnly", L"DragItem", L"Picture", L"Scale", L"Shape", L"Slider", L"Sortable",
 				L"Stars", L"VideoPlayer"
@@ -1010,8 +1006,7 @@ private:
 		this->QuestionTypes->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 			static_cast<System::Byte>(204)));
 		this->QuestionTypes->FormattingEnabled = true;
-		this->QuestionTypes->Items->AddRange(gcnew cli::array< System::Object^  >(7)
-		{
+		this->QuestionTypes->Items->AddRange(gcnew cli::array< System::Object^  >(7) {
 			L"CheckBox", L"RadioButton", L"Text", L"Memo",
 				L"Integer", L"Number", L"File"
 		});
@@ -1197,8 +1192,7 @@ private:
 		// 
 		// MenuParam
 		// 
-		this->MenuParam->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(9)
-		{
+		this->MenuParam->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(9) {
 			this->AutoNumId,
 				this->FirstUp, this->GetPageId, this->toolStripSeparator2, this->toolStripMenuItem1, this->CopyBuf, this->spaceBefore, this->toolStripSeparator1,
 				this->устранениеПроблемToolStripMenuItem
@@ -1241,8 +1235,7 @@ private:
 		// 
 		// toolStripMenuItem1
 		// 
-		this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2)
-		{
+		this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 			this->tabs,
 				this->missFirst
 		});
@@ -1303,8 +1296,7 @@ private:
 		// 
 		// дополнительноToolStripMenuItem
 		// 
-		this->дополнительноToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5)
-		{
+		this->дополнительноToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 			this->заменаВФайлеToolStripMenuItem,
 				this->DelDileIds, this->преобразованияToolStripMenuItem, this->синтаксисSPSSБазыToolStripMenuItem, this->сообщитьОбОшибкеToolStripMenuItem
 		});

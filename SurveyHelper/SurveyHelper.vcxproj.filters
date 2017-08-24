@@ -89,10 +89,10 @@
     <ClInclude Include="ReplaceDebugWindow.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="SecurityFile.h">
+    <ClInclude Include="PilotSyntax.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="PilotSyntax.h">
+    <ClInclude Include="SecurityFile.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
