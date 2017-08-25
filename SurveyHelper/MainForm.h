@@ -1788,8 +1788,8 @@ private:
 
 	private: System::Void DelDileIds_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		Headers^ form = gcnew Headers();
-		form->ShowDialog();
+		headersForm->Show();
+		headersForm->Activate();
 	}
 
 
@@ -1883,15 +1883,15 @@ private:
 
 	private: System::Void преобразованияToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		SurveyConverter^ c = gcnew SurveyConverter(curVers);
-		c->ShowDialog();
+		convForm->Show();
+		convForm->Activate();
 	}
 
 
 	private: System::Void заменаВФайлеToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		FileReplace^ f = gcnew FileReplace();
-		f->ShowDialog();
+		fRepForm->Show();
+		fRepForm->Activate();
 	}
 
 
@@ -2194,6 +2194,9 @@ private:
 		 UnionQuestions^ Unionform;
 		 HintForm^ hintForm = gcnew HintForm();
 		 PilotSyntax^ spssForm = gcnew PilotSyntax();
+		 Headers^ headersForm = gcnew Headers();
+		 SurveyConverter^ convForm = gcnew SurveyConverter(curVers);
+		 FileReplace^ fRepForm = gcnew FileReplace();
 
 		 AutoCompleteStringCollection^ lists = gcnew AutoCompleteStringCollection();
 
@@ -3758,7 +3761,8 @@ private:
 
 	private: System::Void синтаксисSPSSБазыToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		spssForm->ShowDialog();
+		spssForm->Show();
+		spssForm->Activate();
 	}
 };
 
