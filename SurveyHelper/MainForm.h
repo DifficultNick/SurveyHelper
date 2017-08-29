@@ -1512,9 +1512,12 @@ private:
 			if ( s == "Slider" ) s = Slider::Get();
 						
 			if ( ExtendUi->ContainsKey(s) ) ExtendString->Text = ExtendUi[s];
+
+			// убрать LabelEnd/start для List
 			if ( s == "Scale" && !IsNumber(repeatName->Text) ) ExtendString->Text = Regex::Replace(ExtendString->Text, "Label(Start|End)=[\"'][^\"']+[\"']", "");
 
-			if ( CompTypes->ContainsKey(s) )//&& !CompTypes[s]->Contains(QuestionTypes->SelectedItem->ToString()) )
+			// подгон QuestionType под Ui
+			if ( CompTypes->ContainsKey(s) )
 				QuestionTypes->SelectedIndex = QuestionTypes->Items->IndexOf(List<String^>(CompTypes[s])[0]);
 		}
 		catch ( Exception^ e )
@@ -3440,7 +3443,7 @@ private:
 		if ( !NoAutoTag && adParent->Checked && PageId->Text->ToLower() == "respinfo" ) AddFalseFilter();
 
 		// добавление Ui Isolate
-		if ( !NoAutoTag && Isolate->Checked && radioAnswer->Checked ) MakeIsolate();
+		if ( !NoAutoTag && Isolate->Checked && radioAnswer->Checked && ExtendTypes->SelectedItem->ToString() != "Scale") MakeIsolate();
 
 		// добавление отступа
 		if ( spaceCount->SelectedIndex > -1) TextMemo2->Text = gcnew String('\n', spaceCount->SelectedIndex) + TextMemo2->Text;
