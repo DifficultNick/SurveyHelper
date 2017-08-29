@@ -3165,7 +3165,6 @@ private:
 					 if ( PageId->Text != nullptr && PageId->Text != _QuestionId ) uni->AnswerListId = PageId->Text;
 					 if ( QuestionHeader->Text != _QuestionHeader ) uni->DummyHeader = (ClearHeader) ? ClearString(QuestionHeader->Text, true, true, false) : QuestionHeader->Text;
 					 if ( QuestionTypes->Enabled && QuestionTypes->SelectedIndex != -1 )  atrs = " Type=\"" + QuestionTypes->SelectedItem->ToString() + "\"";
-					 if ( unionMix == UnionMixType::UnionMixId ) atrs += " SyncId=\"@ID\"";
 
 					 uni->DummyAtributes = atrs;
 					 uni->TabCount = tabCount;

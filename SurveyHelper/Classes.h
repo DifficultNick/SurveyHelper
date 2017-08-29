@@ -1182,7 +1182,9 @@ public:
 		if ( CombineQuestions )
 		{
 			resD->Add("\t<Repeat List=\"" + QuestionListId + "\">");
-			resD->Add("\t\t<Question Id=\"" + QuestionId + "_@ID\"" + ( QuestionType != "" ? (" Type=\"" + QuestionType + "\"") : "") + "><Text>@Text</Text></Question>");
+			String^ Qa = QuestionType != "" ? (" Type=\"" + QuestionType + "\"") : "";
+			Qa += unionMix == UnionMixType::UnionMixId ? " SyncId=\"@ID\"" : "";
+			resD->Add("\t\t<Question Id=\"" + QuestionId + "_@ID\"" + Qa + "><Text>@Text</Text></Question>");
 			resD->Add("\t</Repeat>");
 		}
 		else
