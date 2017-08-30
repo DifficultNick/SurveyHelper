@@ -952,7 +952,7 @@ public:
 						break;
 					}
 
-				if ( (gcnew String("RadioButton CheckBox Text Integer Memo Number"))->Contains(GetProp(QuestionAttributes, "Type")) && !Extend->Contains("Scale"))
+				if ( (gcnew String("RadioButton CheckBox Text Integer Memo Number"))->Contains(GetProp(QuestionAttributes, "Type")) && (!Extend->Contains("Scale") || i == txt->Count-1) )
 				{
 					found = gcnew List<String^>(gcnew array<String^> {"отказ", "затрудняюсь", "ничего", "ни один", "ни одного", "ни одной", "ни одну", "ни одно", "ни в одном", "ни в одной", "никогда", "исключающий", "exclude", "exclusive", "нет ответа", "не отвечать", "никакой", "никакую", "никакое"});
 					for each (String^ str in found)
