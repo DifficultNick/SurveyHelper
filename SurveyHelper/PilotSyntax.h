@@ -27,17 +27,19 @@
 			autoRun->Checked = sets->Get("AutoRun", true);
 		}
 
-		protected:
+
+		
+
+#pragma region Windows Form Designer generated code
+	protected:
 		~PilotSyntax()
 		{
-			if ( components )
+			if (components)
 			{
 				delete components;
 			}
 		}
-		
 
-#pragma region Windows Form Designer generated code
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
 		protected:
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel2;
@@ -637,6 +639,17 @@
 			String^ load = Regex::IsMatch(Path::GetFileName(fp), "load", RegexOptions::IgnoreCase) ? "" : "_load";
 
 			progressBar1->Value = 40;
+			StatusLabel->Text = "Проверка списка переменных...";
+			Update();
+
+			List<String^>^ nvalidVarList = GetDuplicated(GetVarList(s));
+			if (nvalidVarList->Count > 0)
+			{
+				CopyToBuffer(ListToString(nvalidVarList, "\n"));
+				ShowWarning("В файле найдено " + nvalidVarList->Count + " повторяющихся переменных.\nПовторяющиеся имена скопированы в буфер обмена.");
+			}
+
+			progressBar1->Value = 50;
 			StatusLabel->Text = "Добавление команд...";
 			Update();
 
@@ -696,7 +709,7 @@
 			}
 			res += add + "\n\n" + s->Remove(0, eof + 1);
 
-			progressBar1->Value = 60;
+			progressBar1->Value = 65;
 
 			// замена @
 			if ( repl )
@@ -860,4 +873,31 @@
 		ShowWarning("Так как в папке содержится несколько txt файлов и ни один из них не содержит Id проекта в имени, то убедитесь в том, что в GET DATA указан путь к нужному файлу.");
 		return files[0];
 	}
+
+
+	private: List<String^>^ GetVarList(String^ s)
+	{
+		List<String^>^ res = gcnew List<String^>();
+		if (!s->Contains("/VARIABLES")) return res;
+		String^ str = s->Remove(0, s->IndexOf("/VARIABLES"));
+		str = str->Remove(0, str->IndexOf("\n")+1);
+		str = str->Remove(0, str->IndexOf("\n") + 1);
+		str = str->Remove(str->IndexOf("\n."));
+		str = str->Replace("\n\n", "");
+		str = Regex::Replace(str, "\n?(?<name>[^\\s\n]+)\\s(?<type>[^\n]+)\n?", "${name},");
+		str = str->Remove(str->LastIndexOf(","));
+		return StringToList(str, ',');
+	}
+
+	private: List<String^>^ GetDuplicated(List<String^>^ vars)
+	{
+		List<String^>^ res = gcnew List<String^>();
+		for (int i = 0; i < vars->Count-1; i++)
+			for (int j = i + 1; j < vars->Count; j++)
+			{
+				if (vars[i] == vars[j] && !res->Contains(vars[i])) res->Add(vars[i]);
+			}
+		return res;
+	}
+
 };
