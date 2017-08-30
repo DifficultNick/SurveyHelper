@@ -1,9 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -34,7 +42,21 @@
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -63,7 +85,13 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -76,16 +104,47 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ResourceCompile>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+      <Culture>0x0419</Culture>
+    </ResourceCompile>
+    <EmbeddedResource>
+      <LogicalName>
+      </LogicalName>
+    </EmbeddedResource>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
@@ -120,6 +179,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -134,6 +194,19 @@
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <EntryPointSymbol>Main</EntryPointSymbol>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -142,6 +215,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>Main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -216,80 +291,140 @@
     <EmbeddedResource Include="Converter.resx">
       <DependentUpon>Converter.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SurveyConverter.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">SurveyConverter.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">SurveyConverter.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">SurveyConverter.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SurveyConverter.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SurveyConverter.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomClear.resx">
       <DependentUpon>CustomClear.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CustomClear.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">CustomClear.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CustomClear.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">CustomClear.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CustomClear.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CustomClear.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="DragItemTypeChooser.resx">
       <DependentUpon>DragItemTypeChooser.h</DependentUpon>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">DragItemTypeChooser.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">DragItemTypeChooser.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="FileReplace.resx">
       <DependentUpon>FileReplace.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FileReplace.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">FileReplace.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FileReplace.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">FileReplace.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">FileReplace.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">FileReplace.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Headers.resx">
       <DependentUpon>Headers.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Headers.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Headers.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Headers.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Headers.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Headers.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Headers.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="HintForm.resx">
       <DependentUpon>HintForm.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">HintForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">HintForm.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">HintForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">HintForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HintForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HintForm.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MainForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">MainForm.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MainForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">MainForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MainForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MainForm.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="PilotSyntax.resx">
       <DependentUpon>PilotSyntax.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PilotSyntax.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">PilotSyntax.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PilotSyntax.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">PilotSyntax.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PilotSyntax.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PilotSyntax.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Problems.resx">
       <DependentUpon>Problems.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Problems.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Problems.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Problems.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Problems.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Problems.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Problems.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="QuestionDialogWindow.resx">
       <DependentUpon>QuestionDialogWindow.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+      </LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">QuestionDialogWindow.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">QuestionDialogWindow.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="ReplaceDebugWindow.resx">
       <DependentUpon>ReplaceDebugWindow.h</DependentUpon>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+      </ExcludedFromBuild>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ReplaceDebugWindow.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">ReplaceDebugWindow.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ReplaceDebugWindow.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">ReplaceDebugWindow.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ReplaceDebugWindow.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ReplaceDebugWindow.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <SubType>Designer</SubType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">false</ExcludedFromBuild>
     </EmbeddedResource>
     <EmbeddedResource Include="SliderType.resx">
       <DependentUpon>SliderType.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">SliderType.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">SliderType.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">SliderType.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">SliderType.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="UnionQuestions.resx">
       <DependentUpon>UnionQuestions.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">UnionQuestions.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">UnionQuestions.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">UnionQuestions.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">UnionQuestions.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">UnionQuestions.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">UnionQuestions.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Updater.resx">
       <DependentUpon>Updater.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Updater.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Updater.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Updater.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Updater.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Updater.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Updater.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="VarForm.resx">
       <DependentUpon>VarForm.h</DependentUpon>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">VarForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">VarForm.resources</LogicalName>
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">VarForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">VarForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VarForm.resources</LogicalName>
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VarForm.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
