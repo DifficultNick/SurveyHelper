@@ -3443,7 +3443,7 @@ private:
 		if ( !NoAutoTag && adParent->Checked && PageId->Text->ToLower() == "respinfo" ) AddFalseFilter();
 
 		// добавление Ui Isolate
-		if ( !NoAutoTag && Isolate->Checked && radioAnswer->Checked && ExtendTypes->SelectedItem->ToString() != "Scale") MakeIsolate();
+		if ( !NoAutoTag && Isolate->Checked && radioAnswer->Checked && ExtendTypes->SelectedItem->ToString() != "Scale" && !(gcnew String("Memo Text Integer Number"))->Contains(QuestionTypes->SelectedItem->ToString())) MakeIsolate();
 
 		// добавление отступа
 		if ( spaceCount->SelectedIndex > -1) TextMemo2->Text = gcnew String('\n', spaceCount->SelectedIndex) + TextMemo2->Text;
