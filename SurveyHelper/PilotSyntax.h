@@ -392,7 +392,7 @@
 			// delimeter
 			// 
 			this->delimeter->Location = System::Drawing::Point(231, 2);
-			this->delimeter->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->delimeter->Margin = System::Windows::Forms::Padding(2);
 			this->delimeter->MaxLength = 1;
 			this->delimeter->Name = L"delimeter";
 			this->delimeter->Size = System::Drawing::Size(27, 20);
@@ -477,7 +477,7 @@
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(337, 5);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(56, 20);
 			this->button1->TabIndex = 1;
@@ -488,7 +488,7 @@
 			// FilePath
 			// 
 			this->FilePath->Location = System::Drawing::Point(3, 6);
-			this->FilePath->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->FilePath->Margin = System::Windows::Forms::Padding(2);
 			this->FilePath->Name = L"FilePath";
 			this->FilePath->Size = System::Drawing::Size(330, 20);
 			this->FilePath->TabIndex = 0;
@@ -510,7 +510,7 @@
 			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->button2->Enabled = false;
 			this->button2->Location = System::Drawing::Point(489, 6);
-			this->button2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(102, 25);
 			this->button2->TabIndex = 5;
@@ -554,7 +554,7 @@
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"PilotSyntax";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Синтаксис для SPSS базы";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &PilotSyntax::PilotSyntax_FormClosing);
 			this->Shown += gcnew System::EventHandler(this, &PilotSyntax::PilotSyntax_Shown);
@@ -633,8 +633,8 @@
 
 			String^ del = repl->Checked ? delimeter->Text : "@";
 			String^ vars = s->Remove(vrInd);
-			String^ add = "";
 			String^ fp = Regex::Replace(FilePath->Text, "\\.sps$", "");
+			String^ fn = Regex::Replace(Path::GetFileName(FilePath->Text), "\\.sps", "");
 			String^ dv = "";
 			String^ load = Regex::IsMatch(Path::GetFileName(fp), "load", RegexOptions::IgnoreCase) ? "" : "_load";
 
@@ -653,33 +653,34 @@
 			StatusLabel->Text = "Добавление команд...";
 			Update();
 
-			//путь в GET DATA
-			String^ txtP = GetTxtPath(fp);
+			//путь в FILE HANDLE
+			String^ txtP = Path::GetDirectoryName(fp);
 			if ( txtP == "" )
 			{
 				ResetAll(false);
 				return;
 			}
-			s = Regex::Replace(s, "GET DATA\\s*/TYPE\\s*=\\s*TXT\\s*\n/FILE\\s*=\\s*['\"][^'\"]+['\"]", "GET DATA  /TYPE = TXT\n/FILE = \"" + txtP + "\"");
+			s = Regex::Replace(s, "(?<pre>FILE HANDLE\\s*[^'\"]*NAME\\s*=\\s*['\"])([^'\"]*)(?<post>['\"][^\n]*\n)", "${pre}" + txtP + "${post}");
 
-			int eof = s->IndexOf("val lab");
-			eof = s->IndexOf("\n.", eof)+1;
-			String^ res = s->Remove(eof) + ".\n\n";
-
-			// промежуточное сохранение
-			add += "\n\nsave outfile \"" + fp + ".sav\" /zcompressed.";
-			add += "\nget file \"" + fp + ".sav\".";
+			int eof = s->IndexOf("\n**** OPENS.");
+			String^ res = s->Remove(eof);
 
 			// переименование
-			if ( renvar->Checked ) add += "\n\nrename variables(pre_sex pre_age" + del + "1 = sex age).";
+			if (renvar->Checked)
+			{
+				int sel = res->IndexOf("select if");
+				sel = res->IndexOf("\n", sel) + 1;
+				res = res->Insert(sel, "rename variables(pre_sex pre_age" + del + "1 = sex age).\n");
+			}
 
 			//выбор статусов
 			if ( selstat->Checked )
 			{
 				String^ statuses = Regex::Replace(stats->Text, "[^\\d,]", "");
-				if (CountSubStrings(statuses, ",") > 0)
-					add += "\n\nselect if any(Status, " + statuses->Replace(",", ", ") + ").";
-				else add += "\n\nselect if Status = " + statuses + ".";
+				if (statuses != "18")
+					res = Regex::Replace(res, "\nselect\\s+if\\s+status\\s*=[^\\.]+", 
+						(CountSubStrings(statuses, ",") > 0) ? ("\nselect if any(status, "+ statuses +")") : ("\nselect if status = "+statuses+""),
+						RegularExpressions::RegexOptions::IgnoreCase);
 			}
 
 			// drop
@@ -693,21 +694,22 @@
 			}
 
 			// финальное сохранение
-			add += "\n\nsave outfile \"" + fp + "_Client.sav\"" + dv + ".";
-			add += "\nget file \"" + fp + "_Client.sav\".";
+			res += "\n\nsave outfile \"currentPath/" + fn + "_Client.sav\"" + dv + ".";
+			res += "\nget file \"currentPath/" + fn + "_Client.sav\".";
 
 			// export
 			if ( excelExp->Checked )
 			{
-				add += "\n\nSAVE TRANSLATE OUTFILE=\"" + fp + "_Client.xlsx\"\n";
-				add += "/TYPE = XLS\n";
-				add += "/VERSION = 12\n";
-				add += "/MAP\n";
-				add += "/REPLACE\n";
-				add += "/FIELDNAMES\n";
-				add += "/CELLS = " + ( labs->Checked ? "LABELS" : "VALUES") + ".";
+				res += "\n";
+				res += "\n\nSAVE TRANSLATE OUTFILE=\"currentPath/" + fn + "_Client.xlsx\"\n";
+				res += "/TYPE = XLS\n";
+				res += "/VERSION = 12\n";
+				res += "/MAP\n";
+				res += "/REPLACE\n";
+				res += "/FIELDNAMES\n";
+				res += "/CELLS = " + (labs->Checked ? "LABELS" : "VALUES") + ".";
 			}
-			res += add + "\n\n" + s->Remove(0, eof + 1);
+			res += "\n\n" + s->Remove(0, eof + 1);
 
 			progressBar1->Value = 65;
 
@@ -853,27 +855,6 @@
 	{
 		ResetAll(true);
 	}
-
-	private: String^ GetTxtPath(String^ path)
-	{
-		List<String^>^ files = gcnew List<String^>(Directory::GetFiles(Path::GetDirectoryName(path), "*.txt"));
-		if ( files->Count == 0 )
-		{
-			ShowWarning("В папке расположения указанного файла не найдено ни одного файла с расширением .txt!");
-			return "";
-		}
-		
-		if ( files->Count == 1 ) return files[0];
-
-		files->Sort(gcnew StringLengthAsc());
-		String^ projId = Regex::Replace(path, "^.*\\\\(?<id>\\d+)[^\\\\\\d]*$", "${id}");
-		for ( int i = 0; i < files->Count; i++ )
-			if ( Path::GetFileName(files[i])->Contains(projId) )
-				return files[i];
-		ShowWarning("Так как в папке содержится несколько txt файлов и ни один из них не содержит Id проекта в имени, то убедитесь в том, что в GET DATA указан путь к нужному файлу.");
-		return files[0];
-	}
-
 
 	private: List<String^>^ GetVarList(String^ s)
 	{
