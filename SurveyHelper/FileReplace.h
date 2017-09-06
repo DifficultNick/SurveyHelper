@@ -161,7 +161,7 @@ private: System::Windows::Forms::Label^  label2;
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				95)));
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				110)));
+				111)));
 			this->tableLayoutPanel3->Controls->Add(this->go, 3, 0);
 			this->tableLayoutPanel3->Controls->Add(this->label1, 0, 0);
 			this->tableLayoutPanel3->Controls->Add(this->filePath, 1, 0);
@@ -177,9 +177,9 @@ private: System::Windows::Forms::Label^  label2;
 			// go
 			// 
 			this->go->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
-			this->go->Location = System::Drawing::Point(722, 3);
+			this->go->Location = System::Drawing::Point(721, 3);
 			this->go->Name = L"go";
-			this->go->Size = System::Drawing::Size(105, 23);
+			this->go->Size = System::Drawing::Size(106, 23);
 			this->go->TabIndex = 3;
 			this->go->Text = L"Заменить";
 			this->go->UseVisualStyleBackColor = true;
@@ -202,13 +202,13 @@ private: System::Windows::Forms::Label^  label2;
 			this->filePath->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->filePath->Location = System::Drawing::Point(56, 3);
 			this->filePath->Name = L"filePath";
-			this->filePath->Size = System::Drawing::Size(565, 20);
+			this->filePath->Size = System::Drawing::Size(564, 20);
 			this->filePath->TabIndex = 1;
 			// 
 			// search
 			// 
 			this->search->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
-			this->search->Location = System::Drawing::Point(627, 3);
+			this->search->Location = System::Drawing::Point(626, 3);
 			this->search->Name = L"search";
 			this->search->Size = System::Drawing::Size(89, 23);
 			this->search->TabIndex = 2;
@@ -230,7 +230,7 @@ private: System::Windows::Forms::Label^  label2;
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"FileReplace";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Построчная замена в файле";
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel2->ResumeLayout(false);

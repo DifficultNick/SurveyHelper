@@ -69,9 +69,6 @@
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->tableLayoutPanel1->SuspendLayout();
 			this->tableLayoutPanel2->SuspendLayout();
-			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::FormDragDrop);
-			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::FormDragEnter);
-			this->DragLeave += gcnew System::EventHandler(this, &Headers::FormDragLeave);
 			this->SuspendLayout();
 			// 
 			// openFileDialog1
@@ -143,16 +140,16 @@
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label1->Location = System::Drawing::Point(16, 19);
+			this->label1->Location = System::Drawing::Point(43, 26);
 			this->label1->Margin = System::Windows::Forms::Padding(0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(239, 110);
+			this->label1->Size = System::Drawing::Size(185, 95);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Файл будет заменён \r\nна новый.\r\nИсходный файл будет \r\nсохранён, как\r\n\"[имя файла]"
 				L".Headers.bak\".";
-				// 
-				// panel1
-				// 
+			// 
+			// panel1
+			// 
 			this->panel1->BackColor = System::Drawing::Color::White;
 			this->panel1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->panel1->Location = System::Drawing::Point(4, 152);
@@ -167,23 +164,23 @@
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label2->Location = System::Drawing::Point(4, 19);
+			this->label2->Location = System::Drawing::Point(4, 23);
 			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(648, 40);
+			this->label2->Size = System::Drawing::Size(670, 32);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Введите полный путь к фалу, или нажмите \"Обзор\" для поиска файла, или перетащите "
 				L"файл на поле внизу справа.";
-				// 
-				// FilePath
-				// 
+			// 
+			// FilePath
+			// 
 			this->FilePath->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
 			this->FilePath->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->FilePath->Location = System::Drawing::Point(4, 86);
+			this->FilePath->Location = System::Drawing::Point(4, 88);
 			this->FilePath->Margin = System::Windows::Forms::Padding(4);
 			this->FilePath->Name = L"FilePath";
-			this->FilePath->Size = System::Drawing::Size(699, 24);
+			this->FilePath->Size = System::Drawing::Size(699, 21);
 			this->FilePath->TabIndex = 5;
 			this->FilePath->TextChanged += gcnew System::EventHandler(this, &Headers::FilePath_TextChanged);
 			this->FilePath->DoubleClick += gcnew System::EventHandler(this, &Headers::FilePath_DoubleClick);
@@ -222,10 +219,10 @@
 			this->StatusLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->StatusLabel->ForeColor = System::Drawing::Color::Red;
-			this->StatusLabel->Location = System::Drawing::Point(771, 28);
+			this->StatusLabel->Location = System::Drawing::Point(785, 30);
 			this->StatusLabel->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->StatusLabel->Name = L"StatusLabel";
-			this->StatusLabel->Size = System::Drawing::Size(151, 23);
+			this->StatusLabel->Size = System::Drawing::Size(124, 19);
 			this->StatusLabel->TabIndex = 7;
 			this->StatusLabel->Text = L"Выберите файл";
 			// 
@@ -256,8 +253,11 @@
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(849, 626);
 			this->Name = L"Headers";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Удаление нумерации вопросов";
+			this->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::FormDragDrop);
+			this->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &Headers::FormDragEnter);
+			this->DragLeave += gcnew System::EventHandler(this, &Headers::FormDragLeave);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
 			this->tableLayoutPanel2->ResumeLayout(false);

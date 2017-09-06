@@ -304,6 +304,7 @@
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(658, 400);
 			this->Name = L"UnionQuestions";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Настройки для Union";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &UnionQuestions::UnionQuestions_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &UnionQuestions::UnionQuestions_Load);

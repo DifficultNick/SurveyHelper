@@ -285,8 +285,7 @@ public: System::Windows::Forms::DataGridView^  dataGridView1;
 			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::AllCells;
 			this->dataGridView1->ClipboardCopyMode = System::Windows::Forms::DataGridViewClipboardCopyMode::Disable;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4)
-			{
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
 				this->On, this->from,
 					this->to, this->IsCustom
 			});
@@ -381,7 +380,7 @@ public: System::Windows::Forms::DataGridView^  dataGridView1;
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(659, 343);
 			this->Name = L"CustomClear";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Настройка очистки текста";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &CustomClear::CustomClear_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &CustomClear::CustomClear_Load);

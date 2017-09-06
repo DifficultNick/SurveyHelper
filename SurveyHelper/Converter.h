@@ -192,7 +192,7 @@ public:
 				 this->label1->Dock = System::Windows::Forms::DockStyle::Left;
 				 this->label1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 				 this->label1->Location = System::Drawing::Point(3, 3);
-				 this->label1->Margin = System::Windows::Forms::Padding(3, 3, 3, 3);
+				 this->label1->Margin = System::Windows::Forms::Padding(3);
 				 this->label1->Name = L"label1";
 				 this->label1->Size = System::Drawing::Size(116, 18);
 				 this->label1->TabIndex = 1;
@@ -325,7 +325,7 @@ public:
 				 this->Name = L"SurveyConverter";
 				 this->ShowIcon = false;
 				 this->ShowInTaskbar = false;
-				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
+				 this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 				 this->Text = L"Преобразования";
 				 this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &SurveyConverter::SurveyConverter_FormClosed);
 				 this->Shown += gcnew System::EventHandler(this, &SurveyConverter::SurveyConverter_Shown);

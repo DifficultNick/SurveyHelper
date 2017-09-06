@@ -128,7 +128,7 @@
 			this->MinimizeBox = false;
 			this->MinimumSize = System::Drawing::Size(500, 200);
 			this->Name = L"ReplaceDebugWindow";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Отладчик автозамены";
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->ResumeLayout(false);
