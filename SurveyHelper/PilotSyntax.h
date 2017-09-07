@@ -639,17 +639,6 @@
 			String^ load = Regex::IsMatch(Path::GetFileName(fp), "load", RegexOptions::IgnoreCase) ? "" : "_load";
 
 			progressBar1->Value = 40;
-			StatusLabel->Text = "Проверка списка переменных...";
-			Update();
-
-			List<String^>^ nvalidVarList = GetDuplicated(GetVarList(s));
-			if (nvalidVarList->Count > 0)
-			{
-				CopyToBuffer(ListToString(nvalidVarList, "\n"));
-				ShowWarning("В файле найдено " + nvalidVarList->Count + " повторяющихся переменных.\nПовторяющиеся имена скопированы в буфер обмена.");
-			}
-
-			progressBar1->Value = 50;
 			StatusLabel->Text = "Добавление команд...";
 			Update();
 
@@ -711,7 +700,7 @@
 			}
 			res += "\n\n" + s->Remove(0, eof + 1);
 
-			progressBar1->Value = 65;
+			progressBar1->Value = 55;
 
 			// замена @
 			if ( repl )
@@ -721,7 +710,20 @@
 				res = res->Replace("@", del);
 			}
 
-			progressBar1->Value = 80;
+			progressBar1->Value = 65;
+			StatusLabel->Text = "Проверка списка переменных...";
+			Update();
+
+			List<String^>^ nvalidVarList = GetDuplicated(GetVarList(res));
+			if (nvalidVarList->Count > 0)
+			{
+				CopyToBuffer(ListToString(nvalidVarList, "\n"));
+				ShowWarning("В файле найдено " + nvalidVarList->Count + " повторяющихся переменных.\nПовторяющиеся имена скопированы в буфер обмена.");
+			}
+
+
+
+			progressBar1->Value = 75;
 			StatusLabel->Text = "Сохранение файла...";
 			Update();
 
@@ -872,6 +874,7 @@
 
 	private: List<String^>^ GetDuplicated(List<String^>^ vars)
 	{
+		CopyToBuffer(ListToString(vars, "\n"));
 		List<String^>^ res = gcnew List<String^>();
 		for (int i = 0; i < vars->Count-1; i++)
 			for (int j = i + 1; j < vars->Count; j++)
