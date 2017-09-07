@@ -1049,12 +1049,21 @@ static void Run(String^ Path)
 
 static String^ GetDefaultBrowserPath()
 {
-	return Microsoft::Win32::Registry::ClassesRoot->OpenSubKey("http\\shell\\open\\command", false)->GetValue("")->ToString()->Split(gcnew array<wchar_t> { '"' })[1];
+	try
+	{
+		String^ pId = Microsoft::Win32::Registry::CurrentUser->OpenSubKey("Software\\Microsoft\\Windows\\Shell\\Associations\\UrlAssociations\\http\\UserChoice", false)->GetValue("ProgId")->ToString();
+		return Microsoft::Win32::Registry::ClassesRoot->OpenSubKey(pId + "\\shell\\open\\command", false)->GetValue("")->ToString()->Split(gcnew array<wchar_t> { '"' })[1];
+	}
+	catch (Exception^ e)
+	{
+		return Microsoft::Win32::Registry::ClassesRoot->OpenSubKey("http\\shell\\open\\command", false)->GetValue("")->ToString()->Split(gcnew array<wchar_t> { '"' })[1];
+	}
 }
 
 static void OpenUrl(String^ url, bool isFile = true)
 {
 	String^ s = isFile ? "file:///" : "";
+	ShowMessage(GetDefaultBrowserPath());
 	Run(GetDefaultBrowserPath(), s + url);
 }
 
