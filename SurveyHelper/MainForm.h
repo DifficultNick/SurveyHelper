@@ -1791,6 +1791,7 @@ private:
 
 	private: System::Void DelDileIds_Click(System::Object^  sender, System::EventArgs^  e)
 	{
+		if (headersForm->IsDisposed) headersForm = gcnew Headers();
 		headersForm->Show();
 		headersForm->Activate();
 	}
@@ -1886,6 +1887,7 @@ private:
 
 	private: System::Void преобразованияToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
+		if (convForm->IsDisposed) convForm = gcnew SurveyConverter(curVers);
 		convForm->Show();
 		convForm->Activate();
 	}
@@ -1893,6 +1895,7 @@ private:
 
 	private: System::Void заменаВФайлеToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
+		if (fRepForm->IsDisposed) fRepForm = gcnew FileReplace();
 		fRepForm->Show();
 		fRepForm->Activate();
 	}
@@ -3763,6 +3766,7 @@ private:
 
 	private: System::Void синтаксисSPSSБазыToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
+		if (spssForm->IsDisposed) spssForm = gcnew PilotSyntax();
 		spssForm->Show();
 		spssForm->Activate();
 	}
