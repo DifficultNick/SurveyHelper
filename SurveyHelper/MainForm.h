@@ -62,7 +62,7 @@ public:
 		ExtendUi->Add("ContentOnly", "");
 		ExtendUi->Add("DragItem_Card", "Type=\"Card\" SourceContainer = \"0, 0\" TargetContainer=\"0, 0\" FontSizeTarget=\"1rem\" FontSizeSource=\"1rem\" DragItemAllowClick=\"1\"");
 		ExtendUi->Add("DragItem_Range", "Type=\"Range\" SourceContainer = \"0, 0\" TargetContainer=\"0, 0\" FontSizeTarget=\"1rem\" FontSizeSource=\"1rem\" DragItemAllowClick=\"1\"");
-		ExtendUi->Add("Slider_Continuous", "Type=\"Continuous\" MinVal=\"0\" MaxVal=\"100\" SliderStep=\"1\"​  LabelBegin=\"\" LabelEnd=\" руб.\"​ ​LabelTop=\"1\" ValueShow=\"1\"");
+		ExtendUi->Add("Slider_Continuous", "Type=\"Continuous\" MinVal=\"0\" MaxVal=\"100\" SliderStep=\"1\" LabelBegin=\"\" LabelEnd=\" руб.\" LabelTop=\"1\" ValueShow=\"1\"");
 		ExtendUi->Add("Slider_Discrete", "Type=\"Discrete\"");
 		ExtendUi->Add("Shape", "Opacity=\"0.3\" OpacitySelected=\"0.6\" WidthBorder=\"1px\" ColorBorder=\"black\" Src=\"@StoreUrl/t/tib_\"");
 		ExtendUi->Add("Sortable", "LabelBegin=\"Самый важный\" LabelEnd=\"Наименее важный\"");
@@ -2600,7 +2600,7 @@ private:
 			 Dictionary<String^, String^>^ res = gcnew Dictionary<String^, String^>(Addon::FindAddons(t));
 			 int after;
 			 int tabCount;
-			 int pos;
+			 //int pos;
 			 String^ s = "", ^str = "";
 			 for each (KeyValuePair<String^, String^>^ p in res)
 			 {
@@ -2835,7 +2835,6 @@ private:
 			 //bool addTag;
 			 List<String^>^ ids = gcnew List<String^>();
 			 Dictionary<String^, List<String^>^>^ Atributes = gcnew Dictionary<String^, List<String^>^>(); // список атрибутов для Answer/Item
-			 QuestionDialog::Result^ res; // для флажка "больше не спрашивать"
 
 
 			 // Items/Answers
