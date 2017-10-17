@@ -346,6 +346,7 @@ public:
 	}
 };
 
+
 // структура для работы с исключёнными элементами
 ref struct ExcludeTemplate
 {
@@ -798,22 +799,8 @@ public:
 	String^ Header = "";
 	String^ PageHeader = "";
 	bool AddPageTag = true;
+	bool Combine = false;
 
-
-	/*void AddQuestionAttributes(Dictionary<String^, String^>^ atrs)
-	{
-		try
-		{
-			QuestionAttributes = AtributesToString(atrs);
-			AddParentTag = true;
-			if ( atrs->ContainsKey("Type") ) QType = atrs["Type"];
-		}
-		catch ( Exception^ e )
-		{
-			ShowError(107, "Ошибка создания атрибутов\nПодробнее:\n" + e->ToString());
-		}
-		
-	}*/
 
 	// атрибуты через пробел в виде Mix="true" Type="Text"
 	void AddQuestionAttributes(String^ atrs)
@@ -828,7 +815,26 @@ public:
 
 	List<String^>^ MakeXML()
 	{
+		List<String^>^ items = gcnew List<String^>();
+		String^ qid = "";
+
 		Elements::MakeXML();
+
+		if (Combine)
+		{
+			qid = Regex::Replace(QuestionAttributes, "^.*Id=['\"](?<id>[^'\"]*)['\"].*$", "${id}");
+
+			items->Add("<List Id=\""+qid+"_List\">");
+			for (int i = 0; i < AllElements->Count; i++)
+				items->Add("\t" + Regex::Replace(AllElements[i], "^[^<]*<Answer[^>]+Id=['\"](?<id>[^'\"]+)['\"][^>]*[^<]*<Text[^>]*>(?<text>[^(</)]*)</Text.*$", "<Item Id=\"${id}\"><Text>${text}</Text></Item>"));
+			items->Add("</List>");
+			items->Add("");
+
+			AllElements = gcnew List<String^>();
+			AllElements->Add("<Repeat List=\""+qid+"_List\">");
+			AllElements->Add("\t<Answer Id=\"@ID\"><Text>@Text</Text></Answer>");
+			AllElements->Add("</Repeat>");
+		}
 
 		
 		if ( AddParentTag )
@@ -907,6 +913,8 @@ public:
 			AllElements->Add("</Page>");
 		}
 
+		if (Combine) AllElements->InsertRange(0, items);
+
 		for ( int i = (MissFirstTab) ? 1 : 0; i < AllElements->Count; i++ )
 			AllElements[i] = GetTabs(TabCount) + AllElements[i];
 
@@ -958,7 +966,7 @@ public:
 					for each (String^ str in found)
 						if ( s->Contains(str) )
 						{
-							tmp += " Reset=\"true\" Fix=\"true\"";
+							tmp += " Reset=\"true\" Fix=\"true\" NoUseInQstFilter=\"true\"";
 							break;
 						}
 				}
