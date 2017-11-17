@@ -842,10 +842,10 @@ public:
 			try
 			{
 				for ( int i = 0; i < AllElements->Count; i++ )
-					AllElements[i] = "\t\t" + AllElements[i];
+					AllElements[i] = "\t" + AllElements[i];
 
 				if ( ExtendAdd ) AllElements->Insert(0, "\t<Ui" + Extend + "/>");
-				if ( !String::IsNullOrEmpty(Header) ) AllElements->Insert(0, "  <Header>" + Header + "</Header>");
+				if ( !String::IsNullOrEmpty(Header) ) AllElements->Insert(0, "\t<Header>" + Header + "</Header>");
 				if ( !String::IsNullOrEmpty(QuestionAttributes) ) AllElements->Insert(0, "<Question" + QuestionAttributes + ">");
 				if ( !String::IsNullOrEmpty(QuestionAttributes) ) AllElements->Add("</Question>");
 			}
@@ -857,7 +857,7 @@ public:
 		if ( AddPageTag )
 		{
 			for ( int i = 0; i < AllElements->Count; i++ )
-				AllElements[i] = "\t\t" + AllElements[i];
+				AllElements[i] = "\t" + AllElements[i];
 
 			if (!String::IsNullOrEmpty(PageHeader)) AllElements->Insert(0, "\t<Header>" + PageHeader + "</Header>");
 			AllElements->Insert(0, "<Page Id=\"" + ParentId + "\">");
