@@ -1306,18 +1306,23 @@ public:
 		AnswerBlock->Header = "@Text";
 		AnswerBlock->MissFirstTab = Questions->Count == 0 ? MissFirstTab : false;
 		String^ res = ListToString(AnswerBlock->MakeXML(), "\n");
+		String^ tmp;
+		String^ tabs = Elements::GetTabs(TabCount + 1);
+		int i = res->IndexOf("<Question");
+		int k = res->IndexOf("</Question");
+		tmp = res->Substring(i, k - i);
+		res = res->Replace(tmp, tmp->Replace("\n", "\n\t"));
 
 		if ( UnionMix == UnionMixType::UnionMix ) um += " Mix=\"true\"";
 		else if ( UnionMix == UnionMixType::UnionMixId ) um += " MixId=\"" + UnionMixIdText + "\"";
 
-		int i = res->IndexOf("<Question");
-		int k = res->IndexOf("</Question");
 		k = res->IndexOf(">", k) + 1;
-		String^ tmp = res->Substring(i, k-i);
+		tmp = tabs;
+		if (um != "") tmp += "<Block Items=\"$repeat(" + QuestionListId + "){" + QuestionId + "_@ID[,]}\"" + um + "/>\n" + tabs;
+		tmp += "<Repeat List=\"" + QuestionListId + "\">\n\t" + tabs;
 
-		res = res->Insert(k, "\n"+ Elements::GetTabs(TabCount + 2) +"</Repeat>");
-		res = res->Insert(i, "<Ui Step=\"1\" HeaderFix=\"1\"/>\n" + Elements::GetTabs(TabCount + 2) + "<Repeat List=\"" + QuestionListId + "\""+um+">\n" + Elements::GetTabs(TabCount+3));
-		res = res->Replace(tmp, tmp->Replace("\n", "\n\t"));
+		res = res->Insert(k, "\n"+ tabs +"</Repeat>");
+		res = res->Insert(i, "<Ui Step=\"1\" HeaderFix=\"1\"/>\n" + tmp);
 		QuestionsRes->Add("");
 		QuestionsRes->AddRange(StringToList(res, '\n'));
 		return QuestionsRes;
