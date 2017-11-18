@@ -714,7 +714,7 @@ public:
 		{
 			if ( Regex::IsMatch(data[i], "^\\s*$") ) continue;
 			data[i] = data[i]->Replace("'", "\"")->Trim();
-			data[i] = Regex::Replace(data[i], "((?<num>\\d+)\\t+(?<text>.+))|((?<text>.+[^\\s])\\t+(?<num>\\d+))", "${num} '${text}'");
+			data[i] = Regex::Replace(data[i], "((?<num>\\d+)((\\.\\s*)|(\\t+))(?<text>.+))|((?<text>.+[^\\t\\n])\\t+(?<num>\\d+))", "${num} '${text}'");
 			res->Add(data[i]);
 		}
 		return "val lab\n" + ListToString(res, "\n") + ".";
