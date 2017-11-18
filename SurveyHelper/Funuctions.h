@@ -408,7 +408,7 @@ static String^ ImprovePropertyLanguage(String^ s)
 		if ( rus->Contains(tmp) )
 			res += eng[rus->IndexOf(tmp)];
 		else
-			if ( !Regex::IsMatch(tmp, "^[\\d_A-Za-z]$") ) res += "_";
+			if ( !Regex::IsMatch(tmp, "^[\\d_A-Za-z@]$") ) res += "_";
 			else res += s[i];
 	}
 

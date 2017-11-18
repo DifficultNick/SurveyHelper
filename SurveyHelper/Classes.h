@@ -585,7 +585,7 @@ public:
 		
 		if ( AddRepeat )
 		{
-			String^ rtxt = (IsNumber(RepeatName)) ? RepeatText : "@Text";
+			String^ rtxt = RepeatText;
 
 			String^ txt = "\t<" + ElemName + " Id=\"" + ( (IsNumber(RepeatName)) ? "@Itera\"" : "@ID\"" );
 			if ( TextSeparate )
