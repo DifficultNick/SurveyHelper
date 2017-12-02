@@ -826,14 +826,19 @@ public:
 
 			items->Add("<List Id=\""+qid+"_List\">");
 			for (int i = 0; i < AllElements->Count; i++)
-				items->Add("\t" + Regex::Replace(AllElements[i], "^[^<]*<Answer[^>]+Id=['\"](?<id>[^'\"]+)['\"][^>]*[^<]*<Text[^>]*>(?<text>[^(</)]*)</Text.*$", "<Item Id=\"${id}\"><Text>${text}</Text></Item>"));
+				if (!Uncombined->Contains(i)) items->Add("\t" + Regex::Replace(AllElements[i], "^[^<]*<Answer[^>]+Id=['\"](?<id>[^'\"]+)['\"][^>]*[^<]*<Text[^>]*>(?<text>[^(</)]*)</Text.*$", "<Item Id=\"${id}\"><Text>${text}</Text></Item>"));
 			items->Add("</List>");
 			items->Add("");
+
+			List<String^>^ notCombineItems = gcnew List<String^>();
+			for each (int i in Uncombined)
+				notCombineItems->Add(AllElements[i]);
 
 			AllElements = gcnew List<String^>();
 			AllElements->Add("<Repeat List=\""+qid+"_List\">");
 			AllElements->Add("\t<Answer Id=\"@ID\"><Text>@Text</Text></Answer>");
 			AllElements->Add("</Repeat>");
+			AllElements->AddRange(notCombineItems);
 		}
 
 		
@@ -854,6 +859,7 @@ public:
 				ShowError(108, "Ошибка обработки табуляции XML\n\nПодробнее:\n" + e->ToString());
 			}
 		}
+
 		if ( AddPageTag )
 		{
 			for ( int i = 0; i < AllElements->Count; i++ )
@@ -970,7 +976,11 @@ public:
 							break;
 						}
 				}
-				if ( tmp != "" ) res->Add(i, tmp);
+				if (tmp != "")
+				{
+					Uncombined->Add(i);
+					res->Add(i, tmp);
+				}
 			}
 		}
 		catch ( Exception^ e )
@@ -986,6 +996,7 @@ public:
 protected: 
 
 	List<int>^ Screens = gcnew List<int>();
+	List<int>^ Uncombined = gcnew List<int>();
 
 	String^ GetProp(String^ atrs, String^ prop)
 	{
