@@ -957,7 +957,6 @@ public:
 			{
 				tmp = "";
 				s = txt[i]->ToLower();
-				//ShowMessage(GetProp(QuestionAttributes, "Mix"));
 				List<String^>^ found = gcnew List<String^>(gcnew array<String^> {"уточните", "укажите", "впишите", "запишите", "открытое поле", "поле для ввода", "где именно", "какая именно", "какой именно", "что именно", "open"});
 				for each (String^ str in found)
 					if ( s->Contains(str) )
@@ -1321,13 +1320,15 @@ public:
 		String^ tabs = Elements::GetTabs(TabCount + 1);
 		int i = res->IndexOf("<Question");
 		int k = res->IndexOf("</Question");
+		k = res->IndexOf(">", k) + 1;
 		tmp = res->Substring(i, k - i);
 		res = res->Replace(tmp, tmp->Replace("\n", "\n\t"));
+		k = res->IndexOf("</Question");
+		k = res->IndexOf(">", k) + 1;
 
 		if ( UnionMix == UnionMixType::UnionMix ) um += " Mix=\"true\"";
 		else if ( UnionMix == UnionMixType::UnionMixId ) um += " MixId=\"" + UnionMixIdText + "\"";
 
-		k = res->IndexOf(">", k) + 1;
 		tmp = tabs;
 		if (um != "") tmp += "<Block Items=\"$repeat(" + QuestionListId + "){" + QuestionId + "_@ID[,]}\"" + um + "/>\n" + tabs;
 		tmp += "<Repeat List=\"" + QuestionListId + "\">\n\t" + tabs;
