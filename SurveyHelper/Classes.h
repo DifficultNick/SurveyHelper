@@ -826,7 +826,9 @@ public:
 
 			items->Add("<List Id=\""+qid+"_List\">");
 			for (int i = 0; i < AllElements->Count; i++)
-				if (!Uncombined->Contains(i)) items->Add("\t" + Regex::Replace(AllElements[i], "^[^<]*<Answer[^>]+Id=['\"](?<id>[^'\"]+)['\"][^>]*[^<]*<Text[^>]*>(?<text>[^(</)]*)</Text.*$", "<Item Id=\"${id}\"><Text>${text}</Text></Item>"));
+				if (!Uncombined->Contains(i)) items->Add("\t" + Regex::Replace(AllElements[i], 
+					"^[^<]*<Answer[^>]+Id=['\"](?<id>[^'\"]+)['\"][^<]+(<Text[^>]*>(?<text>.*)</Text)?.*", 
+					"<Item Id=\"${id}\"><Text>${text}</Text></Item>"));
 			items->Add("</List>");
 			items->Add("");
 
