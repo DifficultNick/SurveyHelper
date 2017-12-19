@@ -655,11 +655,11 @@ public:
 					else a->Set(14, a->Values[0]);
 					indexes->Add(i);
 				}
-				res->Add("\t<Item Id=\"" + i + "\" Var=\"" + a->Vars + "\"><Text>" + a->Text + "</Text></Item>");
+				res->Add("\t\t<Item Id=\"" + i + "\" Var=\"" + a->Vars + "\"><Text>" + a->Text + "</Text></Item>");
 			}
 
-			res->Insert(0, "<List Id=\"ageList\">");
-			res->Add("</List>");
+			res->Insert(0, "\t<List Id=\"ageList\">");
+			res->Add("\t</List>");
 		}
 		catch ( Exception^ e )
 		{
