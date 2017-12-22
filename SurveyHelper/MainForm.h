@@ -3739,7 +3739,7 @@ private:
 	private: System::Void dataGridView1_ColumnHeaderMouseClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellMouseEventArgs^  e)
 	{
 		for ( int i = 0; i < dataGridView1->RowCount; i++ )
-			if ( dataGridView1->Rows[i]->Cells[0]->Value )
+			if ( !!dataGridView1->Rows[i]->Cells[0]->Value )
 				dataGridView1->Rows[i]->Cells[3]->Value = i;
 		
 		SortOrder GlOrd = dataGridView1->Columns[e->ColumnIndex]->HeaderCell->SortGlyphDirection;
@@ -3765,13 +3765,16 @@ private:
 		}
 		
 		int newCol = VForm->dataGridView1->Columns->Add(gcnew DataGridViewColumn(VForm->dataGridView1->Rows[0]->Cells[0]));
+		VForm->dataGridView1->Columns[newCol]->ValueType = Type::GetType("System.Int32");
 		for ( int i = 0; i < dataGridView1->RowCount; i++ )
 			if ( dataGridView1->Rows[i]->Cells[3]->Value )
-				VForm->dataGridView1->Rows[(int)dataGridView1->Rows[i]->Cells[3]->Value]->Cells[newCol]->Value = i.ToString();
+				VForm->dataGridView1->Rows[(int)dataGridView1->Rows[i]->Cells[3]->Value]->Cells[newCol]->Value = i;
 				
 		VForm->dataGridView1->Sort(VForm->dataGridView1->Columns[newCol], ListSortDirection::Ascending);
 		
 		VForm->dataGridView1->Columns->RemoveAt(newCol);
+		VForm->saveVars();
+		Vars = gcnew List<List<String^>^>(VForm->vars);
 	}
 
 	private: System::Void сообщитьОбОшибкеToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)

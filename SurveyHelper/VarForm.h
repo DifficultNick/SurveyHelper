@@ -632,20 +632,25 @@
 	{		
 		SaveSettings();
 		this->Hide();
-		int j;
+		saveVars();
+	}
+
+
+	public: void saveVars()
+	{
 		List<String^>^ tmp;
 		vars->Clear();
 		try
 		{
-			for ( int i = 0; i < dataGridView1->RowCount-1; i++ )
+			for (int i = 0; i < dataGridView1->RowCount - 1; i++)
 			{
 				tmp = gcnew List<String^>();
-				for ( j = 0; j < dataGridView1->ColumnCount; j++ )
+				for (int j = 0; j < dataGridView1->ColumnCount; j++)
 					tmp->Add(Convert::ToString(dataGridView1["Var" + j.ToString(), i]->Value));
 				vars->Add(tmp);
 			}
 		}
-		catch(Exception^ e)
+		catch (Exception^ e)
 		{
 			ShowError(326, "Ошибка при сохранении списка Var\nПодробнее:\n" + e->ToString());
 		}
