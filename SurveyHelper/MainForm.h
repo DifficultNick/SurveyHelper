@@ -560,7 +560,7 @@ private:
 		this->intoList->Size = System::Drawing::Size(205, 21);
 		this->intoList->TabIndex = 2;
 		this->intoList->Text = L"Выделить ответы в List";
-		this->toolTip1->SetToolTip(this->intoList, L"Выносить атрибут Text в отдельный \r\nтег <Text>");
+		this->toolTip1->SetToolTip(this->intoList, L"");
 		this->intoList->UseVisualStyleBackColor = true;
 		this->intoList->CheckedChanged += gcnew System::EventHandler(this, &MainForm::PerformanceUpdate);
 		// 
