@@ -381,6 +381,12 @@ public:
 		return Separators[separatorsItem->SelectedIndex];
 	}
 
+	void Report(String^ str)
+	{
+		resultTex->Text += str + "\n";
+		resultTex->Update();
+	}
+
 
 #pragma endregion
 
