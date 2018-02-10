@@ -729,9 +729,10 @@ public:
 	{
 		List<String^>^ data = StringToList(table, '\n');
 		if (data->Count < 2) return "Нет данных\nВ первой строке должны быть имена переменных";
-		wchar_t delimiter = CountSubStrings(data[0], "\t") >= CountSubStrings(data[0], ";") ? '\t' : ';';
+		wchar_t delimiter = '\t';//CountSubStrings(data[0], "\t") >= CountSubStrings(data[0], ";") ? '\t' : ';';
 		array<String^>^ names = data[0]->Split(delimiter);
 		if (names->Length == 0) return "Нет данных\nВ первой строке должны быть имена переменных";
+		array<String^>^ newAr = gcnew array<String^>(data->Count - 1); // тут будем хранить новое
 
 		// берём только правильное
 		List<int>^ empty = gcnew List<int>();
@@ -765,40 +766,33 @@ public:
 		array<String^>^ line;
 		bool emptyFound = false;
 
-		// первый проход: собираем список возможных значений
+		// собираем список возможных значений
+		// и сразу сохраняем intовый List
 		for (int i = 1; i < data->Count; i++)
 		{
 			line = data[i]->Split(delimiter);
 			if (line->Length < length) return "Строка " + i.ToString() + " содержит количество значений, отличное от предыдущих.";
+			if (System::Array::IndexOf(line, "") > -1) emptyFound = true;
 			for (int j = 0; j < length; j++)
 			{
-				if (line[j] == "") emptyFound = true;
-				if (!fullData[names[j]]->Contains(line[j])) fullData[names[j]]->Add(line[j]);
+				if (!fullData[names[j]]->Contains(line[j])) fullData[names[j]]->Add(line[j]); // сохраняем новые значения
+				line[j] = (fullData[names[j]]->IndexOf(line[j]) + 1).ToString(); // заменяем значение на индекс из листа
 			}
+			newAr[i - 1] = String::Join(";", line);
 		}
 
 		if (emptyFound) ShowWarning("В данных найдены пустые значения");
 
-		// второй проход: заменяем на int
-		for (int i = 1; i < data->Count; i++)
-		{
-			line = data[i]->Split(delimiter);
-			for (int j = 0; j < length; j++)
-			{
-				line[j] = (fullData[names[j]]->IndexOf(line[j]) + 1).ToString();
-			}
-			data[i] = String::Join("\t", line);
-		}
-
 		// сохраняем таблицу данных
 		saveFileDialog1 = gcnew SaveFileDialog;
-		saveFileDialog1->Filter = "Файл MS Excel|*.xls|Текстовый файл|*.txt|All files|*.*";
+		saveFileDialog1->Filter = "Файл CSV(;)|*.csv|Текстовый файл|*.txt|All files|*.*";
 		saveFileDialog1->FilterIndex = 1;
-		saveFileDialog1->FileName = "data.xls";
+		saveFileDialog1->FileName = "data.csv";
 
 		if (saveFileDialog1->ShowDialog() == Forms::DialogResult::OK)
 		{
-			ExportToExcel(ListToString(data, "\n"), saveFileDialog1->FileName);
+			//ExportToExcel(ListToString(data, "\n"), saveFileDialog1->FileName);
+			WriteFile(saveFileDialog1->FileName, newAr);
 		}
 
 		// сохраняем XML листы
@@ -806,6 +800,7 @@ public:
 		String^ res = "";
 		for each (KeyValuePair<String^, List<String^>^> element in fullData)
 		{
+			if (element.Value->Count == data->Count - 1) continue;
 			res += "\t<List Id=\"" + element.Key + "_List\">\n";
 			for (int i = 0; i < element.Value->Count; i++)
 			{
