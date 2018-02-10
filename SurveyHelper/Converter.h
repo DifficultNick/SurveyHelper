@@ -139,7 +139,7 @@ public:
 				 this->sourceText->Margin = System::Windows::Forms::Padding(4, 4, 9, 4);
 				 this->sourceText->Name = L"sourceText";
 				 this->sourceText->Size = System::Drawing::Size(504, 348);
-				 this->sourceText->TabIndex = 1;
+				 this->sourceText->TabIndex = 0;
 				 this->sourceText->Text = L"";
 				 // 
 				 // resultTex
@@ -149,7 +149,7 @@ public:
 				 this->resultTex->Margin = System::Windows::Forms::Padding(9, 4, 4, 4);
 				 this->resultTex->Name = L"resultTex";
 				 this->resultTex->Size = System::Drawing::Size(505, 348);
-				 this->resultTex->TabIndex = 0;
+				 this->resultTex->TabIndex = 2;
 				 this->resultTex->Text = L"";
 				 // 
 				 // tableLayoutPanel2
@@ -225,7 +225,7 @@ public:
 				 this->genButton->Margin = System::Windows::Forms::Padding(4, 0, 0, 0);
 				 this->genButton->Name = L"genButton";
 				 this->genButton->Size = System::Drawing::Size(145, 29);
-				 this->genButton->TabIndex = 0;
+				 this->genButton->TabIndex = 1;
 				 this->genButton->Text = L"Преобразовать";
 				 this->genButton->UseVisualStyleBackColor = true;
 				 this->genButton->Click += gcnew System::EventHandler(this, &SurveyConverter::genButton_Click);
@@ -733,13 +733,15 @@ public:
 
 	String^ DataFromTable(String^ table)
 	{
+		Report("Проверка формата файла");
 		List<String^>^ data = StringToList(table, '\n');
 		if (data->Count < 2) return "Нет данных\nВ первой строке должны быть имена переменных";
 		wchar_t delimiter = '\t';//CountSubStrings(data[0], "\t") >= CountSubStrings(data[0], ";") ? '\t' : ';';
 		array<String^>^ names = data[0]->Split(delimiter);
 		if (names->Length == 0) return "Нет данных\nВ первой строке должны быть имена переменных";
 		array<String^>^ newAr = gcnew array<String^>(data->Count - 1); // тут будем хранить новое
-
+		
+		Report("Очистка пустых данных");
 		// берём только правильное
 		List<int>^ empty = gcnew List<int>();
 		List<int>^ ends = gcnew List<int>();
@@ -759,7 +761,11 @@ public:
 		for (int i = empty->Count - 1; i >= 0; i--)
 			data->RemoveAt(empty[i]);
 
+		Report("Данные содержат " + data->Count.ToString() +  " строк");
+
 		Dictionary<String^, List<String^>^>^ fullData = gcnew Dictionary<String^, List<String^>^>();
+
+		Report("Выделение переменных");
 
 		// собираем имена переменных
 		for (int i = 0; i < length; i++)
@@ -769,8 +775,28 @@ public:
 			else return "Имена переменных не должны повторяться: '" + names[i] + "'";
 		}
 
+		Report("Переменные:\t" + String::Join(", ", names));
+
 		array<String^>^ line;
 		bool emptyFound = false;
+
+		saveFileDialog1 = gcnew SaveFileDialog;
+		saveFileDialog1->Filter = "Файл CSV(;)|*.csv|Таблица Excel|*.xls|Текстовый файл|*.txt|All files|*.*";
+		saveFileDialog1->FilterIndex = 1;
+		saveFileDialog1->FileName = "data.csv";
+		bool fw = saveFileDialog1->ShowDialog() == Forms::DialogResult::OK;
+		String^ sep = fw && Path::GetExtension(saveFileDialog1->FileName) == ".csv" ? ";" : "\t";
+
+		if (fw)
+		{
+			Report("Файл будет сохранён: " + saveFileDialog1->FileName);
+			Report("Сбор уникальных значений переменных и замена исходных данных");
+		}
+		else
+		{
+			Report("Сохранение файла отменено");
+			Report("Сбор уникальных значений переменных");
+		}
 
 		// собираем список возможных значений
 		// и сразу сохраняем intовый List
@@ -782,24 +808,33 @@ public:
 			for (int j = 0; j < length; j++)
 			{
 				if (!fullData[names[j]]->Contains(line[j])) fullData[names[j]]->Add(line[j]); // сохраняем новые значения
-				line[j] = (fullData[names[j]]->IndexOf(line[j]) + 1).ToString(); // заменяем значение на индекс из листа
+				if (fw) line[j] = (fullData[names[j]]->IndexOf(line[j]) + 1).ToString(); // заменяем значение на индекс из листа
 			}
-			newAr[i - 1] = String::Join(";", line);
+			if (fw) newAr[i - 1] = String::Join(sep, line);
 		}
 
 		if (emptyFound) ShowWarning("В данных найдены пустые значения");
 
-		// сохраняем таблицу данных
-		saveFileDialog1 = gcnew SaveFileDialog;
-		saveFileDialog1->Filter = "Файл CSV(;)|*.csv|Текстовый файл|*.txt|All files|*.*";
-		saveFileDialog1->FilterIndex = 1;
-		saveFileDialog1->FileName = "data.csv";
-
-		if (saveFileDialog1->ShowDialog() == Forms::DialogResult::OK)
+		if (fw && newAr->Length != data->Count - 1)
 		{
-			//ExportToExcel(ListToString(data, "\n"), saveFileDialog1->FileName);
-			WriteFile(saveFileDialog1->FileName, newAr);
+			ShowWarning("Ошибка при проверке результатов: не сходится количество строк");
+			return "Ошибка при проверке результатов: не сходится количество строк";
 		}
+
+		Report("Проверка данных прошла успешно");
+
+		// сохраняем таблицу данных в файл
+		if (fw)
+		{
+			Report("Сохранение файла");
+			if (Path::GetExtension(saveFileDialog1->FileName) == ".xls")
+				ExportToExcel(newAr, saveFileDialog1->FileName);
+			else
+				WriteFile(saveFileDialog1->FileName, newAr);
+		}
+
+		Report("Файл успешно сохранён");
+		Report("Формирование листов");
 
 		// сохраняем XML листы
 		List<Items^>^ listList = gcnew List<Items^>();
@@ -821,6 +856,8 @@ public:
 
 	private: System::Void genButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
+		resultTex->Clear();
+
 		switch ( convertType->SelectedIndex )
 		{
 			case 0:
@@ -893,7 +930,7 @@ public:
 		saveFileDialog1->RestoreDirectory = true;
 		if ( saveFileDialog1->ShowDialog() == Forms::DialogResult::OK )
 			if ( saveFileDialog1->FilterIndex == 0 )
-				ExportToExcel(resultTex->Text, saveFileDialog1->FileName);
+				ExportToExcel(resultTex->Text->Split('\n'), saveFileDialog1->FileName);
 			else
 				WriteFile(saveFileDialog1->FileName, resultTex->Text->Split('\n'));
 	}
