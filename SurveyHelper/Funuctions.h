@@ -956,26 +956,52 @@ static HeaderList^ RemoveHeaders(String^ FilePath)
 }
 
 
-static void ExportToExcel(String^ text, String^ FilePath)
+static void setExcelRange(array<String^>^ data, Excel::Worksheet^ sheet, wchar_t delimiter)
+{
+	int rows = data->Length;
+	int columns = data[0]->Split(delimiter)->Length;
+	array<Object^, 2>^ objData = gcnew array<Object^, 2>(rows, columns);
+	array<String^>^ line;
+	for (int row = 0; row < rows; row++)
+	{
+		line = data[row]->Split(delimiter);
+		for (int column = 0; column < columns; column++)
+		{
+			objData[row , column] = line[column];
+		}
+	}
+
+	Excel::Range^ startCell = (Excel::Range^)sheet->Cells[1, 1];
+	Excel::Range^ endCell = (Excel::Range^)sheet->Cells[rows, columns];
+	Excel::Range^ writeRange = sheet->Range[startCell, endCell];
+
+	writeRange->Value2 = objData;
+}
+
+
+static void ExportToExcel(array<String^>^ lines, String^ FilePath)
 {
 	try
 	{
 		Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 		Excel::Workbook^ book = exApp->Workbooks->Add(Type::Missing);
+		Excel::Worksheet^ sheet = (Excel::Worksheet^)book->Sheets[1]; // хз почему так
 		Object^ misValue = System::Reflection::Missing::Value;
-		List<String^>^ lines = StringToList(text, '\n');
-		List<String^>^ cells;
-		for ( int i = 0; i < lines->Count; i++ )
+		array<String^>^ cells;
+		/*for (int i = 0; i < lines->Length; i++)
 		{
-			cells = StringToList(lines[i], '\t');
-			for ( int j = 0; j < cells->Count; j++ )
-				exApp->Cells[i+1, j+1] = cells[j];
-		}
+			cells = lines[i]->Split('\t');
+			
+			for (int j = 0; j < cells->Length; j++)
+				exApp->Cells[i + 1, j + 1] = cells[j];
+			
+		}*/
+		setExcelRange(lines, sheet, '\t');
 		book->SaveAs(FilePath, Excel::XlFileFormat::xlExcel12, misValue, misValue, misValue, misValue, Excel::XlSaveAsAccessMode::xlShared, misValue, misValue, misValue, misValue, misValue);
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
-		ShowError(424, "Ошибка сохранения файла в формате xls\nПодробнее:\n\n"+e->ToString());
+		ShowError(424, "Ошибка сохранения файла в формате xls\nПодробнее:\n\n" + e->ToString());
 	}
 }
 
