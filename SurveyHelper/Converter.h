@@ -734,64 +734,53 @@ public:
 	String^ DataFromTable(String^ table)
 	{
 		Report("> Проверка формата файла...");
+
 		List<String^>^ data = StringToList(table, '\n');
-		if (data->Count < 2) return "Нет данных\nВ первой строке должны быть имена переменных";
+		if (data->Count < 2) return "Нет данных";
 		wchar_t delimiter = '\t';//CountSubStrings(data[0], "\t") >= CountSubStrings(data[0], ";") ? '\t' : ';';
 		array<String^>^ names = data[0]->Split(delimiter);
-		if (names->Length == 0) return "Нет данных\nВ первой строке должны быть имена переменных";
-		array<String^>^ newAr = gcnew array<String^>(data->Count - 1); // тут будем хранить новое
 		
-		Report("> Очистка пустых данных...");
-		// берём только правильное
-		List<int>^ empty = gcnew List<int>();
 		List<int>^ ends = gcnew List<int>();
-		for (int i = 0; i < data->Count; i++)
+		List<int>^ empty = gcnew List<int>();
+		array<String^>^ line;
+		List<String^>^ ids = gcnew List<String^>();
+		Dictionary<String^, List<String^>^>^ fullData = gcnew Dictionary<String^, List<String^>^>();
+		bool emptyFound = false;
+		List<String^>^ longVars = gcnew List<String^>();
+
+		/*
+			первый проход по data:
+				- при вставке из Excel почему-то каждая строка кончается на \t\n. В ends считаем все такие строки
+				- удаляем пустые, чтобы не писать их в фал и не перекодировать (поэтому идём с конца)
+		*/
+		for (int i = data->Count - 1; i >= 0; i--)
 		{
-			if (Regex::IsMatch(data[i], "^\\s*$")) empty->Add(i); // номера пустых строк
+			if (Regex::IsMatch(data[i], "^\\s*$"))
+			{
+				data->RemoveAt(i);
+				continue;
+			}
 			if (Regex::IsMatch(data[i], "^(.*\\s+)?$")) ends->Add(i);
 		}
 
-		int length = names->Length; // количество столбцов
-		/*
-			при вставке из Excel почему-то каждая строка кончается на \t\n
-			в ends считаем все такие строки
-		*/
-		if (ends->Count == data->Count) length = length - 1;
+		array<String^>^ newAr = gcnew array<String^>(data->Count - 1); // тут будем хранить новое
 
-		for (int i = empty->Count - 1; i >= 0; i--)
-			data->RemoveAt(empty[i]);
+		int length = names->Length; // количество столбцов
+		if (ends->Count == data->Count) length = length - 1; // если все \t\n$, то последнюю не считаем
 
 		Report("Данные содержат " + data->Count.ToString() +  " строк");
-
-		Dictionary<String^, List<String^>^>^ fullData = gcnew Dictionary<String^, List<String^>^>();
-
 		Report("> Выделение переменных...");
 
-		// собираем имена переменных
+		// собираем, очищаем и проверяем имена переменных
 		for (int i = 0; i < length; i++)
 		{
-			if (String::IsNullOrEmpty(names[i])) return "Не задано имя " + (i + 1).ToString() + " переменной";
+			names[i] = names[i]->Trim();
+			if (!Regex::IsMatch(names[i], "^\\w+$")) return "Первая строка должна содержать только правильные имена переменных";
 			if (!fullData->ContainsKey(names[i])) fullData->Add(names[i], gcnew List<String^>());
 			else return "Имена переменных не должны повторяться: '" + names[i] + "'";
 		}
 
 		Report("Переменные:\t" + String::Join(", ", names));
-
-		array<String^>^ line;
-		bool emptyFound = false;
-
-		Report("Проверка уникальности значений первого столбца...");
-
-		List<String^>^ ids = gcnew List<String^>();
-		// проверяем уникальность первого столбца
-		for (int i = 1; i < data->Count; i++)
-		{
-			line = data[i]->Split(delimiter);
-			if (!ids->Contains(line[0])) ids->Add(line[0]);
-			else return "Первый столбец содержит повторяющиеся значения";
-		}
-
-		Report("Все значения первого столбца уникальны");
 
 		// получаем путь
 		saveFileDialog1 = gcnew SaveFileDialog;
@@ -804,19 +793,22 @@ public:
 		if (fw)
 		{
 			Report("Файл будет сохранён: " + saveFileDialog1->FileName);
-			Report("Сбор уникальных значений переменных и замена исходных данных");
+			Report("> Сбор уникальных значений переменных и кодирование данных...");
 		}
 		else
 		{
 			Report("Сохранение файла отменено");
-			Report("Сбор уникальных значений переменных");
+			Report("> Сбор уникальных значений переменных...");
 		}
 
 		// собираем список возможных значений
 		// и сразу сохраняем intовый List
 		for (int i = 1; i < data->Count; i++)
 		{
+			if (empty->Contains(i)) continue; // пропускаем пустые
 			line = data[i]->Split(delimiter);
+			if (!ids->Contains(line[0])) ids->Add(line[0]); // проверяем уникальность
+			else return "Первый столбец содержит повторяющиеся значения";
 			if (line->Length < length) return "Строка " + i.ToString() + " содержит количество значений, отличное от предыдущих.";
 			if (System::Array::IndexOf(line, "") > -1) emptyFound = true;
 			for (int j = 1; j < length; j++)
@@ -828,21 +820,13 @@ public:
 		}
 
 		// проверка списка значений
+		if (fw && newAr->Length != data->Count - 1) return "Ошибка при проверке результатов: не сходится количество строк";
 		Report("> Поиск возможных текстовых переменных...");
-		List<String^>^ longVars = gcnew List<String^>();
 		for (int j = 1; j < length; j++)
 			if (fullData[names[j]]->Count > 0.7 * data->Count) longVars->Add(names[j]);
-		
 		if (longVars->Count > 0) 
 			ShowWarning("Переменные " + String::Join(", ", longVars) + " содержат относительно большой набор уникальных значений.\nВозможно, их не стоит кодировать");
-
-		if (emptyFound) ShowWarning("В данных найдены пустые значения");
-
-		if (fw && newAr->Length != data->Count - 1)
-		{
-			ShowWarning("Ошибка при проверке результатов: не сходится количество строк");
-			return "Ошибка при проверке результатов: не сходится количество строк";
-		}
+		if (emptyFound) ShowWarning("В данных найдены пустые значения.\nЭто не страшно, просто в листе будут элементы с пустым текстом");
 
 		Report("Проверка данных прошла успешно");
 
@@ -851,15 +835,14 @@ public:
 		{
 			Report("> Сохранение файла...");
 			if (Path::GetExtension(saveFileDialog1->FileName) == ".xls")
-				ExportToExcel(newAr, saveFileDialog1->FileName);
+				if (!ExportToExcel(newAr, saveFileDialog1->FileName)) return "Ошибка сохранения данных. Попробуйте CSV";
 			else
-				WriteFile(saveFileDialog1->FileName, newAr);
+				if(!WriteFile(saveFileDialog1->FileName, newAr)) return "Ошибка сохранения данных";
+			Report("Файл успешно сохранён");
 		}
 
-		Report("Файл успешно сохранён");
-		Report("> Формирование листов...");
-
 		// сохраняем XML листы
+		Report("> Формирование листов...");
 		List<Items^>^ listList = gcnew List<Items^>();
 		String^ res = "";
 		for each (KeyValuePair<String^, List<String^>^> element in fullData)
@@ -872,6 +855,15 @@ public:
 			}
 			res += "\t</List>\n\n";
 		}
+
+		Report("Всё готово!");
+
+		// открытие файла
+		if (fw && MessageBox::Show(
+			"Всё готово!\nОткрыть файл с закодированными данными?",
+			"", System::Windows::Forms::MessageBoxButtons::YesNoCancel,
+			System::Windows::Forms::MessageBoxIcon::Information) == Forms::DialogResult::Yes)
+			Run(saveFileDialog1->FileName);
 
 		return res;
 	}

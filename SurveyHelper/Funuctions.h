@@ -979,7 +979,7 @@ static void setExcelRange(array<String^>^ data, Excel::Worksheet^ sheet, wchar_t
 }
 
 
-static void ExportToExcel(array<String^>^ lines, String^ FilePath)
+static bool ExportToExcel(array<String^>^ lines, String^ FilePath)
 {
 	try
 	{
@@ -1002,7 +1002,9 @@ static void ExportToExcel(array<String^>^ lines, String^ FilePath)
 	catch (Exception^ e)
 	{
 		ShowError(424, "Ошибка сохранения файла в формате xls\nПодробнее:\n\n" + e->ToString());
+		return false;
 	}
+	return true;
 }
 
 
