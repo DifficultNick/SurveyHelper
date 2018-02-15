@@ -780,6 +780,18 @@ public:
 		array<String^>^ line;
 		bool emptyFound = false;
 
+		List<String^>^ ids = gcnew List<String^>();
+		// проверяем уникальность первого столбца
+		for (int i = 1; i < data->Count; i++)
+		{
+			line = data[i]->Split(delimiter);
+			if (!ids->Contains(line[0])) ids->Add(line[0]);
+			else return "Первый столбец содержит повторяющиеся значения";
+		}
+
+		Report("Все значения первого столбца уникальны");
+
+		// получаем путь
 		saveFileDialog1 = gcnew SaveFileDialog;
 		saveFileDialog1->Filter = "Файл CSV(;)|*.csv|Таблица Excel|*.xls|Текстовый файл|*.txt|All files|*.*";
 		saveFileDialog1->FilterIndex = 1;
@@ -805,7 +817,7 @@ public:
 			line = data[i]->Split(delimiter);
 			if (line->Length < length) return "Строка " + i.ToString() + " содержит количество значений, отличное от предыдущих.";
 			if (System::Array::IndexOf(line, "") > -1) emptyFound = true;
-			for (int j = 0; j < length; j++)
+			for (int j = 1; j < length; j++)
 			{
 				if (!fullData[names[j]]->Contains(line[j])) fullData[names[j]]->Add(line[j]); // сохраняем новые значения
 				if (fw) line[j] = (fullData[names[j]]->IndexOf(line[j]) + 1).ToString(); // заменяем значение на индекс из листа
