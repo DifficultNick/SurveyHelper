@@ -733,7 +733,7 @@ public:
 
 	String^ DataFromTable(String^ table)
 	{
-		Report("Проверка формата файла");
+		Report("> Проверка формата файла...");
 		List<String^>^ data = StringToList(table, '\n');
 		if (data->Count < 2) return "Нет данных\nВ первой строке должны быть имена переменных";
 		wchar_t delimiter = '\t';//CountSubStrings(data[0], "\t") >= CountSubStrings(data[0], ";") ? '\t' : ';';
@@ -741,7 +741,7 @@ public:
 		if (names->Length == 0) return "Нет данных\nВ первой строке должны быть имена переменных";
 		array<String^>^ newAr = gcnew array<String^>(data->Count - 1); // тут будем хранить новое
 		
-		Report("Очистка пустых данных");
+		Report("> Очистка пустых данных...");
 		// берём только правильное
 		List<int>^ empty = gcnew List<int>();
 		List<int>^ ends = gcnew List<int>();
@@ -765,7 +765,7 @@ public:
 
 		Dictionary<String^, List<String^>^>^ fullData = gcnew Dictionary<String^, List<String^>^>();
 
-		Report("Выделение переменных");
+		Report("> Выделение переменных...");
 
 		// собираем имена переменных
 		for (int i = 0; i < length; i++)
@@ -779,6 +779,8 @@ public:
 
 		array<String^>^ line;
 		bool emptyFound = false;
+
+		Report("Проверка уникальности значений первого столбца...");
 
 		List<String^>^ ids = gcnew List<String^>();
 		// проверяем уникальность первого столбца
@@ -825,6 +827,15 @@ public:
 			if (fw) newAr[i - 1] = String::Join(sep, line);
 		}
 
+		// проверка списка значений
+		Report("> Поиск возможных текстовых переменных...");
+		List<String^>^ longVars = gcnew List<String^>();
+		for (int j = 1; j < length; j++)
+			if (fullData[names[j]]->Count > 0.7 * data->Count) longVars->Add(names[j]);
+		
+		if (longVars->Count > 0) 
+			ShowWarning("Переменные " + String::Join(", ", longVars) + " содержат относительно большой набор уникальных значений.\nВозможно, их не стоит кодировать");
+
 		if (emptyFound) ShowWarning("В данных найдены пустые значения");
 
 		if (fw && newAr->Length != data->Count - 1)
@@ -838,7 +849,7 @@ public:
 		// сохраняем таблицу данных в файл
 		if (fw)
 		{
-			Report("Сохранение файла");
+			Report("> Сохранение файла...");
 			if (Path::GetExtension(saveFileDialog1->FileName) == ".xls")
 				ExportToExcel(newAr, saveFileDialog1->FileName);
 			else
@@ -846,14 +857,14 @@ public:
 		}
 
 		Report("Файл успешно сохранён");
-		Report("Формирование листов");
+		Report("> Формирование листов...");
 
 		// сохраняем XML листы
 		List<Items^>^ listList = gcnew List<Items^>();
 		String^ res = "";
 		for each (KeyValuePair<String^, List<String^>^> element in fullData)
 		{
-			if (element.Value->Count == data->Count - 1) continue;
+			if (element.Key == names[0]) continue; // пропуск Id
 			res += "\t<List Id=\"" + element.Key + "_List\">\n";
 			for (int i = 0; i < element.Value->Count; i++)
 			{
