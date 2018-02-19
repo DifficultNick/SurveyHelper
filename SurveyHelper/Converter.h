@@ -739,6 +739,8 @@ public:
 		if (data->Count < 2) return "Нет данных";
 		wchar_t delimiter = '\t';//CountSubStrings(data[0], "\t") >= CountSubStrings(data[0], ";") ? '\t' : ';';
 		array<String^>^ names = data[0]->Split(delimiter);
+
+		if(names->Length < 2) return "Нет данных";
 		
 		List<int>^ ends = gcnew List<int>();
 		List<int>^ empty = gcnew List<int>();
@@ -747,6 +749,7 @@ public:
 		Dictionary<String^, List<String^>^>^ fullData = gcnew Dictionary<String^, List<String^>^>();
 		bool emptyFound = false;
 		List<String^>^ longVars = gcnew List<String^>();
+		String^ separator = "";
 
 		/*
 			первый проход по data:
@@ -772,12 +775,41 @@ public:
 		Report("> Выделение переменных...");
 
 		// собираем, очищаем и проверяем имена переменных
-		for (int i = 0; i < length; i++)
+		for (int i = 1; i < length; i++)
 		{
 			names[i] = names[i]->Trim();
 			if (!Regex::IsMatch(names[i], "^\\w+$")) return "Первая строка должна содержать только правильные имена переменных";
 			if (!fullData->ContainsKey(names[i])) fullData->Add(names[i], gcnew List<String^>());
 			else return "Имена переменных не должны повторяться: '" + names[i] + "'";
+		}
+
+		bool needSeparate = false;
+		if (names->Length > 5)
+		{
+			needSeparate = MessageBox::Show((names->Length - 1).ToString() + " переменных — это много, объединить все переменные в строку?",
+				"", System::Windows::Forms::MessageBoxButtons::YesNoCancel, 
+				System::Windows::Forms::MessageBoxIcon::Information) == Forms::DialogResult::Yes;
+			Report("> Поиск подходящего разделителя...");
+			if (needSeparate)
+			{
+				// проверка разделителей
+				List<String^>^ separators = gcnew List<String^>(gcnew array<String^>{"#", "*", "/", ","});
+				for (int k = separators->Count - 1; k >= 0; k--)
+				{
+					if (table->IndexOf(separators[k]) > -1) separators->RemoveAt(k);
+					else
+					{
+						separator = separators[k];
+						break;
+					}
+				}
+			}
+			if (separator != "") Report("Выбран разделитель '" + separator + "'");
+			else
+			{
+				needSeparate = false;
+				ShowWarning("Подходящий разделитель не найден, значения не будут объединены в строку");
+			}
 		}
 
 		Report("Переменные:\t" + String::Join(", ", names));
@@ -816,7 +848,19 @@ public:
 				if (!fullData[names[j]]->Contains(line[j])) fullData[names[j]]->Add(line[j]); // сохраняем новые значения
 				if (fw) line[j] = (fullData[names[j]]->IndexOf(line[j]) + 1).ToString(); // заменяем значение на индекс из листа
 			}
-			if (fw) newAr[i - 1] = String::Join(sep, line);
+			if (fw)
+			{
+				if (needSeparate)
+				{
+					// добавляем Id и объединённые переменные через вот такой костыль
+					newAr[i - 1] = line[0] + sep;
+					Array::Reverse(line);
+					Array::Resize(line, line->Length - 1);
+					Array::Reverse(line);
+					newAr[i - 1] = newAr[i - 1] + String::Join(separator, line);
+				}
+				else newAr[i - 1] = String::Join(sep, line);
+			}
 		}
 
 		// проверка списка значений
@@ -835,9 +879,13 @@ public:
 		{
 			Report("> Сохранение файла...");
 			if (Path::GetExtension(saveFileDialog1->FileName) == ".xls")
+			{
 				if (!ExportToExcel(newAr, saveFileDialog1->FileName)) return "Ошибка сохранения данных. Попробуйте CSV";
+			}
 			else
-				if(!WriteFile(saveFileDialog1->FileName, newAr)) return "Ошибка сохранения данных";
+			{
+				if (!WriteFile(saveFileDialog1->FileName, newAr)) return "Ошибка сохранения данных";
+			}
 			Report("Файл успешно сохранён");
 		}
 
@@ -855,6 +903,13 @@ public:
 			}
 			res += "\t</List>\n\n";
 		}
+
+		res += "\t<List Id=\"dataList\">\n";
+		for (int i = 1; i < length; i++)
+		{
+			res += "\t\t<Item Id=\"" + (i - 1).ToString() + "\"><Text>" + names[i] + "</Text></Item>\n";
+		}
+		res += "\t</List>\n";
 
 		Report("Всё готово!");
 
