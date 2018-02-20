@@ -1653,7 +1653,7 @@ public ref class Addon
 public:
 	Addon::Addon(String^ filePath)
 	{
-		FileContent = ListToString(ReadFile(filePath), Environment::NewLine);
+		FileContent = String::Join(Environment::NewLine, ReadFile(filePath));
 	}
 
 	Addon::~Addon()

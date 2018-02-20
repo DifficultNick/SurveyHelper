@@ -306,7 +306,7 @@ private: System::Windows::Forms::Label^  label2;
 			return;
 		}
 
-		List<String^>^ file = ReadFile(filePath->Text);
+		List<String^>^ file = gcnew List<String^>(ReadFile(filePath->Text));
 		List<String^>^ oldV = StringToList(from->Text, '\n');
 		List<String^>^ newV = StringToList(to->Text, '\n');
 		List<int>^ order = SortByLength(oldV);

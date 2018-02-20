@@ -22,9 +22,9 @@ static String^ ListToString(List<String^>^ str, String^ devide);
 
 
 // Сортировка строк по убыванию длины
-public ref class StringLengthDesc: System::Collections::Generic::IComparer<String^>
+public ref class StringLengthDesc : System::Collections::Generic::IComparer<String^>
 {
-public:
+	public:
 	// Сортировка строк по убыванию длины
 	StringLengthDesc()
 	{};
@@ -34,13 +34,13 @@ public:
 
 	virtual int Compare(String^ x, String^ y)
 	{
-		if ( x == nullptr )
-			if ( y == nullptr )
+		if (x == nullptr)
+			if (y == nullptr)
 				return 0;
 			else
 				return 1;
 
-		if ( y == nullptr ) return -1;
+		if (y == nullptr) return -1;
 		return y->Length.CompareTo(x->Length);
 	}
 };
@@ -48,9 +48,9 @@ public:
 
 
 // Сортировка строк по возрастанию длины
-public ref class StringLengthAsc: System::Collections::Generic::IComparer<String^>
+public ref class StringLengthAsc : System::Collections::Generic::IComparer<String^>
 {
-public:
+	public:
 	// Сортировка строк по возрастанию длины
 	StringLengthAsc()
 	{};
@@ -59,13 +59,13 @@ public:
 
 	virtual int Compare(String^ y, String^ x)
 	{
-		if ( x == nullptr )
-			if ( y == nullptr )
+		if (x == nullptr)
+			if (y == nullptr)
 				return 0;
 			else
 				return 1;
 
-		if ( y == nullptr ) return -1;
+		if (y == nullptr) return -1;
 		return y->Length.CompareTo(x->Length);
 	}
 };
@@ -73,9 +73,9 @@ public:
 
 
 // сортировка строк таблицы по длине строки в ячейке
-public ref class DataGridViewColumnSort: System::Collections::IComparer
+public ref class DataGridViewColumnSort : System::Collections::IComparer
 {
-public:
+	public:
 	DataGridViewColumnSort()
 	{ }
 	DataGridViewColumnSort(int columnIndex, ListSortDirection direction)
@@ -93,16 +93,16 @@ public:
 	{
 		DataGridViewRow^ Row1 = (DataGridViewRow^)x;
 		DataGridViewRow^ Row2 = (DataGridViewRow^)y;
-		if ( Direction == ListSortDirection::Ascending )
+		if (Direction == ListSortDirection::Ascending)
 		{
 			Row1 = (DataGridViewRow^)y;
 			Row2 = (DataGridViewRow^)x;
 		}
-		if ( Row1->Cells->Count <= ColumnIndex || Row1->Cells[ColumnIndex]->Value == nullptr )
-			if ( Row2->Cells->Count <= ColumnIndex || Row2->Cells[ColumnIndex]->Value == nullptr )	return 0;
+		if (Row1->Cells->Count <= ColumnIndex || Row1->Cells[ColumnIndex]->Value == nullptr)
+			if (Row2->Cells->Count <= ColumnIndex || Row2->Cells[ColumnIndex]->Value == nullptr)	return 0;
 			else return 1;
-		if ( Row2->Cells->Count <= ColumnIndex || Row2->Cells[ColumnIndex]->Value == nullptr )	return -1;
-		return Row2->Cells[ColumnIndex]->Value->ToString()->Length.CompareTo(Row1->Cells[ColumnIndex]->Value->ToString()->Length);
+			if (Row2->Cells->Count <= ColumnIndex || Row2->Cells[ColumnIndex]->Value == nullptr)	return -1;
+			return Row2->Cells[ColumnIndex]->Value->ToString()->Length.CompareTo(Row1->Cells[ColumnIndex]->Value->ToString()->Length);
 	}
 };
 
@@ -131,10 +131,10 @@ public ref struct HeaderList
 // результаты проверки на недопустимые символы
 public ref struct CheckSyntaxResult
 {
-public:
+	public:
 	int AddError(String^ text, int line)
 	{
-		if ( !LineNums->Contains(line) )
+		if (!LineNums->Contains(line))
 		{
 			LineNums->Add(line);
 			Count++;
@@ -208,8 +208,8 @@ static void ShowWarning(String^ txt)
 // наличие цифры в строке
 static bool ContainsNumber(String^str)
 {
-	for ( int i = 0; i <= 9; i++ )
-		if ( str->Contains(i.ToString()) ) return true;
+	for (int i = 0; i <= 9; i++)
+		if (str->Contains(i.ToString())) return true;
 	return false;
 }
 
@@ -219,16 +219,16 @@ static bool FakeFound(String^ str)
 {
 	String^ s = str->Trim();
 
-	if ( s->Contains("\t") ) return false;
+	if (s->Contains("\t")) return false;
 
 	int i = Min(s->IndexOf("."), s->IndexOf(")"));
 	i = Min(i, s->IndexOf(" "));
-	
-	if ( i < 0 || i >= s->Length - 1 ) return true;
-	if ( IsNumber(s[i + 1].ToString()) ) return true;
+
+	if (i < 0 || i >= s->Length - 1) return true;
+	if (IsNumber(s[i + 1].ToString())) return true;
 	s = s->Remove(i);
-	if ( !ContainsNumber(s) ) return true;
-	
+	if (!ContainsNumber(s)) return true;
+
 	System::Text::RegularExpressions::Regex^  r = gcnew System::Text::RegularExpressions::Regex("^\\W*\\d+\\s?[-–]?\\s?\\d+.*");
 	System::Text::RegularExpressions::Regex^ rv = gcnew System::Text::RegularExpressions::Regex("^\\W*\\d+\\s?\\W*\\w+");
 	return r->Match(str)->Success && !rv->Match(str)->Success;
@@ -238,11 +238,11 @@ static bool FakeFound(String^ str)
 // возвращает меньшее из двух положительных, или большее, если хотя бы одно отрицательное
 static int Min(int a, int b)
 {
-	if ( a == b ) return a;
-	
+	if (a == b) return a;
+
 	int c = (a < b) ? a : b;
 
-	if ( c >= 0 ) return c;
+	if (c >= 0) return c;
 	else return (a > b) ? a : b;
 }
 
@@ -265,9 +265,9 @@ static CheckSyntaxResult^ CheckSyntax(List<String^>^ Strings)
 			n++;
 			tmp = "";
 			i = 0;
-			while ( i < str->Length )
+			while (i < str->Length)
 			{
-				if ( ValidateChars->ContainsKey(str[i].ToString()) )
+				if (ValidateChars->ContainsKey(str[i].ToString()))
 				{
 					tmp += ValidateChars[str[i].ToString()];
 					res->AddError("В строке " + n.ToString() + " найден недопустимый символ \"" + str[i] + "\"", n);
@@ -282,7 +282,7 @@ static CheckSyntaxResult^ CheckSyntax(List<String^>^ Strings)
 			res->NewLines->Add(tmp);
 		}
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(401, "Ошибка разбора строки.\n\nПодробнее\n" + e->ToString());
 	}
@@ -304,9 +304,9 @@ static CheckSyntaxResult^ CheckSyntax(String^ str)
 
 	try
 	{
-		while ( i < str->Length )
+		while (i < str->Length)
 		{
-			if ( ValidateChars->ContainsKey(str[i].ToString()) )
+			if (ValidateChars->ContainsKey(str[i].ToString()))
 			{
 				tmp += ValidateChars[str[i].ToString()];
 				res->AddError("В строке " + n.ToString() + " найден недопустимый символ \"" + str[i] + "\"", n);
@@ -320,7 +320,7 @@ static CheckSyntaxResult^ CheckSyntax(String^ str)
 		}
 	}
 
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(402, "Ошибка разбора строки.\n\nПодробнее\n" + e->ToString());
 	}
@@ -333,7 +333,7 @@ static CheckSyntaxResult^ CheckSyntax(String^ str)
 // безопасные символы
 static String^ Translate(String^ str)
 {
-	if ( String::IsNullOrEmpty(str) ) return str;
+	if (String::IsNullOrEmpty(str)) return str;
 	String^ rus = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 	rus += rus->ToLower();
 	String^ ValidChars = "qwertyuiopasdfghjklzxcvbnm";
@@ -346,17 +346,17 @@ static String^ Translate(String^ str)
 
 	try
 	{
-		for ( int i = 0; i < str->Length; i++ )
+		for (int i = 0; i < str->Length; i++)
 		{
-			if ( ValidChars->Contains(str[i].ToString()) )
+			if (ValidChars->Contains(str[i].ToString()))
 			{
 				res += str[i];
 				continue;
 			}
 
 			int p = rus->IndexOf(str[i]);
-			if ( p > -1 )
-				if ( p > 32 )
+			if (p > -1)
+				if (p > 32)
 					res += eng[p - 33]->ToLower();
 				else
 					res += eng[p];
@@ -364,31 +364,31 @@ static String^ Translate(String^ str)
 				res += "_";
 		}
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(403, "Ошибка разбора строки.\n\nПодробнее\n" + e->ToString());
 	}
-	
-	
+
+
 	// очистка лишних _
 	int i = 0;
 	try
 	{
-		while ( i < res->Length - 1 )
+		while (i < res->Length - 1)
 		{
-			if ( (res[i] == '_') && (res[i + 1] == '_') )
+			if ((res[i] == '_') && (res[i + 1] == '_'))
 				res = res->Remove(i, 1);
 			else
 				i++;
 		}
-		if ( res[res->Length - 1] == '_' ) res = res->Remove(res->Length - 1);
-		if ( res[0] == '_' ) res = res->Remove(0, 1);
+		if (res[res->Length - 1] == '_') res = res->Remove(res->Length - 1);
+		if (res[0] == '_') res = res->Remove(0, 1);
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(404, "Ошибка разбора строки.\n\nПодробнее\n" + e->ToString());
 	}
-	
+
 	return res;
 }
 
@@ -402,13 +402,13 @@ static String^ ImprovePropertyLanguage(String^ s)
 	eng += eng->ToLower();
 	String^ res = "";
 	String^ tmp = "";
-	for ( int i = 0; i < s->Length; i++ )
+	for (int i = 0; i < s->Length; i++)
 	{
 		tmp = s[i].ToString();
-		if ( rus->Contains(tmp) )
+		if (rus->Contains(tmp))
 			res += eng[rus->IndexOf(tmp)];
 		else
-			if ( !Regex::IsMatch(tmp, "^[\\d_A-Za-z@]$") ) res += "_";
+			if (!Regex::IsMatch(tmp, "^[\\d_A-Za-z@]$")) res += "_";
 			else res += s[i];
 	}
 
@@ -418,53 +418,53 @@ static String^ ImprovePropertyLanguage(String^ s)
 // поиск Redirect
 static List<int>^ GetScreenIds(List<String^>^ strl)
 {
-	array<String^>^ screen = {"закончить", "окончание", "конец", "завершить", "скрин", "screen", "close"};
-	array<String^>^ separator = {" ", "_", ".", "-"};
+	array<String^>^ screen = { "закончить", "окончание", "конец", "завершить", "скрин", "screen", "close" };
+	array<String^>^ separator = { " ", "_", ".", "-" };
 	String^ s;
 	List<int>^ res = gcnew List<int>();
 	bool a = false;
 	int i = 0;
 
 	String^ lst = ListToString(strl, " ")->ToLower();
-	if ( CountSubStrings(lst, "продолжить") > 1 || CountSubStrings(lst, "\tпродолжить") > 0 || CountSubStrings(lst, "continue") > 1 || CountSubStrings(lst, "\tcontinue") > 0 )
+	if (CountSubStrings(lst, "продолжить") > 1 || CountSubStrings(lst, "\tпродолжить") > 0 || CountSubStrings(lst, "continue") > 1 || CountSubStrings(lst, "\tcontinue") > 0)
 	{
-		for ( int i = 0; i < strl->Count; i++)
-			if ( !strl[i]->ToLower()->Contains("продолжить") )
+		for (int i = 0; i < strl->Count; i++)
+			if (!strl[i]->ToLower()->Contains("продолжить"))
 				res->Add(i);
 		return res;
 	}
 	for each (String^ str in strl)
 	{
 		// если есть табуляция
-		if ( CountSubStrings(str, "\t") > 0 )
+		if (CountSubStrings(str, "\t") > 0)
 		{
 			int k = str->LastIndexOf("\t");
-			s = str->Remove(0, k+1)->ToLower();
+			s = str->Remove(0, k + 1)->ToLower();
 			a = false;
-			for ( int j = 0; j < screen->Length; j++ )
-				if ( s->Contains(screen[j]) ) a = true;
+			for (int j = 0; j < screen->Length; j++)
+				if (s->Contains(screen[j])) a = true;
 		}
 		else
 		{
-			for ( int j = 0; j < separator->Length; j++ )
+			for (int j = 0; j < separator->Length; j++)
 			{
 				s = separator[j] + separator[j];
-				if ( str->Contains(s) )
+				if (str->Contains(s))
 				{
-					for ( int k = 0; k < screen->Length; k++ )
-					if ( s->Contains(screen[k]) )
-					{
-						a = true;
-						break;
-					}
+					for (int k = 0; k < screen->Length; k++)
+						if (s->Contains(screen[k]))
+						{
+							a = true;
+							break;
+						}
 				}
 			}
 		}
-		if ( a ) res->Add(i);
+		if (a) res->Add(i);
 		i++;
 		a = false;
 	}
-	
+
 	return res;
 }
 
@@ -474,12 +474,12 @@ static List<String^>^ ClearScreenWords(List<String^>^ strl/*, List<int>^ screenI
 	List<String^>^ res = gcnew List<String^>();
 	try
 	{
-		for ( int i = 0; i < strl->Count; i++ )
+		for (int i = 0; i < strl->Count; i++)
 			res->Add(ClearString(strl[i], true, false, true, true));
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
-		ShowError(417, "Ошибка при очистке текста элементов от ключевых слов для скринаута.\n\nПодробнее:\n"+e->ToString());
+		ShowError(417, "Ошибка при очистке текста элементов от ключевых слов для скринаута.\n\nПодробнее:\n" + e->ToString());
 	}
 	return res;
 }
@@ -495,57 +495,57 @@ static String^ ClearString(String^ str, bool TrimString, bool DelNums, bool igno
 		while ( CountSubStrings(res, "\t") > 1 )
 			res = res->Remove(res->LastIndexOf("\t"));*/
 
-	if ( TrimString ) res = res->Trim();
+	if (TrimString) res = res->Trim();
 
-	if ( DelNums )
+	if (DelNums)
 	{
-		if ( !FakeFound(res) )
+		if (!FakeFound(res))
 		{
 			String^ l = res;
 			try
 			{
-			
+
 				int i = res->IndexOf('\t');
 
 				// если есть табуляция
-				if ( i > 0 && i < res->Length - 1 )
+				if (i > 0 && i < res->Length - 1)
 				{
 					String
 						^prev = res->Remove(i),
 						^post = res->Remove(0, i + 1);
-					if ( IsNumber(prev) || !IsNumber(post) && ContainsNumber(prev) && Regex::IsMatch(post, "\\w") ) res = post;
-					else if ( IsNumber(post) || !IsNumber(prev) && ContainsNumber(post) && Regex::IsMatch(prev, "\\w") ) res = prev;
+					if (IsNumber(prev) || !IsNumber(post) && ContainsNumber(prev) && Regex::IsMatch(post, "\\w")) res = post;
+					else if (IsNumber(post) || !IsNumber(prev) && ContainsNumber(post) && Regex::IsMatch(prev, "\\w")) res = prev;
 				}
 				else
 					// остальное только при преднумерации
 				{
 					i = res->IndexOf('.');
-					if ( i < res->Length - 1 && i > 0 ) l = res->Remove(i);
-					if ( !l->Contains(" ") && ContainsNumber(l) )
+					if (i < res->Length - 1 && i > 0) l = res->Remove(i);
+					if (!l->Contains(" ") && ContainsNumber(l))
 					{
 						res = res->Remove(0, i + 1);
 						goto found;
 					}
 
 					i = res->IndexOf(')');
-					if ( i > 0 ) l = res->Remove(i);
-					if ( !l->Contains(" ") && ContainsNumber(l) )
+					if (i > 0) l = res->Remove(i);
+					if (!l->Contains(" ") && ContainsNumber(l))
 					{
 						res = res->Remove(0, i + 1);
 						goto found;
 					}
 
-					if ( !ignorSpace )
+					if (!ignorSpace)
 					{
 						i = res->IndexOf(' ');
-						if ( i > 0 ) l = res->Remove(i);
-						if ( ContainsNumber(l) && !FakeFound(str) )
+						if (i > 0) l = res->Remove(i);
+						if (ContainsNumber(l) && !FakeFound(str))
 							res = res->Remove(0, i + 1);
 					}
 
 				}
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
 				ShowError(405, "Ошибка разбора строки.\n\nПодробнее\n" + e->ToString());
 			}
@@ -560,18 +560,18 @@ static String^ ClearString(String^ str, bool TrimString, bool DelNums, bool igno
 			}
 		}*/
 	}
-	else if ( afterScreen )
+	else if (afterScreen)
 	{
 		// очистка всего после первого \t
 		int i = str->IndexOf('\t');
-		if ( i > 0 )
+		if (i > 0)
 		{
 			res = str->Remove(i);
 		}
 	}
 
 found:
-	if ( TrimString ) res = res->Trim();
+	if (TrimString) res = res->Trim();
 	return res;
 }
 
@@ -589,10 +589,10 @@ static void CopyToBuffer(List<String^>^ lst)
 		for each (String^ s in lst)
 			txt += s + "\n";
 
-		if ( String::IsNullOrEmpty(txt) ) return;
+		if (String::IsNullOrEmpty(txt)) return;
 		Clipboard::SetText(txt);
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(406, "Ошибка копирования в буфер обмена.\n\nПодробнее\n" + e->ToString());
 	}
@@ -604,10 +604,10 @@ static void CopyToBuffer(String^ lst)
 {
 	try
 	{
-		if ( String::IsNullOrEmpty(lst) ) return;
+		if (String::IsNullOrEmpty(lst)) return;
 		Clipboard::SetText(lst);
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(406, "Ошибка копирования в буфер обмена.\n\nПодробнее\n" + e->ToString());
 	}
@@ -621,15 +621,15 @@ static int StrToInt(String^ str)
 	String^ tmp = "";
 	try
 	{
-		for ( int i = 0; i < str->Length; i++ )
-			if ( ((char)str[i] <= '9' && (char)str[i] >= '0') || str[i] == '-' ) tmp += str[i];
-		if ( !Int32::TryParse(tmp, res) ) res = -1;
+		for (int i = 0; i < str->Length; i++)
+			if (((char)str[i] <= '9' && (char)str[i] >= '0') || str[i] == '-') tmp += str[i];
+		if (!Int32::TryParse(tmp, res)) res = -1;
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(407, "Ошибка разбора строки.\n\nПодробнее\n" + e->ToString());
 	}
-	
+
 	return res;
 }
 
@@ -637,14 +637,14 @@ static int StrToInt(String^ str)
 // выделение нумерации Answer/Item
 static int GetId(String^ s, bool ignorSpace)
 {
-	if ( s == nullptr || String::IsNullOrEmpty(s) || FakeFound(s) ) return -1;
+	if (s == nullptr || String::IsNullOrEmpty(s) || FakeFound(s)) return -1;
 	String^ res = s;
 	String^ l = res;
 	try
 	{
 		// если есть табуляция
 		int i = res->IndexOf('\t');
-		if ( i > 0 && i < res->Length - 1 )
+		if (i > 0 && i < res->Length - 1)
 		{
 			/*if ( i <= Math::Round(res->Length / 2) ) res = res->Remove(i);
 			else res = res->Remove(0, i + 1);
@@ -652,18 +652,18 @@ static int GetId(String^ s, bool ignorSpace)
 			String
 				^prev = res->Remove(i),
 				^post = res->Remove(0, i + 1);
-			if ( IsNumber(prev) || !IsNumber(post) && ContainsNumber(prev) && !FakeFound(prev) ) res = prev;
-			else if ( IsNumber(post) || !IsNumber(prev) && ContainsNumber(post) && !FakeFound(post) ) res = post;
+			if (IsNumber(prev) || !IsNumber(post) && ContainsNumber(prev) && !FakeFound(prev)) res = prev;
+			else if (IsNumber(post) || !IsNumber(prev) && ContainsNumber(post) && !FakeFound(post)) res = post;
 			goto found;
 		}
 		else
-		// остальное только при преднумерации
+			// остальное только при преднумерации
 		{
 			i = res->IndexOf(".");
-			if ( i < res->Length - 1 && i > 0 )
+			if (i < res->Length - 1 && i > 0)
 			{
 				l = res->Remove(i);
-				if ( ContainsNumber(l) )
+				if (ContainsNumber(l))
 				{
 					res = l;
 					goto found;
@@ -671,36 +671,36 @@ static int GetId(String^ s, bool ignorSpace)
 			}
 
 			i = res->IndexOf(")");
-			if ( i > 0 )
+			if (i > 0)
 			{
 				l = res->Remove(i);
-				if ( ContainsNumber(l) )
+				if (ContainsNumber(l))
 				{
 					res = l;
 					goto found;
 				}
 			}
-			
-			if ( ignorSpace ) return -1;
+
+			if (ignorSpace) return -1;
 			i = res->IndexOf(' ');
-			if ( i > 0 )
+			if (i > 0)
 			{
 				l = res->Remove(i);
-				if ( ContainsNumber(l) )
+				if (ContainsNumber(l))
 				{
 					res = l;
 					goto found;
 				}
 			}
-			
+
 		}
 		return -1;
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(408, "Ошибка при выделении нумерации элемента.\n\nПодробнее\n" + e->ToString());
 	}
-	
+
 found:
 	res = ClearString(res, true, false, false);
 	return StrToInt(res);
@@ -710,7 +710,7 @@ found:
 // выделение нумерации Question
 static String^ GetQuestionId(String^ s)
 {
-	if ( s == nullptr || String::IsNullOrEmpty(s) ) return "";
+	if (s == nullptr || String::IsNullOrEmpty(s)) return "";
 	String^ res = ClearString(s, true, false, false);
 
 	try
@@ -719,14 +719,14 @@ static String^ GetQuestionId(String^ s)
 
 		i = Min(i, res->IndexOf('.'));
 
-		if ( i > 0 ) res = res->Remove(i);
+		if (i > 0) res = res->Remove(i);
 		else return "";
 
-		if ( !ContainsNumber(res) ) return "";
+		if (!ContainsNumber(res)) return "";
 
-		if ( res[res->Length - 1] == '.' ) res = res->Remove(res->Length - 1);
+		if (res[res->Length - 1] == '.') res = res->Remove(res->Length - 1);
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(409, "Ошибка при выделении нумерации вопроса.\n\nПодробнее\n" + e->ToString());
 	}
@@ -738,7 +738,7 @@ static String^ GetQuestionId(String^ s)
 // возвращает строку с первой заглавной буквой
 static String^ RiseFirstLetter(String^ s)
 {
-	if ( s == nullptr || s->Length < 2 ) return s;
+	if (s == nullptr || s->Length < 2) return s;
 	String^ str = s;
 	String ^res;
 	str = str->ToUpper();
@@ -746,7 +746,7 @@ static String^ RiseFirstLetter(String^ s)
 	{
 		res = str->Remove(1, str->Length - 1) + s->Remove(0, 1);
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(410, "Ошибка при разборе строки.\n\nПодробнее\n" + e->ToString());
 	}
@@ -756,22 +756,18 @@ static String^ RiseFirstLetter(String^ s)
 
 
 
-static List<String^>^ ReadFile(String^ FilePath)
+static array<String^>^ ReadFile(String^ FilePath)
 {
-	List<String^>^ strs = gcnew List<String^>();
+	array<String^>^ ar;
 	try
 	{
-		array<String^>^ ar = File::ReadAllLines(FilePath, System::Text::Encoding::GetEncoding(1251));
-		for each (String^ s in ar)
-		{
-			strs->Add(s);
-		}
+		ar = File::ReadAllLines(FilePath, System::Text::Encoding::GetEncoding(1251));
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(215, "Ошибка при чтении файла.\n\nПодробнее\n" + e->ToString());
 	}
-	return strs;
+	return ar;
 }
 
 
@@ -781,7 +777,7 @@ static bool WriteFile(String^ FileName, array<String^>^ Str)
 	{
 		File::WriteAllLines(FileName, Str, System::Text::Encoding::GetEncoding(1251));
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(216, "Ошибка при записи файла.\n\nПодробнее\n" + e->ToString());
 		return false;
@@ -797,7 +793,7 @@ static bool WriteFile(String^ FileName, array<String^>^ Str, System::Text::Encod
 	{
 		File::WriteAllLines(FileName, Str, enc);
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(216, "Ошибка при записи файла.\n\nПодробнее\n" + e->ToString());
 		return false;
@@ -810,7 +806,7 @@ static bool WriteFile(String^ FileName, array<String^>^ Str, System::Text::Encod
 // если файл с именем FileName уже существует, то он перемещается в FileName + bactxt (старый заменяется)
 static bool WriteFile(String^ FileName, array<String^>^ Str, String^ bactxt)
 {
-	if ( File::Exists(FileName) ) File::Copy(FileName, FileName + bactxt, true);
+	if (File::Exists(FileName)) File::Copy(FileName, FileName + bactxt, true);
 	return WriteFile(FileName, Str);
 }
 
@@ -820,8 +816,8 @@ static bool WriteFile(String^ FileName, array<String^>^ Str, String^ bactxt)
 // возвращает количество вхождений
 static int CountSubStrings(String^ source, String^ sub)
 {
-	int i = source->IndexOf(sub), k=0;
-	while ( i >= 0 )
+	int i = source->IndexOf(sub), k = 0;
+	while (i >= 0)
 	{
 		i += sub->Length;
 		i = source->IndexOf(sub, i);
@@ -834,7 +830,7 @@ static int CountSubStrings(String^ source, String^ sub)
 
 static String^ ListToString(List<String^>^ str, String^ devide)
 {
-	if ( str == nullptr || str->Count < 1 ) return "";
+	if (str == nullptr || str->Count < 1) return "";
 	String^ res = "";
 	for each (String^ s in str)
 	{
@@ -845,18 +841,18 @@ static String^ ListToString(List<String^>^ str, String^ devide)
 	{
 		res = res->Remove(res->LastIndexOf(devide));
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(411, "Ошибка при разборе строки.\n\nПодробнее\n" + e->ToString());
 	}
-	
+
 	return res;
 }
 
 
 static String^ ListToString(List<int>^ str, String^ devide)
 {
-	if ( str == nullptr || str->Count < 1 ) return "";
+	if (str == nullptr || str->Count < 1) return "";
 	String^ res = "";
 	for each (int s in str)
 	{
@@ -867,7 +863,7 @@ static String^ ListToString(List<int>^ str, String^ devide)
 	{
 		res = res->Remove(res->LastIndexOf(devide));
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(411, "Ошибка при разборе строки.\n\nПодробнее\n" + e->ToString());
 	}
@@ -884,7 +880,7 @@ static List<String^>^ StringToList(String^ str, Char separator)
 //выделение части строки
 static String^ TakePart(String^ s, int from, int to)
 {
-	if ( from > to || s == nullptr ) return "";
+	if (from > to || s == nullptr) return "";
 	/*array<wchar_t>^ destination = gcnew array<wchar_t>(to - from+1);
 	s->CopyTo(from, destination, 0, to - from);
 	return gcnew String(destination);*/
@@ -900,30 +896,30 @@ static HeaderList^ RemoveHeaders(String^ FilePath)
 	HeaderList^ res = gcnew HeaderList();
 	String^ CompStr;
 
-	if ( s == nullptr || s->Length < 10 ) return res;
+	if (s == nullptr || s->Length < 10) return res;
 
 	int i = 0;
 	int j;
 
 	try
 	{
-		while ( (i = s->IndexOf("<Header>", i)) > -1 )
+		while ((i = s->IndexOf("<Header>", i)) > -1)
 		{
 			res->Count = res->Count + 1;
 
 			i += 8;
 			j = 0;
-			while ( s[i] == ' ' || s[i] == '\t' || s[i] == '\n' )
+			while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
 				i++;
 
 			j = Min(s->IndexOf(" ", i + 1), s->IndexOf("\t", i + 1));
 			j = Min(j, s->IndexOf(".", i + 1));
 
-			while ( s[j+1] == ' ' || s[j+1] == '\t' )
+			while (s[j + 1] == ' ' || s[j + 1] == '\t')
 				j++;
 
 
-			if ( j - i > 10 || !ContainsNumber(TakePart(s, i, j)) || TakePart(s, i, j)->Contains("@") ) continue;
+			if (j - i > 10 || !ContainsNumber(TakePart(s, i, j)) || TakePart(s, i, j)->Contains("@")) continue;
 
 			// сохранение от <Header> до </Header>
 			CompStr = s->Remove(s->IndexOf("</Header>", i));
@@ -938,15 +934,15 @@ static HeaderList^ RemoveHeaders(String^ FilePath)
 			res->Completed = res->Completed + 1;
 		}
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(412, "Ошибка при разборе строки.\n\nПодробнее\n" + e->ToString());
 	}
 
-	if ( res->Completed > 0 )
+	if (res->Completed > 0)
 	{
 		array<wchar_t>^ a = { '\n' };
-		if ( s->Split(a)->Length < fStr->Count - 1 )
+		if (s->Split(a)->Length < fStr->Count - 1)
 			ShowWarning("В ходе проверки целостности файла была обнаружена ошибка.\nФайл остался в исходном состоянии.");
 		else
 			WriteFile(FilePath, s->Split(a), ".Headers.bak");
@@ -967,7 +963,7 @@ static void setExcelRange(array<String^>^ data, Excel::Worksheet^ sheet, wchar_t
 		line = data[row]->Split(delimiter);
 		for (int column = 0; column < columns; column++)
 		{
-			objData[row , column] = line[column];
+			objData[row, column] = line[column];
 		}
 	}
 
@@ -988,14 +984,7 @@ static bool ExportToExcel(array<String^>^ lines, String^ FilePath)
 		Excel::Worksheet^ sheet = (Excel::Worksheet^)book->Sheets[1]; // хз почему так
 		Object^ misValue = System::Reflection::Missing::Value;
 		array<String^>^ cells;
-		/*for (int i = 0; i < lines->Length; i++)
-		{
-			cells = lines[i]->Split('\t');
-			
-			for (int j = 0; j < cells->Length; j++)
-				exApp->Cells[i + 1, j + 1] = cells[j];
-			
-		}*/
+
 		setExcelRange(lines, sheet, '\t');
 		book->SaveAs(FilePath, Excel::XlFileFormat::xlExcel12, misValue, misValue, misValue, misValue, Excel::XlSaveAsAccessMode::xlShared, misValue, misValue, misValue, misValue, misValue);
 	}
@@ -1008,43 +997,73 @@ static bool ExportToExcel(array<String^>^ lines, String^ FilePath)
 }
 
 
+static String^ ReadExcelFile(String^ filePath)
+{
+	String^ res = "";
+
+	try
+	{
+		Excel::Application^ exApp = gcnew Excel::ApplicationClass();
+		Excel::Workbook^ book = exApp->Workbooks->Open(filePath, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing);
+		Excel::Worksheet^ sheet = (Excel::Worksheet^)book->Sheets[1];
+		Excel::Range^ range = (Excel::Range^)sheet->UsedRange;
+		ShowMessage(range->Rows->Count);
+		for (int i = 1; i <= range->Rows->Count; i++)
+		{
+			for (int j = 1; j <= range->Columns->Count; j++)
+			{
+				auto tmp = ((Excel::Range^)sheet->Cells[i, j])->Value2;
+				if (tmp != nullptr) res += tmp->ToString();
+				res += "\t";
+			}
+			res += Environment::NewLine;
+		}
+	}
+	catch (Exception^ e)
+	{
+		ShowError(430, "Ошибка при чтении файла\nПодробнее:\n\n" + e->ToString());
+	}
+	return res;
+}
+
+
 // очищает текст от лишних символов
 static String^ CleanText(String^ str)
 {
-	if ( String::IsNullOrEmpty(str) ) return "";
-	
+	if (String::IsNullOrEmpty(str)) return "";
+
 	String^ validu = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯQWERTYUIOPASDFGHJKLZXCVBNM";
 	String^ valid = validu + validu->ToLower() + "*()@.,:;–-№?!\"/'+ 1234567890\t\n";
 	String^ res, ^s;
 	String^ noRepeat = "/\\-–";
-	
+
 	try
-	{		
-		for ( int i = 0; i < str->Length; i++ )
+	{
+		for (int i = 0; i < str->Length; i++)
 		{
 			s = str[i].ToString();
 
 			// исправление повторов
-			if ( i > 0 && noRepeat->Contains(s) && str[i - 1].ToString() == s )
+			if (i > 0 && noRepeat->Contains(s) && str[i - 1].ToString() == s)
 			{
 				s = "";
 				goto ok;
 			}
 
-			if ( !valid->Contains(s) ) s = "";
+			if (!valid->Contains(s)) s = "";
 		ok:
 			res += s;
 		}
 
 		// исправление UPCASE
-		if ( Regex::IsMatch(res, "^[A_ZА_Я\\W]$") )
+		if (Regex::IsMatch(res, "^[A_ZА_Я\\W]$"))
 			res = RiseFirstLetter(res->ToLower());
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(413, "Ошибка удаления символов\n\nПодробнее\n" + e->ToString());
 	}
-	
+
 	return res;
 }
 
@@ -1065,13 +1084,13 @@ static List<String^>^ CleanText(List<String^>^ strs)
 
 static void Run(String^ Path, String^ args)
 {
-	if ( File::Exists(Path) )
+	if (File::Exists(Path))
 		Diagnostics::Process::Start(Path, args);
 }
 
 static void Run(String^ Path)
 {
-	if ( File::Exists(Path) )
+	if (File::Exists(Path))
 		Diagnostics::Process::Start(Path);
 }
 
@@ -1115,9 +1134,9 @@ static bool StructFileWrite(String^ filePath, Object^ data)
 		formatter->Serialize(fs, data);
 		fs->Close();
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
-		ShowError(213, "Ошибка доступа к данным\n\nПодробнее:\n"+e->ToString());
+		ShowError(213, "Ошибка доступа к данным\n\nПодробнее:\n" + e->ToString());
 		return false;
 	}
 	return true;
@@ -1128,7 +1147,7 @@ static bool StructFileWrite(String^ filePath, Object^ data)
 static Object^ StructFileRead(String^ filePath)
 {
 	Object^ res = gcnew Object();
-	if ( !File::Exists(filePath) ) return nullptr;
+	if (!File::Exists(filePath)) return nullptr;
 	try
 	{
 		FileStream^ fs = gcnew FileStream(filePath, FileMode::Open);
@@ -1136,7 +1155,7 @@ static Object^ StructFileRead(String^ filePath)
 		res = dynamic_cast<Object^>(formatter->Deserialize(fs));
 		fs->Close();
 	}
-	catch ( Exception^ e )
+	catch (Exception^ e)
 	{
 		ShowError(428, "Ошибка при чтении структуры файла.\nПодробнее:\n\n" + e->ToString());
 	}
