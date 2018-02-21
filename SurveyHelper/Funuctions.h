@@ -981,12 +981,13 @@ static bool ExportToExcel(array<String^>^ lines, String^ FilePath)
 	{
 		Excel::Application^ exApp = gcnew Excel::ApplicationClass();
 		Excel::Workbook^ book = exApp->Workbooks->Add(Type::Missing);
-		Excel::Worksheet^ sheet = (Excel::Worksheet^)book->Sheets[1]; // хз почему так
+		Excel::Worksheet^ sheet = (Excel::Worksheet^)book->Sheets[1];
 		Object^ misValue = System::Reflection::Missing::Value;
 		array<String^>^ cells;
 
 		setExcelRange(lines, sheet, '\t');
 		book->SaveAs(FilePath, Excel::XlFileFormat::xlExcel12, misValue, misValue, misValue, misValue, Excel::XlSaveAsAccessMode::xlShared, misValue, misValue, misValue, misValue, misValue);
+		book->Close(false, FilePath, false);
 	}
 	catch (Exception^ e)
 	{
@@ -1007,17 +1008,23 @@ static String^ ReadExcelFile(String^ filePath)
 		Excel::Workbook^ book = exApp->Workbooks->Open(filePath, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing);
 		Excel::Worksheet^ sheet = (Excel::Worksheet^)book->Sheets[1];
 		Excel::Range^ range = (Excel::Range^)sheet->UsedRange;
-		ShowMessage(range->Rows->Count);
-		for (int i = 1; i <= range->Rows->Count; i++)
+		auto values = safe_cast<array<Object^, 2>^>(range->Value2);
+		int NumRow = values->GetLength(0);
+		int NumCols = values->GetLength(1);
+		array<String^>^ tmpC = gcnew array<String^>(NumCols);
+		array<String^>^ tmpR = gcnew array<String^>(NumRow);
+		int r = 1;
+		while (r <= NumRow)
 		{
-			for (int j = 1; j <= range->Columns->Count; j++)
+			for (int c = 1; c <= NumCols; c++)
 			{
-				auto tmp = ((Excel::Range^)sheet->Cells[i, j])->Value2;
-				if (tmp != nullptr) res += tmp->ToString();
-				res += "\t";
+				tmpC[c - 1] = values[r, c] == nullptr ? "" : values[r, c]->ToString();
 			}
-			res += Environment::NewLine;
+			tmpR[r - 1] = String::Join("\t", tmpC);
+			r++;
 		}
+		res = String::Join("\n", tmpR);
+		book->Close(false, filePath, Type::Missing);
 	}
 	catch (Exception^ e)
 	{
