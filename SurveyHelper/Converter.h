@@ -131,32 +131,31 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel2, 0, 0);
 		this->tableLayoutPanel1->Controls->Add(this->tableLayoutPanel3, 1, 0);
 		this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->tableLayoutPanel1->Location = System::Drawing::Point(0, 28);
-		this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(4);
+		this->tableLayoutPanel1->Location = System::Drawing::Point(0, 24);
 		this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 		this->tableLayoutPanel1->RowCount = 2;
-		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 37)));
+		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 30)));
 		this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-		this->tableLayoutPanel1->Size = System::Drawing::Size(1035, 393);
+		this->tableLayoutPanel1->Size = System::Drawing::Size(776, 318);
 		this->tableLayoutPanel1->TabIndex = 0;
 		// 
 		// sourceText
 		// 
 		this->sourceText->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->sourceText->Location = System::Drawing::Point(4, 41);
-		this->sourceText->Margin = System::Windows::Forms::Padding(4, 4, 9, 4);
+		this->sourceText->Location = System::Drawing::Point(3, 33);
+		this->sourceText->Margin = System::Windows::Forms::Padding(3, 3, 7, 3);
 		this->sourceText->Name = L"sourceText";
-		this->sourceText->Size = System::Drawing::Size(504, 348);
+		this->sourceText->Size = System::Drawing::Size(378, 282);
 		this->sourceText->TabIndex = 0;
 		this->sourceText->Text = L"";
 		// 
 		// resultTex
 		// 
 		this->resultTex->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->resultTex->Location = System::Drawing::Point(526, 41);
-		this->resultTex->Margin = System::Windows::Forms::Padding(9, 4, 4, 4);
+		this->resultTex->Location = System::Drawing::Point(395, 33);
+		this->resultTex->Margin = System::Windows::Forms::Padding(7, 3, 3, 3);
 		this->resultTex->Name = L"resultTex";
-		this->resultTex->Size = System::Drawing::Size(505, 348);
+		this->resultTex->Size = System::Drawing::Size(378, 282);
 		this->resultTex->TabIndex = 2;
 		this->resultTex->Text = L"";
 		// 
@@ -164,18 +163,17 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		// 
 		this->tableLayoutPanel2->ColumnCount = 2;
 		this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-			192)));
+			144)));
 		this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 			100)));
 		this->tableLayoutPanel2->Controls->Add(this->convertType, 1, 0);
 		this->tableLayoutPanel2->Controls->Add(this->label1, 0, 0);
 		this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->tableLayoutPanel2->Location = System::Drawing::Point(4, 4);
-		this->tableLayoutPanel2->Margin = System::Windows::Forms::Padding(4);
+		this->tableLayoutPanel2->Location = System::Drawing::Point(3, 3);
 		this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
 		this->tableLayoutPanel2->RowCount = 1;
 		this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-		this->tableLayoutPanel2->Size = System::Drawing::Size(509, 29);
+		this->tableLayoutPanel2->Size = System::Drawing::Size(382, 24);
 		this->tableLayoutPanel2->TabIndex = 3;
 		// 
 		// convertType
@@ -188,10 +186,9 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 			L"Val lab из Answer / Item", L"Val lab из таблицы",
 				L"Таблица из Answer / Item", L"Диапазон переменных", L"Список возрастных групп", L"Val lab из возрастных групп", L"Списки данных"
 		});
-		this->convertType->Location = System::Drawing::Point(196, 4);
-		this->convertType->Margin = System::Windows::Forms::Padding(4);
+		this->convertType->Location = System::Drawing::Point(147, 3);
 		this->convertType->Name = L"convertType";
-		this->convertType->Size = System::Drawing::Size(308, 24);
+		this->convertType->Size = System::Drawing::Size(232, 21);
 		this->convertType->TabIndex = 0;
 		this->toolTip1->SetToolTip(this->convertType, L"Выберите нужное действие");
 		// 
@@ -200,10 +197,10 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		this->label1->AutoSize = true;
 		this->label1->Dock = System::Windows::Forms::DockStyle::Left;
 		this->label1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-		this->label1->Location = System::Drawing::Point(4, 4);
-		this->label1->Margin = System::Windows::Forms::Padding(4);
+		this->label1->Location = System::Drawing::Point(3, 3);
+		this->label1->Margin = System::Windows::Forms::Padding(3);
 		this->label1->Name = L"label1";
-		this->label1->Size = System::Drawing::Size(151, 21);
+		this->label1->Size = System::Drawing::Size(116, 18);
 		this->label1->TabIndex = 1;
 		this->label1->Text = L"Тип преобразования:";
 		this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
@@ -218,21 +215,20 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		this->tableLayoutPanel3->Controls->Add(this->genButton, 0, 0);
 		this->tableLayoutPanel3->Controls->Add(this->button2, 1, 0);
 		this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
-		this->tableLayoutPanel3->Location = System::Drawing::Point(521, 4);
-		this->tableLayoutPanel3->Margin = System::Windows::Forms::Padding(4);
+		this->tableLayoutPanel3->Location = System::Drawing::Point(391, 3);
 		this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
 		this->tableLayoutPanel3->RowCount = 1;
 		this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-		this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 29)));
-		this->tableLayoutPanel3->Size = System::Drawing::Size(510, 29);
+		this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 24)));
+		this->tableLayoutPanel3->Size = System::Drawing::Size(382, 24);
 		this->tableLayoutPanel3->TabIndex = 4;
 		// 
 		// genButton
 		// 
-		this->genButton->Location = System::Drawing::Point(4, 0);
-		this->genButton->Margin = System::Windows::Forms::Padding(4, 0, 0, 0);
+		this->genButton->Location = System::Drawing::Point(3, 0);
+		this->genButton->Margin = System::Windows::Forms::Padding(3, 0, 0, 0);
 		this->genButton->Name = L"genButton";
-		this->genButton->Size = System::Drawing::Size(145, 29);
+		this->genButton->Size = System::Drawing::Size(109, 24);
 		this->genButton->TabIndex = 1;
 		this->genButton->Text = L"Преобразовать";
 		this->genButton->UseVisualStyleBackColor = true;
@@ -241,10 +237,10 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		// button2
 		// 
 		this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-		this->button2->Location = System::Drawing::Point(362, 0);
+		this->button2->Location = System::Drawing::Point(271, 0);
 		this->button2->Margin = System::Windows::Forms::Padding(0);
 		this->button2->Name = L"button2";
-		this->button2->Size = System::Drawing::Size(148, 29);
+		this->button2->Size = System::Drawing::Size(111, 24);
 		this->button2->TabIndex = 1;
 		this->button2->Text = L"Справка";
 		this->button2->UseVisualStyleBackColor = true;
@@ -255,10 +251,10 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 		this->button1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.BackgroundImage")));
 		this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-		this->button1->Location = System::Drawing::Point(993, -1);
+		this->button1->Location = System::Drawing::Point(745, -1);
 		this->button1->Margin = System::Windows::Forms::Padding(0);
 		this->button1->Name = L"button1";
-		this->button1->Size = System::Drawing::Size(37, 31);
+		this->button1->Size = System::Drawing::Size(28, 25);
 		this->button1->TabIndex = 2;
 		this->toolTip1->SetToolTip(this->button1, L"Сохранить результат");
 		this->button1->UseVisualStyleBackColor = true;
@@ -269,12 +265,12 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		this->button3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 		this->button3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button3.BackgroundImage")));
 		this->button3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-		this->button3->Location = System::Drawing::Point(951, -1);
+		this->button3->Location = System::Drawing::Point(713, -1);
 		this->button3->Margin = System::Windows::Forms::Padding(0);
 		this->button3->Name = L"button3";
-		this->button3->Size = System::Drawing::Size(37, 31);
+		this->button3->Size = System::Drawing::Size(28, 25);
 		this->button3->TabIndex = 3;
-		this->toolTip1->SetToolTip(this->button3, L"Сохранить результат");
+		this->toolTip1->SetToolTip(this->button3, L"Загрузить данные из файла");
 		this->button3->UseVisualStyleBackColor = true;
 		this->button3->Click += gcnew System::EventHandler(this, &SurveyConverter::button3_Click);
 		// 
@@ -284,8 +280,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->параметрыToolStripMenuItem });
 		this->menuStrip1->Location = System::Drawing::Point(0, 0);
 		this->menuStrip1->Name = L"menuStrip1";
-		this->menuStrip1->Padding = System::Windows::Forms::Padding(8, 2, 0, 2);
-		this->menuStrip1->Size = System::Drawing::Size(1035, 28);
+		this->menuStrip1->Size = System::Drawing::Size(776, 24);
 		this->menuStrip1->TabIndex = 1;
 		this->menuStrip1->Text = L"menuStrip1";
 		// 
@@ -296,7 +291,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 				this->separatorToolStripMenuItem
 		});
 		this->параметрыToolStripMenuItem->Name = L"параметрыToolStripMenuItem";
-		this->параметрыToolStripMenuItem->Size = System::Drawing::Size(102, 24);
+		this->параметрыToolStripMenuItem->Size = System::Drawing::Size(83, 20);
 		this->параметрыToolStripMenuItem->Text = L"Параметры";
 		// 
 		// bufToolStripMenuItem
@@ -305,7 +300,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		this->bufToolStripMenuItem->CheckOnClick = true;
 		this->bufToolStripMenuItem->CheckState = System::Windows::Forms::CheckState::Checked;
 		this->bufToolStripMenuItem->Name = L"bufToolStripMenuItem";
-		this->bufToolStripMenuItem->Size = System::Drawing::Size(227, 26);
+		this->bufToolStripMenuItem->Size = System::Drawing::Size(186, 22);
 		this->bufToolStripMenuItem->Text = L"Копировать в буфер";
 		this->bufToolStripMenuItem->ToolTipText = L"Копировать результат в буфер обмена сразу после выполнения преобразования";
 		// 
@@ -316,7 +311,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 				this->customSep
 		});
 		this->separatorToolStripMenuItem->Name = L"separatorToolStripMenuItem";
-		this->separatorToolStripMenuItem->Size = System::Drawing::Size(227, 26);
+		this->separatorToolStripMenuItem->Size = System::Drawing::Size(186, 22);
 		this->separatorToolStripMenuItem->Text = L"Разделитель";
 		// 
 		// separatorsItem
@@ -327,28 +322,27 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 				L"Запятая"
 		});
 		this->separatorsItem->Name = L"separatorsItem";
-		this->separatorsItem->Size = System::Drawing::Size(121, 28);
+		this->separatorsItem->Size = System::Drawing::Size(121, 23);
 		this->separatorsItem->SelectedIndexChanged += gcnew System::EventHandler(this, &SurveyConverter::separatorsItem_SelectedIndexChanged);
 		// 
 		// customSep
 		// 
 		this->customSep->Name = L"customSep";
-		this->customSep->Size = System::Drawing::Size(120, 27);
+		this->customSep->Size = System::Drawing::Size(120, 23);
 		this->customSep->Text = L"Другой разделитель";
 		this->customSep->Click += gcnew System::EventHandler(this, &SurveyConverter::customSep_Click);
 		// 
 		// SurveyConverter
 		// 
-		this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+		this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 		this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 		this->BackColor = System::Drawing::SystemColors::AppWorkspace;
-		this->ClientSize = System::Drawing::Size(1035, 421);
+		this->ClientSize = System::Drawing::Size(776, 342);
 		this->Controls->Add(this->button3);
 		this->Controls->Add(this->button1);
 		this->Controls->Add(this->tableLayoutPanel1);
 		this->Controls->Add(this->menuStrip1);
-		this->Margin = System::Windows::Forms::Padding(4);
-		this->MinimumSize = System::Drawing::Size(794, 358);
+		this->MinimumSize = System::Drawing::Size(600, 298);
 		this->Name = L"SurveyConverter";
 		this->ShowIcon = false;
 		this->ShowInTaskbar = false;
@@ -374,7 +368,16 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 #pragma region доп функции
 
-
+	private: FileType GetFileType(String^ path)
+	{
+		String^ ext = Path::GetExtension(path)->ToLower();
+		ShowMessage(ext);
+		ShowMessage(ext->Contains("xls"));
+		if (ext->Contains("xls")) return FileType::Excel;
+		if (ext->Contains("csv")) return FileType::CSV;
+		if (ext->Contains("txt")) return FileType::TXT;
+		return FileType::Other;
+	}
 
 	private: List<String^>^ MakeRange(List<String^>^ store, String^ prefix, Dictionary<String^, String^>^ options)
 	{
@@ -398,7 +401,6 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		}
 		return res;
 	}
-
 
 	private: String ^ GetSeparator()
 	{
@@ -497,7 +499,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		}
 		return res;
 	}
-			 
+
 
 			 // создаёт список переменных по указанному шаблону имени
 	private:String ^ GenerateVarList(String^ templ)
@@ -758,7 +760,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 	private: String ^ DataFromTable(String^ table)
 	{
-		Report("> Проверка формата файла...");
+		Report("> Проверка формата данных...");
 
 		List<String^>^ data = StringToList(table, '\n');
 		if (data->Count < 2) return "Нет данных";
@@ -774,7 +776,8 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		Dictionary<String^, List<String^>^>^ fullData = gcnew Dictionary<String^, List<String^>^>();
 		bool emptyFound = false;
 		List<String^>^ longVars = gcnew List<String^>();
-		String^ separator = "";
+		String^ separator = ""; // разделитель для переменных
+		FileType tp;
 
 		/*
 			первый проход по data:
@@ -796,7 +799,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		int length = names->Length; // количество столбцов
 		if (ends->Count == data->Count) length = length - 1; // если все \t\n$, то последнюю не считаем
 
-		Report("Данные содержат " + data->Count.ToString() + " строк");
+		Report("Данные содержат " + (data->Count - 1).ToString() + " строк");
 		Report("> Выделение переменных...");
 
 		// собираем, очищаем и проверяем имена переменных
@@ -811,7 +814,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		bool needSeparate = false;
 		if (names->Length > 5)
 		{
-			needSeparate = MessageBox::Show((names->Length - 1).ToString() + " переменных — это много, объединить все переменные в строку?",
+			needSeparate = MessageBox::Show((length - 1).ToString() + " переменных — это много, объединить все переменные в строку?",
 				"", System::Windows::Forms::MessageBoxButtons::YesNoCancel,
 				System::Windows::Forms::MessageBoxIcon::Information) == Forms::DialogResult::Yes;
 			Report("> Поиск подходящего разделителя...");
@@ -828,12 +831,12 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 						break;
 					}
 				}
-			}
-			if (separator != "") Report("Выбран разделитель '" + separator + "'");
-			else
-			{
-				needSeparate = false;
-				ShowWarning("Подходящий разделитель не найден, значения не будут объединены в строку");
+				if (separator != "") Report("Выбран разделитель '" + separator + "'");
+				else
+				{
+					needSeparate = false;
+					ShowWarning("Подходящий разделитель не найден, значения не будут объединены в строку");
+				}
 			}
 		}
 
@@ -841,7 +844,9 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 		// получаем путь
 		bool fw = saveFileDialog1->ShowDialog() == Forms::DialogResult::OK;
-		String^ sep = fw && saveFileDialog1->FilterIndex != 1 ? ";" : "\t";
+
+		tp = GetFileType(saveFileDialog1->FileName);
+		String^ sep = fw && tp == FileType::CSV ? ";" : "\t"; // разделитель для ячеек
 
 		if (fw)
 		{
@@ -899,13 +904,13 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		if (fw)
 		{
 			Report("> Сохранение файла...");
-			if (saveFileDialog1->FilterIndex == 1)
+			if (tp == FileType::Excel)
 			{
 				if (!ExportToExcel(newAr, saveFileDialog1->FileName)) return "Ошибка сохранения данных. Попробуйте CSV";
 			}
 			else
 			{
-				if (!WriteFile(saveFileDialog1->FileName, newAr)) return "Ошибка сохранения данных";
+				if (!WriteFile(saveFileDialog1->FileName, newAr, System::Text::Encoding::UTF8)) return "Ошибка сохранения данных";
 			}
 			Report("Файл успешно сохранён");
 		}
@@ -930,7 +935,20 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		{
 			res += "\t\t<Item Id=\"" + (i - 1).ToString() + "\"><Text>" + names[i] + "</Text></Item>\n";
 		}
-		res += "\t</List>\n";
+		res += "\t</List>\n\n";
+
+
+		Report("Формирование XML+C# синтаксиса");
+
+		res += "\t<Page Id=\"RespInfo\">\n\t\t<Filter>false;</Filter>\n";
+		res += "\t\t\<Repeat List=\"dataList\">\n\t\t\t<Question Id=\"@Pure\" Imperative=\"false\">\n\t\t\t\t<Header>@Text</Header>\n\t\t\t\t<Repeat List=\"@Pure_List\">\n\t\t\t\t\t<Answer Id=\"@ID\"><Text>@Text</Text></Answer>\n\t\t\t\t</Repeat>\n\t\t\t</Question>\n\t\t</Repeat>\n";
+		res += "\t\t<Redirect>\n\t\t\tstring[][] data = DataGetCustoms(0/*НОМЕР!*/, InterviewPars.RespID);\n\t\t\tif (data.Length == 0) return false;\n\t\t\t";
+		if (needSeparate)
+			res += "string[] vals = data[0][0].Split('" + separator + "');";
+		else
+			res += "string[] vals = data[0];";
+		res += "\n\t\t\tif (CurrentSurvey.Lists[\"dataList\"].Items.Count != vals.Length) return false;\n\t\t\tforeach (SurveyListItem item in CurrentSurvey.Lists[\"dataList\"].Items)\n\t\t\t\tAnswerUpdateP(\"RespInfo\", item.Text, vals[int.Parse(item.ID)]);\n\t\t\treturn false;\n\t\t</Redirect>\n\t</Page>\n";
+
 
 		Report("Всё готово!");
 
@@ -1017,7 +1035,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 	{
 		if (saveFileDialog1->ShowDialog() == Forms::DialogResult::OK)
 		{
-			if (saveFileDialog1->FilterIndex == 1)
+			if (GetFileType(saveFileDialog1->FileName) == FileType::Excel)
 				ExportToExcel(resultTex->Text->Split('\n'), saveFileDialog1->FileName);
 			else
 				WriteFile(saveFileDialog1->FileName, resultTex->Text->Split('\n'));
@@ -1078,14 +1096,15 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 	}
 
 
-	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) 
+	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		resultTex->Clear();
 
 		if (openFileDialog1->ShowDialog() == Forms::DialogResult::OK)
 		{
+			FileType tp = GetFileType(openFileDialog1->FileName);
 			Report("> Загрузка данных из файла...");
-			if (openFileDialog1->FilterIndex != 1)
+			if (tp != FileType::Excel)
 			{
 				array<String^>^ ar = ReadFile(openFileDialog1->FileName);
 				if (ar != nullptr) sourceText->Text = String::Join(Environment::NewLine, ar);

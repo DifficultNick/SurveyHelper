@@ -130,6 +130,8 @@ namespace CustomTemplates
 }
 
 
+public enum FileType : int { Excel, CSV, TXT, Other };
+
 public ref struct AddonTag
 {
 	String^ Title;
@@ -439,6 +441,7 @@ private:
 
 public enum MixType : int { None, Mix, MixId };
 public enum UnionMixType: int { UnionNone, UnionMix, UnionMixId };
+
 
 /*
 
