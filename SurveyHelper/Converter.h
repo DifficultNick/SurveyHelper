@@ -46,13 +46,13 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 		saveFileDialog1 = gcnew SaveFileDialog();
 		saveFileDialog1->Filter = FileFilter;
-		saveFileDialog1->FilterIndex = 0;
-		saveFileDialog1->FileName = "data.csv";
+		saveFileDialog1->FilterIndex = 1;
+		saveFileDialog1->FileName = "data";
 		saveFileDialog1->RestoreDirectory = true;
 
 		openFileDialog1 = gcnew OpenFileDialog();
 		openFileDialog1->Filter = FileFilter;
-		openFileDialog1->FilterIndex = 0;
+		openFileDialog1->FilterIndex = 1;
 		openFileDialog1->Multiselect = false;
 	}
 
@@ -841,7 +841,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 		// получаем путь
 		bool fw = saveFileDialog1->ShowDialog() == Forms::DialogResult::OK;
-		String^ sep = fw && saveFileDialog1->FilterIndex != 0 ? ";" : "\t";
+		String^ sep = fw && saveFileDialog1->FilterIndex != 1 ? ";" : "\t";
 
 		if (fw)
 		{
@@ -899,7 +899,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		if (fw)
 		{
 			Report("> Сохранение файла...");
-			if (saveFileDialog1->FilterIndex == 0)
+			if (saveFileDialog1->FilterIndex == 1)
 			{
 				if (!ExportToExcel(newAr, saveFileDialog1->FileName)) return "Ошибка сохранения данных. Попробуйте CSV";
 			}
@@ -1017,7 +1017,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 	{
 		if (saveFileDialog1->ShowDialog() == Forms::DialogResult::OK)
 		{
-			if (saveFileDialog1->FilterIndex == 0)
+			if (saveFileDialog1->FilterIndex == 1)
 				ExportToExcel(resultTex->Text->Split('\n'), saveFileDialog1->FileName);
 			else
 				WriteFile(saveFileDialog1->FileName, resultTex->Text->Split('\n'));
@@ -1080,9 +1080,11 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
+		resultTex->Clear();
+
 		if (openFileDialog1->ShowDialog() == Forms::DialogResult::OK)
 		{
-			ShowMessage(openFileDialog1->FilterIndex);
+			Report("> Загрузка данных из файла...");
 			if (openFileDialog1->FilterIndex != 1)
 			{
 				array<String^>^ ar = ReadFile(openFileDialog1->FileName);
@@ -1092,6 +1094,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 			{
 				sourceText->Text = ReadExcelFile(openFileDialog1->FileName);
 			}
+			Report("Данные загружены");
 		}
 	}
 };
