@@ -368,17 +368,6 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 #pragma region доп функции
 
-	private: FileType GetFileType(String^ path)
-	{
-		String^ ext = Path::GetExtension(path)->ToLower();
-		ShowMessage(ext);
-		ShowMessage(ext->Contains("xls"));
-		if (ext->Contains("xls")) return FileType::Excel;
-		if (ext->Contains("csv")) return FileType::CSV;
-		if (ext->Contains("txt")) return FileType::TXT;
-		return FileType::Other;
-	}
-
 	private: List<String^>^ MakeRange(List<String^>^ store, String^ prefix, Dictionary<String^, String^>^ options)
 	{
 		List<String^>^ res = gcnew List<String^>();
@@ -843,6 +832,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		Report("Переменные:\t" + String::Join(", ", names));
 
 		// получаем путь
+		saveFileDialog1->FilterIndex = 2;
 		bool fw = saveFileDialog1->ShowDialog() == Forms::DialogResult::OK;
 
 		tp = GetFileType(saveFileDialog1->FileName);
@@ -910,7 +900,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 			}
 			else
 			{
-				if (!WriteFile(saveFileDialog1->FileName, newAr, System::Text::Encoding::UTF8)) return "Ошибка сохранения данных";
+				if (!WriteFile(saveFileDialog1->FileName, newAr)) return "Ошибка сохранения данных";
 			}
 			Report("Файл успешно сохранён");
 		}
@@ -933,15 +923,14 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 		res += "\t<List Id=\"dataList\">\n";
 		for (int i = 1; i < length; i++)
 		{
-			res += "\t\t<Item Id=\"" + (i - 1).ToString() + "\"><Text>" + names[i] + "</Text></Item>\n";
+			res += "\t\t<Item Id=\"" + (i - 1).ToString() + "\"><Var>" + names[i] + "</Var><Text>" + names[i] + "</Text></Item>\n";
 		}
 		res += "\t</List>\n\n";
-
 
 		Report("Формирование XML+C# синтаксиса");
 
 		res += "\t<Page Id=\"RespInfo\">\n\t\t<Filter>false;</Filter>\n";
-		res += "\t\t\<Repeat List=\"dataList\">\n\t\t\t<Question Id=\"@Pure\" Imperative=\"false\">\n\t\t\t\t<Header>@Text</Header>\n\t\t\t\t<Repeat List=\"@Pure_List\">\n\t\t\t\t\t<Answer Id=\"@ID\"><Text>@Text</Text></Answer>\n\t\t\t\t</Repeat>\n\t\t\t</Question>\n\t\t</Repeat>\n";
+		res += "\t\t\<Repeat List=\"dataList\">\n\t\t\t<Question Id=\"@Pure\" Imperative=\"false\">\n\t\t\t\t<Filter>false;</Filter>\n\t\t\t\t<Header>@Var(0)</Header>\n\t\t\t\t<Repeat List=\"@Pure_List\">\n\t\t\t\t\t<Answer Id=\"@ID\"><Text>@Text</Text></Answer>\n\t\t\t\t</Repeat>\n\t\t\t</Question>\n\t\t</Repeat>\n";
 		res += "\t\t<Redirect>\n\t\t\tstring[][] data = DataGetCustoms(0/*НОМЕР!*/, InterviewPars.RespID);\n\t\t\tif (data.Length == 0) return false;\n\t\t\t";
 		if (needSeparate)
 			res += "string[] vals = data[0][0].Split('" + separator + "');";

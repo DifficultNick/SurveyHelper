@@ -36,7 +36,7 @@ namespace CustomTemplates
 			Value = value;
 			IsCustom = isCustom;
 		}
-		
+
 		bool Active;
 		String^ Key;
 		String^ Value;
@@ -44,9 +44,9 @@ namespace CustomTemplates
 	};
 
 	[Serializable]
-	public ref class CustomTemplateList: List<CustomTemplate^>
+	public ref class CustomTemplateList : List<CustomTemplate^>
 	{
-	public:
+		public:
 		CustomTemplateList()
 		{};
 		~CustomTemplateList()
@@ -62,7 +62,7 @@ namespace CustomTemplates
 		{
 			CustomTemplateList^ res = gcnew CustomTemplateList();
 			for each (CustomTemplate^ tmp in this)
-				if ( tmp->Active ) res->Add(tmp);
+				if (tmp->Active) res->Add(tmp);
 			return res;
 		}
 
@@ -84,7 +84,7 @@ namespace CustomTemplates
 				for each (CustomTemplate^ item in this)
 					if (item->Active) res = Regex::Replace(res, item->Key, item->Value);
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
 				ShowError(422, "Ошибка замены\n\n" + e->ToString());
 			}
@@ -96,7 +96,7 @@ namespace CustomTemplates
 	static CustomTemplateList^ GetFrom(String^ filePath)
 	{
 		CustomTemplateList^ res = gcnew CustomTemplateList();
-		if ( !File::Exists(filePath) ) return res;
+		if (!File::Exists(filePath)) return res;
 		res = (CustomTemplateList^)StructFileRead(filePath);
 		return res;
 	}
@@ -104,13 +104,13 @@ namespace CustomTemplates
 	static CustomTemplateList^ Get()
 	{
 		CustomTemplateList^ res = gcnew CustomTemplateList();
-		if ( File::Exists(_appDataDir + "\\CustomReplaceList.bin") )
+		if (File::Exists(_appDataDir + "\\CustomReplaceList.bin"))
 			res = GetFrom(_appDataDir + "\\CustomReplaceList.bin");
 		else
-			if ( File::Exists(_appDataDir + "\\ReplaceList.bin") )
+			if (File::Exists(_appDataDir + "\\ReplaceList.bin"))
 			{
 				res = GetFrom(_appDataDir + "\\ReplaceList.bin");
-				for ( int i = 0; i < res->Count; i++ )
+				for (int i = 0; i < res->Count; i++)
 					res[i]->IsCustom = false;
 			}
 		return res;
@@ -131,6 +131,15 @@ namespace CustomTemplates
 
 
 public enum FileType : int { Excel, CSV, TXT, Other };
+
+static FileType GetFileType(String^ path)
+{
+	String^ ext = Path::GetExtension(path)->ToLower();
+	if (ext->Contains("xls")) return FileType::Excel;
+	if (ext->Contains("csv")) return FileType::CSV;
+	if (ext->Contains("txt")) return FileType::TXT;
+	return FileType::Other;
+}
 
 public ref struct AddonTag
 {
@@ -155,12 +164,12 @@ public ref struct SHVersion
 		Post = post;
 	}
 
-	static bool operator > (SHVersion^ v1, SHVersion^ v2)
-	{
-		if ( v1->Pre > v2->Pre ) return true;
-		if ( v1->Pre < v2->Pre ) return false;
-		return v1->Post > v2->Post;
-	}
+			static bool operator > (SHVersion^ v1, SHVersion^ v2)
+			{
+				if (v1->Pre > v2->Pre) return true;
+				if (v1->Pre < v2->Pre) return false;
+				return v1->Post > v2->Post;
+			}
 
 	public: SHVersion(String ^v)
 	{
@@ -169,15 +178,15 @@ public ref struct SHVersion
 			Int32::TryParse(v->Remove(v->IndexOf(".")), Pre);
 			Int32::TryParse(v->Remove(0, v->IndexOf(".") + 1), Post);
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			Pre = 0;
 			Post = 0;
 		}
 	}
 
-	// возвращает версию в виде 2.45
-	public:  String^ ToString() override
+			// возвращает версию в виде 2.45
+	public:  String ^ ToString() override
 	{
 		return this->Pre.ToString() + "." + this->Post.ToString();
 	}
@@ -190,7 +199,7 @@ public ref struct DefaultValue
 	String^ Value;
 	String^ Type;
 
-public:
+	public:
 	DefaultValue()
 	{}
 
@@ -217,7 +226,7 @@ public:
 };
 
 
-public ref struct DefaultValueList: List<DefaultValue^>
+public ref struct DefaultValueList : List<DefaultValue^>
 {
 	int Add(Object^ Object, String^ Value)
 	{
@@ -246,21 +255,21 @@ public ref struct DefaultValueList: List<DefaultValue^>
 		{
 			for each (DefaultValue^ val in this)
 			{
-				if ( val->Type == (gcnew CheckBox)->GetType()->ToString() )
+				if (val->Type == (gcnew CheckBox)->GetType()->ToString())
 					((CheckBox^)val->Object)->Checked = Convert::ToBoolean(val->Value);
-				if ( val->Type == (gcnew ToolStripMenuItem)->GetType()->ToString() )
+				if (val->Type == (gcnew ToolStripMenuItem)->GetType()->ToString())
 					((ToolStripMenuItem^)val->Object)->Checked = Convert::ToBoolean(val->Value);
-				else if ( val->Type == (gcnew TextBox)->GetType()->ToString() )
+				else if (val->Type == (gcnew TextBox)->GetType()->ToString())
 					((TextBox^)val->Object)->Text = val->Value;
-				else if ( val->Type == (gcnew ComboBox)->GetType()->ToString() )
+				else if (val->Type == (gcnew ComboBox)->GetType()->ToString())
 					((ComboBox^)val->Object)->SelectedIndex = StrToInt(val->Value);
-				else if ( val->Type == (gcnew ToolStripComboBox)->GetType()->ToString() )
+				else if (val->Type == (gcnew ToolStripComboBox)->GetType()->ToString())
 					((ToolStripComboBox^)val->Object)->SelectedIndex = StrToInt(val->Value);
 			}
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
-			ShowError(423, "Ошибка восстановления настроек по умолчанию.\n\nПодробнее:\n"+e->ToString());
+			ShowError(423, "Ошибка восстановления настроек по умолчанию.\n\nПодробнее:\n" + e->ToString());
 		}
 	}
 };
@@ -285,7 +294,7 @@ public ref struct ProjectResources
 	}
 
 	private:
-		ResourceManager ^res;
+	ResourceManager ^ res;
 };
 
 
@@ -293,15 +302,15 @@ public ref struct ProjectResources
 // рассматривается только выражжение a+b*#
 ref struct IteraTemplate
 {
-private:
-	String^ Templ = "";
+	private:
+	String ^ Templ = "";
 
-public:
+	public:
 	IteraTemplate(String^ body)
 	{
 		Templ = body;
 		Valid = Regex::IsMatch(Templ, "^(\\d+\\+)?(\\d+\\*)?#$");
-		if ( Valid ) SetExpression();
+		if (Valid) SetExpression();
 	}
 
 	int a = 0;
@@ -311,13 +320,13 @@ public:
 	void SetExpression()
 	{
 		String^s = Templ;
-		if ( Templ->Contains("+") )
+		if (Templ->Contains("+"))
 		{
 			a = StrToInt(Templ->Remove(Templ->IndexOf("+")));
 			s = Templ->Remove(0, Templ->IndexOf("+") + 1);
 		}
 
-		if ( s->Contains("*") )
+		if (s->Contains("*"))
 			b = StrToInt(s->Remove(s->IndexOf("*")));
 	}
 
@@ -332,7 +341,7 @@ public:
 // структура для работы с диапазоном
 ref struct RangeTemplate
 {
-public:
+	public:
 	bool Valid = false;
 	int Min = 1;
 	int Max = 10;
@@ -340,7 +349,7 @@ public:
 	RangeTemplate(String^ templ)
 	{
 		Valid = Regex::IsMatch(templ, "^\\d+to\\d+$");
-		if ( Valid )
+		if (Valid)
 		{
 			Min = StrToInt(templ->Remove(templ->IndexOf("to")));
 			Max = StrToInt(templ->Remove(0, templ->IndexOf("to") + 2));
@@ -352,24 +361,24 @@ public:
 // структура для работы с исключёнными элементами
 ref struct ExcludeTemplate
 {
-public:
+	public:
 	bool Valid = false;
 	List<int>^ Items = gcnew List<int>();
 
 	ExcludeTemplate(String^ templ)
 	{
 		Valid = Regex::IsMatch(templ, "^e\\{(\\d+,?)*\\}$");
-		if ( Valid )
+		if (Valid)
 		{
 			String^ s = templ;
 			int j = s->IndexOf(",");
-			while ( j > -1 )
+			while (j > -1)
 			{
 				Items->Add(StrToInt(s->Remove(j)));
 				s = s->Remove(0, j + 1);
 				j = s->IndexOf(",");
 			}
-			if ( !String::IsNullOrEmpty(s) ) Items->Add(StrToInt(s));
+			if (!String::IsNullOrEmpty(s)) Items->Add(StrToInt(s));
 		}
 	}
 };
@@ -377,7 +386,7 @@ public:
 
 ref struct AgeRange
 {
-public:
+	public:
 
 	AgeRange(String^ str)
 	{
@@ -385,11 +394,11 @@ public:
 		String^ pattern = "\\d\\d";
 		MatchCollection^ matches = Regex::Matches(str, pattern);
 		Count = matches->Count;
-		if ( Count == 0 ) return;
+		if (Count == 0) return;
 		Values[0] = StrToInt(matches[0]->Value);
 		Vars = Values[0].ToString();
 		Text = Values[0].ToString();
-		if ( Count > 1 )
+		if (Count > 1)
 		{
 			Values[1] = StrToInt(matches[1]->Value);
 			Vars += "," + Values[1];
@@ -418,21 +427,21 @@ public:
 	virtual String^ ToString() override
 	{
 		String^ res = "";
-		if ( this->Values->Length > 0 ) res += this->Values[0].ToString();
-		if ( this->Values->Length > 1 ) res += "-" + this->Values[1].ToString();
+		if (this->Values->Length > 0) res += this->Values[0].ToString();
+		if (this->Values->Length > 1) res += "-" + this->Values[1].ToString();
 		return res;
 	}
 
 	int ToNumber()
 	{
 		int res = 0;
-		if ( this->Values->Length > 0 ) res = this->Values[0];
-		if ( this->Values->Length > 1 ) res = res * 100 + this->Values[1];
+		if (this->Values->Length > 0) res = this->Values[0];
+		if (this->Values->Length > 1) res = res * 100 + this->Values[1];
 		return res;
 	}
 
-private:
-	String^ Input = "";
+	private:
+	String ^ Input = "";
 };
 
 
@@ -440,7 +449,7 @@ private:
 
 
 public enum MixType : int { None, Mix, MixId };
-public enum UnionMixType: int { UnionNone, UnionMix, UnionMixId };
+public enum UnionMixType : int { UnionNone, UnionMix, UnionMixId };
 
 
 /*
@@ -467,9 +476,9 @@ AddVars и AddText
 ref struct prevCellstr
 {
 	public:
-		String^ Value;
-		int Column = -1;
-		int Row;
+	String ^ Value;
+	int Column = -1;
+	int Row;
 };
 
 
@@ -483,7 +492,7 @@ ref struct prevCellstr
 // базовый класс построения XML без преобразований
 public ref class Elements
 {
-public:
+	public:
 	Elements(String^ elementName, int count)
 	{
 		ElemName = elementName;
@@ -502,7 +511,7 @@ public:
 		VarSeparate = separated;
 		Vars = gcnew List<List<String^>^>(vars);
 
-		if ( !VarSeparate )
+		if (!VarSeparate)
 		{
 			List<String^>^ s = gcnew List<String^>();
 			for each (List<String^>^ strlst in vars)
@@ -519,8 +528,8 @@ public:
 	{
 		TextSeparate = separated;
 		List<String^>^ CleanText = gcnew List<String^>();
-		for ( int i = 0; i < text->Count; i++ )
-			CleanText->Add(ClearString(text[i],true,mustClear,sp, contScr));
+		for (int i = 0; i < text->Count; i++)
+			CleanText->Add(ClearString(text[i], true, mustClear, sp, contScr));
 
 		Texts = gcnew List<String^>(CleanText);
 		if (!TextSeparate)
@@ -549,10 +558,10 @@ public:
 		List<String^>^ res = gcnew List<String^>();
 		String^ str = "";
 
-		for ( int i = 0; i < Count; i++ )
+		for (int i = 0; i < Count; i++)
 		{
 			str = "<" + ElemName + AtributesToString(i) + GetAditionalAtribs(i);
-			if ( !TextSeparate && (!VarSeparate || !VarsEnabled) )
+			if (!TextSeparate && (!VarSeparate || !VarsEnabled))
 			{
 				str += "/>";
 				res->Add(str);
@@ -561,46 +570,46 @@ public:
 
 			str += ">";
 
-			if ( TextSeparate )
-				if ( Texts[i] != nullptr && !String::IsNullOrEmpty(Texts[i]) ) str += "<Text>" + Texts[i] + "</Text>";
+			if (TextSeparate)
+				if (Texts[i] != nullptr && !String::IsNullOrEmpty(Texts[i])) str += "<Text>" + Texts[i] + "</Text>";
 
 			try
 			{
-				if ( VarSeparate && VarsEnabled )
-					if ( i < Vars->Count)
+				if (VarSeparate && VarsEnabled)
+					if (i < Vars->Count)
 						for each (String^ var in Vars[i])
 							str += "<Var>" + var + "</Var>";
-					else if (Vars->Count>0) 
+					else if (Vars->Count > 0)
 						for each (String^ var in Vars[0])
 							str += "<Var></Var>";
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
-				ShowError(101, "Ошибка разбора списка Vars.\nПодробнее:\n"+e->ToString());
+				ShowError(101, "Ошибка разбора списка Vars.\nПодробнее:\n" + e->ToString());
 			}
 
-			
+
 			str += "</" + ElemName + ">";
 
 			res->Add(str);
 		}
 
-		
-		if ( AddRepeat )
+
+		if (AddRepeat)
 		{
 			String^ rtxt = RepeatText;
 
-			String^ txt = "\t<" + ElemName + " Id=\"" + ( (IsNumber(RepeatName)) ? "@Itera\"" : "@ID\"" );
-			if ( TextSeparate )
-				if ( !String::IsNullOrEmpty(rtxt) ) txt += "><Text>" + rtxt + "</Text>" + "</" + ElemName + ">";
+			String^ txt = "\t<" + ElemName + " Id=\"" + ((IsNumber(RepeatName)) ? "@Itera\"" : "@ID\"");
+			if (TextSeparate)
+				if (!String::IsNullOrEmpty(rtxt)) txt += "><Text>" + rtxt + "</Text>" + "</" + ElemName + ">";
 				else txt += "/>";
 			else
-				if ( !String::IsNullOrEmpty(rtxt) ) txt += " Text=\"" + rtxt + "\"/>";
+				if (!String::IsNullOrEmpty(rtxt)) txt += " Text=\"" + rtxt + "\"/>";
 				else txt += "/>";
 
-			res->Insert(0, "</Repeat>");
-			res->Insert(0,  txt);
-			res->Insert(0, "<Repeat " + ((IsNumber(RepeatName)) ? "Length" : "List") + "=\"" + RepeatName + "\">");
+				res->Insert(0, "</Repeat>");
+				res->Insert(0, txt);
+				res->Insert(0, "<Repeat " + ((IsNumber(RepeatName)) ? "Length" : "List") + "=\"" + RepeatName + "\">");
 		}
 
 		AllElements = gcnew List<String^>(res);
@@ -616,15 +625,15 @@ public:
 		try
 		{
 			for each (KeyValuePair<String^, String^> atr in atrs)
-				if ( atr.Value != nullptr && !String::IsNullOrEmpty(atr.Value) && atr.Key != "Var" && atr.Key != "Id" )
+				if (atr.Value != nullptr && !String::IsNullOrEmpty(atr.Value) && atr.Key != "Var" && atr.Key != "Id")
 					res += " " + atr.Key + "=\"" + atr.Value + "\"";
 
 		}
 		catch (Exception^ e)
 		{
-			ShowError(102, "Ошибка создания атрибутов элемента.\nПодробнее:\n"+e->ToString());
+			ShowError(102, "Ошибка создания атрибутов элемента.\nПодробнее:\n" + e->ToString());
 		}
-		
+
 		return res;
 	}
 
@@ -632,7 +641,7 @@ public:
 	// возвращает элемент num
 	String^ Get(int num)
 	{
-		if ( num >= AllElements->Count ) return "NoElement";
+		if (num >= AllElements->Count) return "NoElement";
 
 		return AllElements[num];
 	}
@@ -643,7 +652,7 @@ public:
 	bool MissFirstTab = true; // пропуск первой табуляции
 	List<String^>^ AllElements;	// содержит все преобразованные элементы
 	bool AddParentTag = true;
-	
+
 	String^ ParentId = ""; // Page/List Id
 
 	bool VarsEnabled = false;
@@ -658,32 +667,32 @@ public:
 		return gcnew String('\t', c);
 	}
 
-protected:
+	protected:
 	// возвращает строку с атрибутами элемента num
-	String^ AtributesToString(int num)
+	String ^ AtributesToString(int num)
 	{
-		if ( Atributes == nullptr)
+		if (Atributes == nullptr)
 		{
 			ShowError(103, "Ошибка получения атрибутов элемента.");
 			return "";
 		}
 
-		if ( Atributes->Count < 1 ) return "";
+		if (Atributes->Count < 1) return "";
 		String^ res = "";
 
 		try
 		{
 			for each (KeyValuePair<String^, List<String^>^> atr in Atributes)
 			{
-				if ( num < atr.Value->Count  && !String::IsNullOrEmpty(atr.Value[num]) )
+				if (num < atr.Value->Count && !String::IsNullOrEmpty(atr.Value[num]))
 					res += " " + atr.Key + "=\"" + atr.Value[num] + "\"";
-				else if ( atr.Key == "Var" )
+				else if (atr.Key == "Var")
 					res += " Var=\"\"";
-				else if ( atr.Key == "Id" )
+				else if (atr.Key == "Id")
 					res += " Id=\"\"";
 			}
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(104, "Ошибка получения атрибутов элемента.");
 		}
@@ -695,7 +704,7 @@ protected:
 
 	String^ GetAditionalAtribs(int num)
 	{
-		if ( !AditionalAtribs->ContainsKey(num) ) return "";
+		if (!AditionalAtribs->ContainsKey(num)) return "";
 		return AditionalAtribs[num];
 	}
 
@@ -712,10 +721,10 @@ protected:
 
 
 
-public ref class Items: public Elements
+public ref class Items : public Elements
 {
-public:
-	Items(int count): Elements("Item", count)
+	public:
+	Items(int count) : Elements("Item", count)
 	{
 	}
 
@@ -726,27 +735,27 @@ public:
 	List<String^>^ MakeXML()
 	{
 		Elements::MakeXML();
-		if ( AddParentTag )
+		if (AddParentTag)
 		{
 			try
 			{
-				for ( int i = 0; i < AllElements->Count; i++ )
+				for (int i = 0; i < AllElements->Count; i++)
 					AllElements[i] = "\t" + AllElements[i];
 
-				if ( AllElements->Count > 0 )
+				if (AllElements->Count > 0)
 				{
 					AllElements->Insert(0, "<List Id=\"" + ParentId + "\">");
 					AllElements->Add("</List>");
 				}
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
 				ShowError(105, "Ошибка обработки табуляции XML.\nПодробнее:\n" + e->ToString());
 			}
-			
+
 		}
 
-		for ( int i = (MissFirstTab) ? 1 : 0; i < AllElements->Count; i++ )
+		for (int i = (MissFirstTab) ? 1 : 0; i < AllElements->Count; i++)
 			AllElements[i] = GetTabs(TabCount) + AllElements[i];
 
 		return AllElements;
@@ -757,7 +766,7 @@ public:
 	{
 		List<String^>^ res = gcnew List<String^>();
 		String^ str;
-		
+
 		try
 		{
 			for each (List<String^>^ var in vars)
@@ -771,11 +780,11 @@ public:
 				res->Add(str);
 			}
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(106, "Ошибка обработки Vars\nПодробнее:\n" + e->ToString());
 		}
-		
+
 		return res;
 	}
 };
@@ -784,10 +793,10 @@ public:
 
 
 
-public ref class Answers: public Elements
+public ref class Answers : public Elements
 {
-public:
-	Answers(int count): Elements("Answer", count)
+	public:
+	Answers(int count) : Elements("Answer", count)
 	{
 	}
 
@@ -808,9 +817,9 @@ public:
 	// атрибуты через пробел в виде Mix="true" Type="Text"
 	void AddQuestionAttributes(String^ atrs)
 	{
-		if ( String::IsNullOrEmpty(atrs) ) return;
+		if (String::IsNullOrEmpty(atrs)) return;
 
-		if ( atrs[0] != ' ' ) atrs = " " + atrs;
+		if (atrs[0] != ' ') atrs = " " + atrs;
 		QuestionAttributes = atrs;
 		AddParentTag = true;
 	}
@@ -827,10 +836,10 @@ public:
 		{
 			qid = Regex::Replace(QuestionAttributes, "^.*Id=['\"](?<id>[^'\"]*)['\"].*$", "${id}");
 
-			items->Add("<List Id=\""+qid+"_List\">");
+			items->Add("<List Id=\"" + qid + "_List\">");
 			for (int i = 0; i < AllElements->Count; i++)
-				if (!Uncombined->Contains(i)) items->Add("\t" + Regex::Replace(AllElements[i], 
-					"^[^<]*<Answer[^>]+Id=['\"](?<id>[^'\"]+)['\"][^<]+(<Text[^>]*>(?<text>.*)</Text)?.*", 
+				if (!Uncombined->Contains(i)) items->Add("\t" + Regex::Replace(AllElements[i],
+					"^[^<]*<Answer[^>]+Id=['\"](?<id>[^'\"]+)['\"][^<]+(<Text[^>]*>(?<text>.*)</Text)?.*",
 					"<Item Id=\"${id}\"><Text>${text}</Text></Item>"));
 			items->Add("</List>");
 			items->Add("");
@@ -840,46 +849,46 @@ public:
 				notCombineItems->Add(AllElements[i]);
 
 			AllElements = gcnew List<String^>();
-			AllElements->Add("<Repeat List=\""+qid+"_List\">");
+			AllElements->Add("<Repeat List=\"" + qid + "_List\">");
 			AllElements->Add("\t<Answer Id=\"@ID\"><Text>@Text</Text></Answer>");
 			AllElements->Add("</Repeat>");
 			AllElements->AddRange(notCombineItems);
 		}
 
-		
-		if ( AddParentTag )
+
+		if (AddParentTag)
 		{
 			try
 			{
-				for ( int i = 0; i < AllElements->Count; i++ )
+				for (int i = 0; i < AllElements->Count; i++)
 					AllElements[i] = "\t" + AllElements[i];
 
-				if ( ExtendAdd ) AllElements->Insert(0, "\t<Ui" + Extend + "/>");
-				if ( !String::IsNullOrEmpty(Header) ) AllElements->Insert(0, "\t<Header>" + Header + "</Header>");
-				if ( !String::IsNullOrEmpty(QuestionAttributes) ) AllElements->Insert(0, "<Question" + QuestionAttributes + ">");
-				if ( !String::IsNullOrEmpty(QuestionAttributes) ) AllElements->Add("</Question>");
+				if (ExtendAdd) AllElements->Insert(0, "\t<Ui" + Extend + "/>");
+				if (!String::IsNullOrEmpty(Header)) AllElements->Insert(0, "\t<Header>" + Header + "</Header>");
+				if (!String::IsNullOrEmpty(QuestionAttributes)) AllElements->Insert(0, "<Question" + QuestionAttributes + ">");
+				if (!String::IsNullOrEmpty(QuestionAttributes)) AllElements->Add("</Question>");
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
 				ShowError(108, "Ошибка обработки табуляции XML\n\nПодробнее:\n" + e->ToString());
 			}
 		}
 
-		if ( AddPageTag )
+		if (AddPageTag)
 		{
-			for ( int i = 0; i < AllElements->Count; i++ )
+			for (int i = 0; i < AllElements->Count; i++)
 				AllElements[i] = "\t" + AllElements[i];
 
 			if (!String::IsNullOrEmpty(PageHeader)) AllElements->Insert(0, "\t<Header>" + PageHeader + "</Header>");
 			AllElements->Insert(0, "<Page Id=\"" + ParentId + "\">");
 			// добавление Redirect
-			if ( AutoTags && Screens->Count > 0 )
+			if (AutoTags && Screens->Count > 0)
 			{
 				try
 				{
 					// получение QuestionId
 					String^ Qid = "";
-					if ( QuestionAttributes->Contains("Id") )
+					if (QuestionAttributes->Contains("Id"))
 					{
 						Qid = QuestionAttributes->Remove(0, QuestionAttributes->IndexOf("Id") + 4);
 						Qid = Qid->Remove(Qid->IndexOf("\""));
@@ -888,35 +897,35 @@ public:
 					String^ redirect = "<Redirect Status=\"19\">return ";
 
 					List<String^>^ lst = gcnew List<String^>();
-					if ( Atributes->ContainsKey("Id") ) lst = Atributes["Id"];
+					if (Atributes->ContainsKey("Id")) lst = Atributes["Id"];
 					String^ rt = "", ^cb = "";
 
 					// получение списка ответов
-					for ( int i = 0; i < lst->Count; i++ )
+					for (int i = 0; i < lst->Count; i++)
 					{
-						if ( Screens->Contains(i) ) rt += lst[i] + ",";
+						if (Screens->Contains(i)) rt += lst[i] + ",";
 						else cb += lst[i] + ",";
 					}
 					cb = cb->Remove(cb->LastIndexOf(","));
 					rt = rt->Remove(rt->LastIndexOf(","));
 
 					// добавление списка ответов
-					if ( QuestionAttributes->Contains("CheckBox") )
+					if (QuestionAttributes->Contains("CheckBox"))
 					{
 						redirect += "AnswerExists" + ((Screens->Count > 1) ? "Any" : "") + "(\"" + Qid + "\", \"" + rt;
 					}
 					else
 					{
-						if (lst->Count/2 < Screens->Count) 
+						if (lst->Count / 2 < Screens->Count)
 							redirect += "!AnswerExists" + ((lst->Count - Screens->Count > 1) ? "Any" : "") + "(\"" + Qid + "\", \"" + cb;
-						else 
+						else
 							redirect += "AnswerExists" + ((Screens->Count > 1) ? "Any" : "") + "(\"" + Qid + "\", \"" + rt;
 					}
 
 					redirect += "\");</Redirect>";
-					AllElements->Add("\t"+redirect);
+					AllElements->Add("\t" + redirect);
 				}
-				catch ( Exception^ e )
+				catch (Exception^ e)
 				{
 					ShowError(414, "Ошибка обработки Redirect\n\nПодробнее:\n" + e->ToString());
 				}
@@ -926,7 +935,7 @@ public:
 
 		if (Combine) AllElements->InsertRange(0, items);
 
-		for ( int i = (MissFirstTab) ? 1 : 0; i < AllElements->Count; i++ )
+		for (int i = (MissFirstTab) ? 1 : 0; i < AllElements->Count; i++)
 			AllElements[i] = GetTabs(TabCount) + AllElements[i];
 
 		return AllElements;
@@ -938,15 +947,15 @@ public:
 		bool a = false;
 		List<String^>^ t = text;
 		// выделение screenOut
-		if ( AutoTags )
+		if (AutoTags)
 		{
 			Screens = GetScreenIds(text);
 			t = ClearScreenWords(text);
-			if ( Screens->Count > 0 ) a = true;
+			if (Screens->Count > 0) a = true;
 		}
 		Elements::AddText(t, separated, mustClear, sp, a);
 		// доп атрибуты Answer
-		if ( AutoTags ) AditionalAtribs = InvokeAdditionalAttributes(text);
+		if (AutoTags) AditionalAtribs = InvokeAdditionalAttributes(text);
 	}
 
 
@@ -954,27 +963,27 @@ public:
 	Dictionary<int, String^>^ InvokeAdditionalAttributes(List<String^>^ txt)
 	{
 		Dictionary<int, String^>^ res = gcnew Dictionary<int, String^>();
-		if ( txt == nullptr || txt->Count < 1 ) return res;
+		if (txt == nullptr || txt->Count < 1) return res;
 		String^ s, ^tmp = "";
 		try
 		{
-			for ( int i = 0; i < txt->Count; i++ )
+			for (int i = 0; i < txt->Count; i++)
 			{
 				tmp = "";
 				s = txt[i]->ToLower();
 				List<String^>^ found = gcnew List<String^>(gcnew array<String^> {"уточните", "укажите", "впишите", "запишите", "открытое поле", "поле для ввода", "где именно", "какая именно", "какой именно", "что именно", "open"});
 				for each (String^ str in found)
-					if ( s->Contains(str) )
+					if (s->Contains(str))
 					{
 						tmp += " Type=\"Text\" Fix=\"true\"";
 						break;
 					}
 
-				if ( (gcnew String("RadioButton CheckBox Text Integer Memo Number"))->Contains(GetProp(QuestionAttributes, "Type")) && (!Extend->Contains("Scale") || i == txt->Count-1) )
+				if ((gcnew String("RadioButton CheckBox Text Integer Memo Number"))->Contains(GetProp(QuestionAttributes, "Type")) && (!Extend->Contains("Scale") || i == txt->Count - 1))
 				{
 					found = gcnew List<String^>(gcnew array<String^> {"отказ", "затрудняюсь", "ничего", "ни один", "ни одного", "ни одной", "ни одну", "ни одно", "ни в одном", "ни в одной", "никогда", "исключающий", "exclude", "exclusive", "нет ответа", "не отвечать", "никакой", "никакую", "никакое"});
 					for each (String^ str in found)
-						if ( s->Contains(str) )
+						if (s->Contains(str))
 						{
 							tmp += " Reset=\"true\" Fix=\"true\" NoUseInQstFilter=\"true\"";
 							break;
@@ -987,7 +996,7 @@ public:
 				}
 			}
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(414, "Ошибка генерации дополнительных элементов\n\nПодробнее\n" + e->ToString());
 		}
@@ -997,14 +1006,14 @@ public:
 
 
 
-protected: 
+	protected:
 
 	List<int>^ Screens = gcnew List<int>();
 	List<int>^ Uncombined = gcnew List<int>();
 
 	String^ GetProp(String^ atrs, String^ prop)
 	{
-		if ( !atrs->Contains(prop) ) return "";
+		if (!atrs->Contains(prop)) return "";
 		String^ res = atrs;
 		res = atrs->Remove(0, atrs->IndexOf("\"", atrs->IndexOf(prop)) + 1);
 		res = res->Remove(res->IndexOf("\""));
@@ -1020,8 +1029,8 @@ protected:
 public ref class Union
 {
 #pragma region Variables
-public:
-	String^ QuestionType;
+	public:
+	String ^ QuestionType;
 	String^ QuestionListId;
 	String^ AnswerListId;
 	String^ DummyHeader;
@@ -1050,7 +1059,7 @@ public:
 	String^ RepeatName = "";
 	String^ RepeatText = "";
 
-private:
+	private:
 	List<String^>^ AnswerIds = gcnew List<String^>(); // список ID Ответов 
 	Items^ QuestionList;
 	Items^ AnswerList;
@@ -1063,7 +1072,7 @@ private:
 	bool CombineAnswers;
 #pragma endregion
 
-public:
+	public:
 	Union::Union()
 	{
 	}
@@ -1096,9 +1105,9 @@ public:
 		List<String^>^ res = gcnew List<String^>();
 		Dictionary<String^, List<String^>^>^ Atributes = gcnew Dictionary<String^, List<String^>^>();
 
-		#pragma region Answers
+#pragma region Answers
 		Atributes->Add("Id", AnswerIds);
-		if ( CombineAnswers )
+		if (CombineAnswers)
 		{
 			try
 			{
@@ -1117,7 +1126,7 @@ public:
 				AnswerList->RepeatText = RepeatText;
 				AnswerList->AutoTags = AutoTags;
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
 				ShowError(109, "Ошибка обработки ответов в Union\nПодробнее:\n" + e->ToString());
 			}
@@ -1139,7 +1148,7 @@ public:
 				answers->AddAttributes(Atributes);
 				answers->AddText(AnswerText, TextSeparate, !DontClear, IgnoreSpases);
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
 				ShowError(110, "Ошибка обработки ответов в Union\nПодробнее:\n" + e->ToString());
 			}
@@ -1147,15 +1156,15 @@ public:
 			resA = answers->MakeXML();
 		}
 
-		#pragma endregion
+#pragma endregion
 
-		#pragma region Questions
+#pragma region Questions
 		List<String^>^ ids = gcnew List<String^>();
-		for ( int i = 1; i <= QuestionCount; i++ )
-			ids->Add( ((!CombineQuestions) ? (QuestionId + "_") : "") + i.ToString() );
+		for (int i = 1; i <= QuestionCount; i++)
+			ids->Add(((!CombineQuestions) ? (QuestionId + "_") : "") + i.ToString());
 		Atributes = gcnew Dictionary<String^, List<String^>^>();
 		Atributes->Add("Id", ids);
-		if ( CombineQuestions )
+		if (CombineQuestions)
 		{
 			try
 			{
@@ -1169,7 +1178,7 @@ public:
 
 				QuestionList->AddText(QuestionText, TextSeparate, !DontClear, IgnoreSpases);
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
 				ShowError(111, "Ошибка обработки вопросов в Union\nПодробнее:\n" + e->ToString());
 			}
@@ -1185,24 +1194,24 @@ public:
 				questions->AddAttributes(Atributes);
 				questions->AddText(QuestionText, TextSeparate, !DontClear, IgnoreSpases);
 			}
-			catch ( Exception^ e )
+			catch (Exception^ e)
 			{
 				ShowError(112, "Ошибка обработки вопросов в Union\nПодробнее:\n" + e->ToString());
 			}
-			
+
 			resQ = questions->MakeXML();
 		}
-		#pragma endregion
+#pragma endregion
 
 		resD->Add("");
 
-		#pragma region Page
+#pragma region Page
 		resD->Add("<Page Id=\"" + QuestionId + "\">");
 
 		if (!String::IsNullOrEmpty(PageHeader)) resD->Add("\t<Header>" + PageHeader + "</Header>");
 
 		// добавление вопросов
-		if ( CombineQuestions )
+		if (CombineQuestions)
 		{
 			resD->Add("\t<Repeat List=\"" + QuestionListId + "\">");
 			String^ Qa = QuestionType != "" ? (" Type=\"" + QuestionType + "\"") : "";
@@ -1212,75 +1221,75 @@ public:
 		}
 		else
 		{
-			for ( int i = 1; i <= QuestionCount; i++)
-				resD->Add("\t<Question Id=\"" + QuestionId + "_" + i.ToString() +"\" Type=\"" + QuestionType + "\"><Text>" + QuestionText[i-1] + "</Text></Question>");
+			for (int i = 1; i <= QuestionCount; i++)
+				resD->Add("\t<Question Id=\"" + QuestionId + "_" + i.ToString() + "\" Type=\"" + QuestionType + "\"><Text>" + QuestionText[i - 1] + "</Text></Question>");
 		}
-		
+
 		// dummy
 		String^ qString = "\t<Question Id=\"" + QuestionId + "_dummy\" TextWidth=\"30\"" + DummyAtributes;
 		try
 		{
-			if ( mix == MixType::Mix ) qString += " Mix=\"true\"";
-			else if ( mix == MixType::MixId ) qString += " MixId=\"" + MixIdText + "\"";
+			if (mix == MixType::Mix) qString += " Mix=\"true\"";
+			else if (mix == MixType::MixId) qString += " MixId=\"" + MixIdText + "\"";
 
-			if ( unionMix == UnionMixType::UnionMix ) qString += " UnionMix=\"true\"";
-			else if ( unionMix == UnionMixType::UnionMixId ) qString += " UnionMixId=\"" + UnionMixIdText + "\"";
+			if (unionMix == UnionMixType::UnionMix) qString += " UnionMix=\"true\"";
+			else if (unionMix == UnionMixType::UnionMixId) qString += " UnionMixId=\"" + UnionMixIdText + "\"";
 
 			qString += " Union=\"$repeat(" + ((CombineQuestions) ? QuestionListId : QuestionCount.ToString()) + "){" + QuestionId + "_@" + ((CombineQuestions) ? "ID" : "Itera") + "[,]}\">";
 			resD->Add(qString);
-			if ( DummyExtend ) resD->Add("\t\t<Ui " + Extend + "/>");
+			if (DummyExtend) resD->Add("\t\t<Ui " + Extend + "/>");
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(113, "Ошибка обработки dummy вопроса в Union\nПодробнее:\n" + e->ToString());
 		}
-		
-		
 
-		if ( !String::IsNullOrEmpty(DummyHeader) ) resD->Add("\t\t<Header>" + DummyHeader + "</Header>");
-		
+
+
+		if (!String::IsNullOrEmpty(DummyHeader)) resD->Add("\t\t<Header>" + DummyHeader + "</Header>");
+
 		// ответы
 		try
 		{
-			if ( CombineAnswers )
+			if (CombineAnswers)
 			{
 				resD->Add("\t\t<Repeat List=\"" + AnswerListId + "\">");
-				if ( TextSeparate ) qString = "\t\t\t<Answer Id=\"@ID\"><Text>@Text</Text></Answer>";
+				if (TextSeparate) qString = "\t\t\t<Answer Id=\"@ID\"><Text>@Text</Text></Answer>";
 				else qString = "\t\t\t<Answer Id=\"@ID\" Text=\"@Text\"/>";
 				resD->Add(qString);
 				resD->Add("\t\t</Repeat>");
 			}
 			else
 			{
-				if ( resA->Count == 0 ) resD->Add("\t\t<Answer Id=\"1\"/>");
+				if (resA->Count == 0) resD->Add("\t\t<Answer Id=\"1\"/>");
 				else
 				{
-					for ( int i = 0; i < resA->Count; i++ )
+					for (int i = 0; i < resA->Count; i++)
 						resA[i] = "\t\t" + resA[i];
 					resD->AddRange(resA);
 				}
 			}
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(114, "Ошибка обработки ответов в Union\nПодробнее:\n" + e->ToString());
 		}
 
 		resD->Add("\t</Question>");
 		resD->Add("</Page>");
-		#pragma endregion
+#pragma endregion
 
 		try
 		{
-			if ( CombineQuestions ) res->AddRange(resQ);
-			if ( CombineAnswers ) res->AddRange(resA);
+			if (CombineQuestions) res->AddRange(resQ);
+			if (CombineAnswers) res->AddRange(resA);
 
 			res->AddRange(resD);
 
-			for ( int i = (MissFirstTab) ? 1 : 0; i < res->Count; i++ )
+			for (int i = (MissFirstTab) ? 1 : 0; i < res->Count; i++)
 				res[i] = Elements::GetTabs(TabCount) + res[i];
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(115, "Ошибка обработки XML\nПодробнее:\n" + e->ToString());
 		}
@@ -1296,7 +1305,7 @@ public:
 
 public ref class QuestionBlock
 {
-public:
+	public:
 	QuestionBlock(int count)
 	{
 		AnswerBlock = gcnew Answers(count);
@@ -1331,14 +1340,14 @@ public:
 		k = res->IndexOf("</Question");
 		k = res->IndexOf(">", k) + 1;
 
-		if ( UnionMix == UnionMixType::UnionMix ) um += " Mix=\"true\"";
-		else if ( UnionMix == UnionMixType::UnionMixId ) um += " MixId=\"" + UnionMixIdText + "\"";
+		if (UnionMix == UnionMixType::UnionMix) um += " Mix=\"true\"";
+		else if (UnionMix == UnionMixType::UnionMixId) um += " MixId=\"" + UnionMixIdText + "\"";
 
 		tmp = tabs;
 		if (um != "") tmp += "<Block Items=\"$repeat(" + QuestionListId + "){" + QuestionId + "_@ID[,]}\"" + um + "/>\n" + tabs;
 		tmp += "<Repeat List=\"" + QuestionListId + "\">\n\t" + tabs;
 
-		res = res->Insert(k, "\n"+ tabs +"</Repeat>");
+		res = res->Insert(k, "\n" + tabs + "</Repeat>");
 		res = res->Insert(i, "<Ui Step=\"1\" HeaderFix=\"1\"/>\n" + tmp);
 		QuestionsRes->Add("");
 		QuestionsRes->AddRange(StringToList(res, '\n'));
@@ -1351,8 +1360,8 @@ public:
 		Questions = gcnew Items(questions->Count);
 		Dictionary<String^, List<String^>^>^ Atributes = gcnew Dictionary<String^, List<String^>^>;
 		List<String^>^ ids = gcnew List<String^>();
-		for ( int i = 0; i < questions->Count; i++ )
-			ids->Add((i+1).ToString());
+		for (int i = 0; i < questions->Count; i++)
+			ids->Add((i + 1).ToString());
 		Atributes->Add("Id", ids);
 		Questions->AddAttributes(Atributes);
 		Questions->TabCount = TabCount;
@@ -1371,7 +1380,7 @@ public:
 		AnswerBlock->AddQuestionAttributes("Id=\"" + QuestionId + "_@ID\"" + atrs + " Hint=\"\"" + (UnionMix == UnionMixType::UnionMixId ? " SyncId=\"@ID\"" : ""));
 	}
 
-private:
+	private:
 	List<String^>^ QuestionsRes = gcnew List<String^>();
 	String^ um = "";
 
@@ -1384,7 +1393,7 @@ private:
 
 public ref class Settings
 {
-public:
+	public:
 
 	Settings::Settings()
 	{
@@ -1396,7 +1405,7 @@ public:
 
 	void Set(String^ PropName, String^ PropValue)
 	{
-		if ( reading )
+		if (reading)
 		{
 			SettingsList->Clear();
 			reading = false;
@@ -1406,7 +1415,7 @@ public:
 
 	void Set(String^ PropName, int PropValue)
 	{
-		if ( reading )
+		if (reading)
 		{
 			SettingsList->Clear();
 			reading = false;
@@ -1416,7 +1425,7 @@ public:
 
 	bool Save(String^ subKey)
 	{
-		if ( reading )
+		if (reading)
 		{
 			SettingsList->Clear();
 			reading = false;
@@ -1426,9 +1435,9 @@ public:
 		{
 			rk = Registry::CurrentUser->OpenSubKey("Software", true);
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
-			if ( !rk ) ShowError(201, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString());
+			if (!rk) ShowError(201, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString());
 			return false;
 		}
 
@@ -1437,9 +1446,9 @@ public:
 			rk = rk->CreateSubKey("SurveyHelper"); // создаёт или открывает
 			if (!String::IsNullOrEmpty(subKey)) rk = rk->CreateSubKey(subKey);
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
-			if ( !rk )
+			if (!rk)
 			{
 				ShowError(202, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString());
 				return false;
@@ -1451,7 +1460,7 @@ public:
 			for each (KeyValuePair<String^, String^>^ set in SettingsList)
 				rk->SetValue(set->Key, set->Value);
 		}
-		catch (Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(203, "Ошибка записи в реестр\nПодробнее:\n" + e->ToString());
 			return false;
@@ -1468,7 +1477,7 @@ public:
 
 	int Read(String^ subKey)
 	{
-		if ( !reading )
+		if (!reading)
 		{
 			SettingsList->Clear();
 			reading = true;
@@ -1479,46 +1488,46 @@ public:
 		{
 			rk = rk->OpenSubKey("Software", true);
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
-			if ( !rk )
+			if (!rk)
 			{
 				ShowError(204, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString());
 				return -1;
 			}
 		}
-		
+
 		try
 		{
 			rk = rk->CreateSubKey("SurveyHelper");
 			if (!String::IsNullOrEmpty(subKey)) rk = rk->OpenSubKey(subKey);
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
-			if ( !rk )
+			if (!rk)
 			{
 				ShowError(205, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString());
 				return -1;
 			}
 		}
-		
-		if ( !!rk )
+
+		if (!!rk)
 			try
+		{
 			{
-				{
-					array<String^>^ names = rk->GetValueNames();
-					for each (String^ set in names)
-						SettingsList->Add(set, rk->GetValue(set)->ToString());
-				}
-		
+				array<String^>^ names = rk->GetValueNames();
+				for each (String^ set in names)
+					SettingsList->Add(set, rk->GetValue(set)->ToString());
+			}
+
 			array<String^>^ names = gcnew array<String^>(rk->ValueCount);
-			
-			}
-			catch ( Exception^ e )
-			{
-				ShowError(206, "Ошибка чтения данных реестра\nПодробнее:\n" + e->ToString());
-				return -1;
-			}
+
+		}
+		catch (Exception^ e)
+		{
+			ShowError(206, "Ошибка чтения данных реестра\nПодробнее:\n" + e->ToString());
+			return -1;
+		}
 
 		return SettingsList->Count;
 	}
@@ -1546,9 +1555,9 @@ public:
 		{
 			rk = rk->OpenSubKey("Software", true);
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
-			if ( !rk )
+			if (!rk)
 			{
 				ShowError(208, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString());
 				return false;
@@ -1558,11 +1567,11 @@ public:
 		try
 		{
 			rk = rk->CreateSubKey("SurveyHelper");
-			if ( !String::IsNullOrEmpty(subKey) ) rk = rk->OpenSubKey(subKey);
+			if (!String::IsNullOrEmpty(subKey)) rk = rk->OpenSubKey(subKey);
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
-			if ( !rk )
+			if (!rk)
 			{
 				ShowError(209, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString());
 				return false;
@@ -1571,10 +1580,10 @@ public:
 
 		try
 		{
-			if ( !(gcnew List<String^>(rk->GetValueNames()))->Contains(setName) ) return true;
+			if (!(gcnew List<String^>(rk->GetValueNames()))->Contains(setName)) return true;
 			rk->DeleteValue(setName);
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(209, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString());
 			return false;
@@ -1599,7 +1608,7 @@ public:
 			rk = rk->OpenSubKey(L"Windows", true); i += !!rk;
 			rk = rk->OpenSubKey(L"CurrentVersion", true); i += !!rk;
 			rk = rk->OpenSubKey(L"Run", true); i += !!rk;
-			if ( st )
+			if (st)
 			{
 				rk->SetValue("SurveyHelper", "\"" + Application::ExecutablePath + "\"");
 				i += !!rk;
@@ -1610,35 +1619,35 @@ public:
 				rk->DeleteValue("SurveyHelper", false);
 			}
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
-			ShowError(207+i, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString()); // 207 ... 214
+			ShowError(207 + i, "Ошибка доступа к реестру\nПодробнее:\n" + e->ToString()); // 207 ... 214
 		}
 	}
 
 	String^ Get(String^ ValName)
 	{
-		if ( !reading )
+		if (!reading)
 		{
 			SettingsList->Clear();
 			reading = true;
 		}
-		if ( !SettingsList->ContainsKey(ValName) ) return "";
+		if (!SettingsList->ContainsKey(ValName)) return "";
 		return SettingsList[ValName];
 	}
 
 	int Get(String^ ValName, bool toInt)
 	{
-		if ( !reading )
+		if (!reading)
 		{
 			SettingsList->Clear();
 			reading = true;
 		}
-		if ( toInt ) return StrToInt(Get(ValName));
+		if (toInt) return StrToInt(Get(ValName));
 		else return -1;
 	}
 
-private:
+	private:
 	Dictionary<String^, String^>^ SettingsList = gcnew Dictionary<String^, String^>();
 	bool reading;
 };
@@ -1653,7 +1662,7 @@ private:
 // класс для добавления фишек из библиотеки кода
 public ref class Addon
 {
-public:
+	public:
 	Addon::Addon(String^ filePath)
 	{
 		FileContent = String::Join(Environment::NewLine, ReadFile(filePath));
@@ -1667,8 +1676,8 @@ public:
 	{
 		List<AddonTag^>^ res = gcnew List<AddonTag^>();
 		AddonTag^ t;
-		if ( tree == nullptr || tree->Count < 1 ) return false;
-		
+		if (tree == nullptr || tree->Count < 1) return false;
+
 		String^ cont = FileContent;
 		String^ tp = "";
 		int i = 0;
@@ -1677,7 +1686,7 @@ public:
 			// содержание тэга tree
 			for each (String^ s in tree)
 			{
-				if ( cont->Contains("<" + s) && cont->Contains("</" + s) )
+				if (cont->Contains("<" + s) && cont->Contains("</" + s))
 				{
 					cont = cont->Remove(0, cont->IndexOf("<" + s));
 					cont = cont->Remove(0, cont->IndexOf(">") + 1);
@@ -1686,7 +1695,7 @@ public:
 				else break;
 			}
 
-			if ( cont == FileContent || String::IsNullOrEmpty(cont) ) return false;
+			if (cont == FileContent || String::IsNullOrEmpty(cont)) return false;
 
 			// получение данных
 			int pos = cont->IndexOf("<");
@@ -1694,7 +1703,7 @@ public:
 			tag = tag->Remove(Min(tag->IndexOf(">"), tag->IndexOf(" ")));
 			String^ tmp;
 			int k;
-			while ( pos > -1 )
+			while (pos > -1)
 			{
 				t = gcnew AddonTag();
 				t->Name = tag;
@@ -1706,7 +1715,7 @@ public:
 				t->Boody = t->Boody->Remove(t->Boody->LastIndexOf("<"));
 				//title
 
-				if ( tmp->IndexOf(" Title") <  tmp->IndexOf(">") )
+				if (tmp->IndexOf(" Title") < tmp->IndexOf(">"))
 				{
 					tmp = tmp->Remove(0, tmp->IndexOf(" ") + 1);
 					tmp = tmp->Remove(0, tmp->IndexOf("\"") + 1);
@@ -1719,12 +1728,12 @@ public:
 
 				k = cont->IndexOf("</" + tag);
 				pos = cont->IndexOf("<", k + 1);
-				if ( pos < 0 ) break;
+				if (pos < 0) break;
 				tag = cont->Remove(0, pos + 1);
 				tag = tag->Remove(Min(tag->IndexOf(">"), tag->IndexOf(" ")));
 			}
 		}
-		catch ( Exception^ e )
+		catch (Exception^ e)
 		{
 			ShowError(416, "Ошибка при работе с библиотекой дополнительных возможностей\n\nПодробнее:\n" + e->ToString());
 			return false;
@@ -1740,10 +1749,10 @@ public:
 
 	bool Contains(String^ tag)
 	{
-		if ( CurrentTags->Count < 1 ) return false;
+		if (CurrentTags->Count < 1) return false;
 
 		for each (AddonTag^ a in CurrentTags)
-			if ( a->Name == tag ) return true;
+			if (a->Name == tag) return true;
 
 		return false;
 	}
@@ -1757,7 +1766,7 @@ public:
 			res->Add(a->Name);
 		return res;
 	}
-	
+
 
 	String^ GetBody(String^ s)
 	{
@@ -1779,13 +1788,13 @@ public:
 
 		return res;
 	}
-	
+
 
 	String^ GetTitle(String^ s)
 	{
 		String^ res = "";
 		for each (AddonTag^ a in CurrentTags)
-			if ( a->Name == s ) return a->Title; 
+			if ( a->Name == s ) return a->Title;
 
 		return res;
 	}*/
@@ -1801,7 +1810,7 @@ public:
 	{
 		Dictionary<String^, String^>^ res = gcnew Dictionary<String^, String^>();
 
-		if ( String::IsNullOrEmpty(t->Boody) ) return res;
+		if (String::IsNullOrEmpty(t->Boody)) return res;
 		try
 		{
 			String^ tmp = t->Boody;
@@ -1811,35 +1820,35 @@ public:
 			tmp = tmp->Remove(tmp->LastIndexOf(">") + 1);
 			int Pos = tmp->IndexOf("<");
 			int a;
-			while ( Pos > -1 )
+			while (Pos > -1)
 			{
 				body = tmp->Remove(0, Pos);
 				tmp = tmp->Remove(0, Pos + 1);
 				name = tmp->Remove(Min(tmp->IndexOf(">"), tmp->IndexOf(" ")));
 				a = body->IndexOf(">", body->IndexOf("</" + name));
-				if ( a < body->Length - 1 )
+				if (a < body->Length - 1)
 					body = body->Remove(a + 1);
 				res->Add(name, body);
 				tmp = tmp->Remove(0, tmp->IndexOf(">") + 1);
 				a = tmp->IndexOf(">", tmp->IndexOf("</" + name));
-				if ( a < tmp->Length - 1 ) tmp = tmp->Remove(0, a + 1);
+				if (a < tmp->Length - 1) tmp = tmp->Remove(0, a + 1);
 				else tmp = "";
 				Pos = tmp->IndexOf("<");
 			}
 		}
-		catch ( Exception ^e )
+		catch (Exception ^e)
 		{
 			ShowError(415, "Ошибка при работе с библиотекой дополнительных возможностей\n\nПодробнее:\n" + e->ToString());
 		}
-		
+
 		return res;
 	}
 
 
-public: 
+	public:
 	int Count = 0;
 
-private:
-	String^ FileContent = "";
+	private:
+	String ^ FileContent = "";
 	List<AddonTag^>^ CurrentTags = gcnew List<AddonTag^>();
 };
