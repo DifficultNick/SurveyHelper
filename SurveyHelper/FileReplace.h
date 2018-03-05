@@ -48,8 +48,11 @@ private: System::Windows::Forms::TextBox^  filePath;
 private: System::Windows::Forms::Button^  search;
 private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
 private: System::Windows::Forms::Label^  label3;
-private: System::Windows::Forms::RichTextBox^  to;
 private: System::Windows::Forms::RichTextBox^  from;
+
+private: System::Windows::Forms::RichTextBox^  to;
+
+
 private: System::Windows::Forms::Label^  label2;
 
 
@@ -59,8 +62,8 @@ private: System::Windows::Forms::Label^  label2;
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->to = (gcnew System::Windows::Forms::RichTextBox());
 			this->from = (gcnew System::Windows::Forms::RichTextBox());
+			this->to = (gcnew System::Windows::Forms::RichTextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->go = (gcnew System::Windows::Forms::Button());
@@ -97,8 +100,8 @@ private: System::Windows::Forms::Label^  label2;
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				50)));
 			this->tableLayoutPanel2->Controls->Add(this->label3, 0, 0);
-			this->tableLayoutPanel2->Controls->Add(this->to, 0, 1);
 			this->tableLayoutPanel2->Controls->Add(this->from, 0, 1);
+			this->tableLayoutPanel2->Controls->Add(this->to, 0, 1);
 			this->tableLayoutPanel2->Controls->Add(this->label2, 1, 0);
 			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tableLayoutPanel2->Location = System::Drawing::Point(3, 38);
@@ -121,23 +124,23 @@ private: System::Windows::Forms::Label^  label2;
 			this->label3->Text = L"Строки для замены:";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			// 
-			// to
-			// 
-			this->to->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->to->Location = System::Drawing::Point(3, 17);
-			this->to->Name = L"to";
-			this->to->Size = System::Drawing::Size(409, 325);
-			this->to->TabIndex = 3;
-			this->to->Text = L"";
-			// 
 			// from
 			// 
 			this->from->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->from->Location = System::Drawing::Point(418, 17);
+			this->from->Location = System::Drawing::Point(3, 17);
 			this->from->Name = L"from";
 			this->from->Size = System::Drawing::Size(409, 325);
-			this->from->TabIndex = 2;
+			this->from->TabIndex = 3;
 			this->from->Text = L"";
+			// 
+			// to
+			// 
+			this->to->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->to->Location = System::Drawing::Point(418, 17);
+			this->to->Name = L"to";
+			this->to->Size = System::Drawing::Size(409, 325);
+			this->to->TabIndex = 2;
+			this->to->Text = L"";
 			// 
 			// label2
 			// 
@@ -161,7 +164,7 @@ private: System::Windows::Forms::Label^  label2;
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				95)));
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				111)));
+				114)));
 			this->tableLayoutPanel3->Controls->Add(this->go, 3, 0);
 			this->tableLayoutPanel3->Controls->Add(this->label1, 0, 0);
 			this->tableLayoutPanel3->Controls->Add(this->filePath, 1, 0);
@@ -177,9 +180,9 @@ private: System::Windows::Forms::Label^  label2;
 			// go
 			// 
 			this->go->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
-			this->go->Location = System::Drawing::Point(721, 3);
+			this->go->Location = System::Drawing::Point(718, 3);
 			this->go->Name = L"go";
-			this->go->Size = System::Drawing::Size(106, 23);
+			this->go->Size = System::Drawing::Size(109, 23);
 			this->go->TabIndex = 3;
 			this->go->Text = L"Заменить";
 			this->go->UseVisualStyleBackColor = true;
@@ -202,13 +205,13 @@ private: System::Windows::Forms::Label^  label2;
 			this->filePath->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->filePath->Location = System::Drawing::Point(56, 3);
 			this->filePath->Name = L"filePath";
-			this->filePath->Size = System::Drawing::Size(564, 20);
+			this->filePath->Size = System::Drawing::Size(561, 20);
 			this->filePath->TabIndex = 1;
 			// 
 			// search
 			// 
 			this->search->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
-			this->search->Location = System::Drawing::Point(626, 3);
+			this->search->Location = System::Drawing::Point(623, 3);
 			this->search->Name = L"search";
 			this->search->Size = System::Drawing::Size(89, 23);
 			this->search->TabIndex = 2;
@@ -306,7 +309,8 @@ private: System::Windows::Forms::Label^  label2;
 			return;
 		}
 
-		List<String^>^ file = gcnew List<String^>(ReadFile(filePath->Text));
+		//List<String^>^ file = gcnew List<String^>(ReadFile(filePath->Text));
+		String^ file = File::ReadAllText(filePath->Text, System::Text::Encoding::Default);
 		List<String^>^ oldV = StringToList(from->Text, '\n');
 		List<String^>^ newV = StringToList(to->Text, '\n');
 		List<int>^ order = SortByLength(oldV);
@@ -323,19 +327,21 @@ private: System::Windows::Forms::Label^  label2;
 				return;
 			}
 
-			for ( int i = 0; file->Count > i; i++ )
-				for ( int j = 0; oldV->Count > j; j++ )
-					if ( file[i]->Contains(oldV[j]) )
-					{
-						c += CountSubStrings(file[i], oldV[j]);
-						file[i] = file[i]->Replace(oldV[j], newV[j]);
-					}
+			for (int j = 0; oldV->Count > j; j++)
+			{
+				String^ tmp = oldV[j]->Trim();
+				if (file->Contains(tmp))
+				{
+					c += CountSubStrings(file, tmp);
+					file = file->Replace(tmp, newV[j]->Trim());
+				}
+			}
 			if ( c == 0 )
 			{
 				ShowMessage("Совпадений не найдено");
 				return;
 			}
-			WriteFile(filePath->Text, file->ToArray(), ".bak");
+			WriteFile(filePath->Text, file->Split('\n'), ".bak");
 			ShowMessage("Файл сохранён, выполнено " + c.ToString() + " замен.");
 		}
 		catch ( Exception^ e )
@@ -344,7 +350,7 @@ private: System::Windows::Forms::Label^  label2;
 		}
 	}
 
-	private: System::Void search_Click(System::Object^  sender, System::EventArgs^  e)
+	private: System::Void search_Click(System::Object^  sender, System::EventArgs^ e)
 	{
 		if ( openFileDialog1->ShowDialog() == Forms::DialogResult::OK ) filePath->Text = openFileDialog1->FileName;
 	}

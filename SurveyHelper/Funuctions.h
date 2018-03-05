@@ -804,10 +804,10 @@ static bool WriteFile(String^ FileName, array<String^>^ Str, System::Text::Encod
 
 
 // если файл с именем FileName уже существует, то он перемещается в FileName + bactxt (старый заменяется)
-static bool WriteFile(String^ FileName, array<String^>^ Str, String^ bactxt)
+static bool WriteFile(String^ FileName, array<String^>^ Str, String^ bactxt, System::Text::Encoding^ enc = System::Text::Encoding::Default)
 {
 	if (File::Exists(FileName)) File::Copy(FileName, FileName + bactxt, true);
-	return WriteFile(FileName, Str);
+	return WriteFile(FileName, Str, enc);
 }
 
 
@@ -1001,7 +1001,6 @@ static bool ExportToExcel(array<String^>^ lines, String^ FilePath)
 static String^ ReadExcelFile(String^ filePath)
 {
 	String^ res = "";
-
 	try
 	{
 		Excel::Application^ exApp = gcnew Excel::ApplicationClass();
