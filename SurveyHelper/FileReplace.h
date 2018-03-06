@@ -246,60 +246,6 @@ private: System::Windows::Forms::Label^  label2;
 	#pragma endregion
 
 
-	// возвращает List Id
-	private: List<int>^ SortByLength(List<String^>^ lstSort)
-	{
-		List<int>^ res = gcnew List<int>();
-		try
-		{
-			if ( lstSort->Count < 2 )
-			{
-				res->Add(0);
-				return res;
-			}
-			List<String^>^ source = gcnew List<String^>(lstSort);
-			int max = 0, j = 0;
-
-			while ( source->Count > 0 )
-			{
-				max = source[0]->Length;
-				j = 0;
-				for ( int i = 0; source->Count > i; i++ )
-				{
-					if ( max < source[i]->Length )
-					{
-						max = source[i]->Length;
-						j = i;
-					}
-				}
-				res->Add(j);
-				source->RemoveAt(j);
-			}
-		}
-		catch ( Exception^ e )
-		{
-			ShowError(417, "Ошибка сортировки строк по увеличению длины\n\n"+e->ToString());
-		}
-
-		
-		return res;
-	}
-
-	private: List<String^>^ SetOrder(List<String^>^ lst, List<int>^ order)
-	{
-		List<String^>^ res = gcnew List<String^>();
-		try
-		{
-			for each (int i in order)
-				res->Add(lst[i]);
-		}
-		catch ( Exception^ e )
-		{
-			ShowError(418, "Ошибка сортировки строк по увеличению длины\n\n" + e->ToString());
-		}
-		
-		return res;
-	}
 
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -309,31 +255,36 @@ private: System::Windows::Forms::Label^  label2;
 			return;
 		}
 
-		//List<String^>^ file = gcnew List<String^>(ReadFile(filePath->Text));
 		String^ file = File::ReadAllText(filePath->Text, System::Text::Encoding::Default);
 		List<String^>^ oldV = StringToList(from->Text, '\n');
 		List<String^>^ newV = StringToList(to->Text, '\n');
-		List<int>^ order = SortByLength(oldV);
-		oldV = SetOrder(oldV, order);
-		newV = SetOrder(newV, order);
+		auto data = gcnew List<array<String^>^>();
 		int c = 0;
 
 		try
 		{
-
 			if ( oldV->Count != newV->Count )
 			{
 				ShowMessage("Разное количество строк!");
 				return;
 			}
 
-			for (int j = 0; oldV->Count > j; j++)
+			for (int i = 0; i < oldV->Count; i++)
 			{
-				String^ tmp = oldV[j]->Trim();
-				if (file->Contains(tmp))
+				array<String^>^ a = { oldV[i], newV[i] };
+				data->Add(a);
+			}
+
+			data = SortListByLength(data);
+
+			for (int j = 0; j < data->Count; j++)
+			{
+				array<String^>^ ar = data[j];
+				String^ tmp = ar[0]->Trim();
+				if (!String::IsNullOrEmpty(tmp) && file->Contains(tmp))
 				{
 					c += CountSubStrings(file, tmp);
-					file = file->Replace(tmp, newV[j]->Trim());
+					file = file->Replace(tmp, ar[1]->Trim());
 				}
 			}
 			if ( c == 0 )
@@ -341,7 +292,7 @@ private: System::Windows::Forms::Label^  label2;
 				ShowMessage("Совпадений не найдено");
 				return;
 			}
-			WriteFile(filePath->Text, file->Split('\n'), ".bak");
+			WriteFile(filePath->Text, file, ".bak");
 			ShowMessage("Файл сохранён, выполнено " + c.ToString() + " замен.");
 		}
 		catch ( Exception^ e )

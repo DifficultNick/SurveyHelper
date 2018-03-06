@@ -46,6 +46,31 @@ public ref class StringLengthDesc : System::Collections::Generic::IComparer<Stri
 };
 
 
+// Сортировка строк по убыванию длины первой (0) строки в массиве [2]
+public ref class StringArrayLengthDesc : System::Collections::Generic::IComparer<array<String^>^>
+{
+public:
+	// Сортировка строк по убыванию длины
+	StringArrayLengthDesc()
+	{};
+
+	~StringArrayLengthDesc()
+	{};
+
+	virtual int Compare(array<String^>^ x, array<String^>^ y)
+	{
+		if (x == nullptr)
+			if (y == nullptr)
+				return 0;
+			else
+				return 1;
+
+		if (y == nullptr) return -1;
+		return y[0]->Length - x[0]->Length;
+	}
+};
+
+
 
 // Сортировка строк по возрастанию длины
 public ref class StringLengthAsc : System::Collections::Generic::IComparer<String^>
@@ -775,7 +800,24 @@ static bool WriteFile(String^ FileName, array<String^>^ Str)
 {
 	try
 	{
-		File::WriteAllLines(FileName, Str, System::Text::Encoding::GetEncoding(1251));
+		File::WriteAllLines(FileName, Str, System::Text::Encoding::Default);
+	}
+	catch (Exception^ e)
+	{
+		ShowError(216, "Ошибка при записи файла.\n\nПодробнее\n" + e->ToString());
+		return false;
+	}
+
+	return true;
+}
+
+
+static bool WriteFile(String^ FileName, String^ Str, String^ bactxt, System::Text::Encoding^ enc = System::Text::Encoding::Default)
+{
+	try
+	{
+		if (File::Exists(FileName)) File::Copy(FileName, FileName + bactxt, true);
+		File::WriteAllText(FileName, Str, enc);
 	}
 	catch (Exception^ e)
 	{
@@ -1126,6 +1168,15 @@ static List<String^>^ SortListByLength(List<String^>^ list)
 {
 	List<String^>^ res = list;
 	res->Sort(gcnew StringLengthDesc());
+	return res;
+}
+
+
+// сортировка по убыванию длины первой строки в массиве
+static List<array<String^>^>^ SortListByLength(List<array<String^>^>^ ar)
+{
+	List<array<String^>^>^ res = ar;
+	res->Sort(gcnew StringArrayLengthDesc());
 	return res;
 }
 
