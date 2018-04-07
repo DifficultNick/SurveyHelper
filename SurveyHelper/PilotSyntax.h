@@ -21,6 +21,10 @@
 		private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
 		private: System::Windows::Forms::CheckBox^  saveLength;
 		private: System::Windows::Forms::CheckBox^  saveResp;
+	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel9;
+	private: System::Windows::Forms::CheckBox^  replaceOther;
+
+	private: System::Windows::Forms::TextBox^  other;
 
 
 				 ProjectResources^ rsc = gcnew ProjectResources();
@@ -136,6 +140,9 @@
 			this->autoRun = (gcnew System::Windows::Forms::CheckBox());
 			this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->tableLayoutPanel9 = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->replaceOther = (gcnew System::Windows::Forms::CheckBox());
+			this->other = (gcnew System::Windows::Forms::TextBox());
 			this->tableLayoutPanel2->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel3->SuspendLayout();
@@ -148,6 +155,7 @@
 			this->panel2->SuspendLayout();
 			this->tableLayoutPanel7->SuspendLayout();
 			this->panel3->SuspendLayout();
+			this->tableLayoutPanel9->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tableLayoutPanel2
@@ -171,7 +179,7 @@
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 25)));
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 22)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(635, 275);
+			this->tableLayoutPanel2->Size = System::Drawing::Size(635, 304);
 			this->tableLayoutPanel2->TabIndex = 1;
 			// 
 			// groupBox1
@@ -182,7 +190,7 @@
 				static_cast<System::Byte>(204)));
 			this->groupBox1->Location = System::Drawing::Point(3, 40);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(445, 185);
+			this->groupBox1->Size = System::Drawing::Size(445, 214);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Настройки";
@@ -192,6 +200,7 @@
 			this->tableLayoutPanel3->ColumnCount = 1;
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				100)));
+			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel9, 0, 6);
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel6, 0, 5);
 			this->tableLayoutPanel3->Controls->Add(this->renvar, 0, 1);
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel4, 0, 2);
@@ -203,15 +212,15 @@
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->tableLayoutPanel3->Location = System::Drawing::Point(3, 16);
 			this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
-			this->tableLayoutPanel3->RowCount = 6;
+			this->tableLayoutPanel3->RowCount = 7;
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 26)));
-			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 22)));
-			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel3->Size = System::Drawing::Size(439, 166);
+			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
+			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
+			this->tableLayoutPanel3->Size = System::Drawing::Size(439, 195);
 			this->tableLayoutPanel3->TabIndex = 0;
 			// 
 			// tableLayoutPanel6
@@ -459,7 +468,7 @@
 			this->tableLayoutPanel2->SetColumnSpan(this->panel2, 2);
 			this->panel2->Controls->Add(this->tableLayoutPanel7);
 			this->panel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel2->Location = System::Drawing::Point(0, 253);
+			this->panel2->Location = System::Drawing::Point(0, 282);
 			this->panel2->Margin = System::Windows::Forms::Padding(0);
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(635, 22);
@@ -541,7 +550,7 @@
 			this->panel4->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->panel4->BackColor = System::Drawing::Color::White;
 			this->panel4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->panel4->Location = System::Drawing::Point(461, 57);
+			this->panel4->Location = System::Drawing::Point(461, 71);
 			this->panel4->Name = L"panel4";
 			this->panel4->Size = System::Drawing::Size(164, 151);
 			this->panel4->TabIndex = 4;
@@ -564,7 +573,7 @@
 			this->autoRun->AutoSize = true;
 			this->autoRun->Checked = true;
 			this->autoRun->CheckState = System::Windows::Forms::CheckState::Checked;
-			this->autoRun->Location = System::Drawing::Point(9, 230);
+			this->autoRun->Location = System::Drawing::Point(9, 259);
 			this->autoRun->Margin = System::Windows::Forms::Padding(9, 2, 2, 2);
 			this->autoRun->Name = L"autoRun";
 			this->autoRun->Size = System::Drawing::Size(150, 17);
@@ -582,12 +591,51 @@
 			this->openFileDialog1->DefaultExt = L"sps";
 			this->openFileDialog1->Filter = L"Файл spss-синтаксиса|*.sps";
 			// 
+			// tableLayoutPanel9
+			// 
+			this->tableLayoutPanel9->ColumnCount = 2;
+			this->tableLayoutPanel9->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				229)));
+			this->tableLayoutPanel9->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				210)));
+			this->tableLayoutPanel9->Controls->Add(this->replaceOther, 0, 0);
+			this->tableLayoutPanel9->Controls->Add(this->other, 1, 0);
+			this->tableLayoutPanel9->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->tableLayoutPanel9->Location = System::Drawing::Point(0, 166);
+			this->tableLayoutPanel9->Margin = System::Windows::Forms::Padding(0);
+			this->tableLayoutPanel9->Name = L"tableLayoutPanel9";
+			this->tableLayoutPanel9->RowCount = 1;
+			this->tableLayoutPanel9->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+			this->tableLayoutPanel9->Size = System::Drawing::Size(439, 29);
+			this->tableLayoutPanel9->TabIndex = 10;
+			// 
+			// replaceOther
+			// 
+			this->replaceOther->AutoSize = true;
+			this->replaceOther->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->replaceOther->Location = System::Drawing::Point(3, 9);
+			this->replaceOther->Name = L"replaceOther";
+			this->replaceOther->Size = System::Drawing::Size(223, 17);
+			this->replaceOther->TabIndex = 4;
+			this->replaceOther->Text = L"Заменить \"{c#}\" на:";
+			this->replaceOther->UseVisualStyleBackColor = true;
+			// 
+			// other
+			// 
+			this->other->Dock = System::Windows::Forms::DockStyle::Left;
+			this->other->Location = System::Drawing::Point(232, 3);
+			this->other->Name = L"other";
+			this->other->Size = System::Drawing::Size(158, 20);
+			this->other->TabIndex = 5;
+			this->other->Text = L"Другое";
+			this->toolTip1->SetToolTip(this->other, L"Список статусов через запятую");
+			// 
 			// PilotSyntax
 			// 
 			this->AllowDrop = true;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(635, 275);
+			this->ClientSize = System::Drawing::Size(635, 304);
 			this->Controls->Add(this->tableLayoutPanel2);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
@@ -623,6 +671,8 @@
 			this->tableLayoutPanel7->PerformLayout();
 			this->panel3->ResumeLayout(false);
 			this->panel3->PerformLayout();
+			this->tableLayoutPanel9->ResumeLayout(false);
+			this->tableLayoutPanel9->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -760,6 +810,14 @@
 				StatusLabel->Text = "Замена @...";
 				Update();
 				res = res->Replace("@", del);
+			}
+
+			// замена {c#}
+			if (replaceOther->Checked)
+			{
+				StatusLabel->Text = "Замена {c#}...";
+				Update();
+				res = res->Replace("{c#}", other->Text);
 			}
 
 			progressBar1->Value = 65;
