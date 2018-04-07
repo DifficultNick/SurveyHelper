@@ -694,14 +694,18 @@
 			s = Regex::Replace(s, "(?<pre>FILE HANDLE\\s*[^'\"]*NAME\\s*=\\s*['\"])([^'\"]*)(?<post>['\"][^\n]*\n)", "${pre}" + txtP + "${post}");
 
 			int eof = s->IndexOf("\n**** OPENS.");
-			String^ res = s->Remove(eof);
+			String^ res = s;
+			if (eof > -1) res = res->Remove(eof);
 
 			// переименование
 			if (renvar->Checked)
 			{
 				int sel = res->IndexOf("select if");
-				sel = res->IndexOf("\n", sel) + 1;
-				res = res->Insert(sel, "rename variables(pre_sex pre_age" + del + "1 = sex age).\n");
+				if (sel >= 0)
+				{
+					sel = res->IndexOf("\n", sel) + 1;
+					res = res->Insert(sel, "rename variables(pre_sex pre_age" + del + "1 = sex age).\n");
+				}
 			}
 
 			//выбор статусов
@@ -726,9 +730,8 @@
 				if (saveLength->Checked) dv += "DeviceType Version to ";
 				dv += lastTech;
 				lastTech = Regex::Match(vars, "(?<name>srt[_@][^\\s]+)\\s+F\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt[_@][^\\s]+)\\s+F\\d[^(crt)]*$")->Result("${name}");
-				dv += " " + lastTech;
+				dv += " " + lastTech + " ";
 				dv += Regex::Match(vars, "(?<name>srt[_@\.][^\\s]+)\\s+[A-Z]\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt[_@\.][^\\s]+)\\s+[A-Z]\\d[^(crt)]*$")->Result("${name}");
-				dv += " " ;
 			}
 
 			// финальное сохранение
