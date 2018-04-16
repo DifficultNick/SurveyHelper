@@ -35,10 +35,11 @@
 			this->panel4->BackgroundImage = rsc->GetImage("waiting_for_file");
 			String^ dd = "_";
 			sets->Read("SPSS");
-			if ( sets->isWritten("Delimiter") ) dd = sets->Get("Delimeter");
+			if ( sets->isWritten("Delimiter") ) dd = sets->Get("Delimiter");
 			delimeter->Text = dd;
-			repl->Checked = sets->Get("Replace", true);
+			repl->Checked = sets->Get("ReplaceDelimiter", true);
 			autoRun->Checked = sets->Get("AutoRun", true);
+			replaceOther->Checked = sets->Get("ReplaceCS", true);
 		}
 
 
@@ -110,6 +111,9 @@
 			this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->tableLayoutPanel9 = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->replaceOther = (gcnew System::Windows::Forms::CheckBox());
+			this->other = (gcnew System::Windows::Forms::TextBox());
 			this->tableLayoutPanel6 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->excelExp = (gcnew System::Windows::Forms::CheckBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
@@ -140,12 +144,10 @@
 			this->autoRun = (gcnew System::Windows::Forms::CheckBox());
 			this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->tableLayoutPanel9 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->replaceOther = (gcnew System::Windows::Forms::CheckBox());
-			this->other = (gcnew System::Windows::Forms::TextBox());
 			this->tableLayoutPanel2->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel3->SuspendLayout();
+			this->tableLayoutPanel9->SuspendLayout();
 			this->tableLayoutPanel6->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->tableLayoutPanel4->SuspendLayout();
@@ -155,7 +157,6 @@
 			this->panel2->SuspendLayout();
 			this->tableLayoutPanel7->SuspendLayout();
 			this->panel3->SuspendLayout();
-			this->tableLayoutPanel9->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tableLayoutPanel2
@@ -222,6 +223,45 @@
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 			this->tableLayoutPanel3->Size = System::Drawing::Size(439, 195);
 			this->tableLayoutPanel3->TabIndex = 0;
+			// 
+			// tableLayoutPanel9
+			// 
+			this->tableLayoutPanel9->ColumnCount = 2;
+			this->tableLayoutPanel9->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				229)));
+			this->tableLayoutPanel9->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				210)));
+			this->tableLayoutPanel9->Controls->Add(this->replaceOther, 0, 0);
+			this->tableLayoutPanel9->Controls->Add(this->other, 1, 0);
+			this->tableLayoutPanel9->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->tableLayoutPanel9->Location = System::Drawing::Point(0, 166);
+			this->tableLayoutPanel9->Margin = System::Windows::Forms::Padding(0);
+			this->tableLayoutPanel9->Name = L"tableLayoutPanel9";
+			this->tableLayoutPanel9->RowCount = 1;
+			this->tableLayoutPanel9->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+			this->tableLayoutPanel9->Size = System::Drawing::Size(439, 29);
+			this->tableLayoutPanel9->TabIndex = 10;
+			// 
+			// replaceOther
+			// 
+			this->replaceOther->AutoSize = true;
+			this->replaceOther->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->replaceOther->Location = System::Drawing::Point(3, 9);
+			this->replaceOther->Name = L"replaceOther";
+			this->replaceOther->Size = System::Drawing::Size(223, 17);
+			this->replaceOther->TabIndex = 4;
+			this->replaceOther->Text = L"Заменить \"{c#}\" на:";
+			this->replaceOther->UseVisualStyleBackColor = true;
+			// 
+			// other
+			// 
+			this->other->Dock = System::Windows::Forms::DockStyle::Left;
+			this->other->Location = System::Drawing::Point(232, 3);
+			this->other->Name = L"other";
+			this->other->Size = System::Drawing::Size(158, 20);
+			this->other->TabIndex = 5;
+			this->other->Text = L"Другое";
+			this->toolTip1->SetToolTip(this->other, L"Список статусов через запятую");
 			// 
 			// tableLayoutPanel6
 			// 
@@ -407,6 +447,7 @@
 			this->delimeter->Name = L"delimeter";
 			this->delimeter->Size = System::Drawing::Size(27, 20);
 			this->delimeter->TabIndex = 0;
+			this->delimeter->Text = L"_";
 			this->delimeter->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->toolTip1->SetToolTip(this->delimeter, L"Разделитель");
 			// 
@@ -591,45 +632,6 @@
 			this->openFileDialog1->DefaultExt = L"sps";
 			this->openFileDialog1->Filter = L"Файл spss-синтаксиса|*.sps";
 			// 
-			// tableLayoutPanel9
-			// 
-			this->tableLayoutPanel9->ColumnCount = 2;
-			this->tableLayoutPanel9->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				229)));
-			this->tableLayoutPanel9->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				210)));
-			this->tableLayoutPanel9->Controls->Add(this->replaceOther, 0, 0);
-			this->tableLayoutPanel9->Controls->Add(this->other, 1, 0);
-			this->tableLayoutPanel9->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel9->Location = System::Drawing::Point(0, 166);
-			this->tableLayoutPanel9->Margin = System::Windows::Forms::Padding(0);
-			this->tableLayoutPanel9->Name = L"tableLayoutPanel9";
-			this->tableLayoutPanel9->RowCount = 1;
-			this->tableLayoutPanel9->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel9->Size = System::Drawing::Size(439, 29);
-			this->tableLayoutPanel9->TabIndex = 10;
-			// 
-			// replaceOther
-			// 
-			this->replaceOther->AutoSize = true;
-			this->replaceOther->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->replaceOther->Location = System::Drawing::Point(3, 9);
-			this->replaceOther->Name = L"replaceOther";
-			this->replaceOther->Size = System::Drawing::Size(223, 17);
-			this->replaceOther->TabIndex = 4;
-			this->replaceOther->Text = L"Заменить \"{c#}\" на:";
-			this->replaceOther->UseVisualStyleBackColor = true;
-			// 
-			// other
-			// 
-			this->other->Dock = System::Windows::Forms::DockStyle::Left;
-			this->other->Location = System::Drawing::Point(232, 3);
-			this->other->Name = L"other";
-			this->other->Size = System::Drawing::Size(158, 20);
-			this->other->TabIndex = 5;
-			this->other->Text = L"Другое";
-			this->toolTip1->SetToolTip(this->other, L"Список статусов через запятую");
-			// 
 			// PilotSyntax
 			// 
 			this->AllowDrop = true;
@@ -654,6 +656,8 @@
 			this->groupBox1->ResumeLayout(false);
 			this->tableLayoutPanel3->ResumeLayout(false);
 			this->tableLayoutPanel3->PerformLayout();
+			this->tableLayoutPanel9->ResumeLayout(false);
+			this->tableLayoutPanel9->PerformLayout();
 			this->tableLayoutPanel6->ResumeLayout(false);
 			this->tableLayoutPanel6->PerformLayout();
 			this->panel1->ResumeLayout(false);
@@ -671,8 +675,6 @@
 			this->tableLayoutPanel7->PerformLayout();
 			this->panel3->ResumeLayout(false);
 			this->panel3->PerformLayout();
-			this->tableLayoutPanel9->ResumeLayout(false);
-			this->tableLayoutPanel9->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -702,7 +704,7 @@
 			return;
 		}
 
-		try
+		//try
 		{
 			StatusLabel->Text = "Загрузка файла...";
 			Update();
@@ -723,7 +725,12 @@
 				return;
 			}
 
-			String^ del = repl->Checked ? delimeter->Text : "@";
+			String^ del;
+			auto delRes = Regex::Match(s, "\npre_age(.)1");
+			// ищем настоящий разделитель
+			if (delRes->Length > 0)
+				del = delRes->Groups[1]->Value;
+			else del = repl->Checked ? delimeter->Text : "@";
 			String^ vars = s->Remove(vrInd);
 			String^ fp = Regex::Replace(FilePath->Text, "\\.sps$", "");
 			String^ fn = Regex::Replace(Path::GetFileName(FilePath->Text), "\\.sps", "");
@@ -779,9 +786,9 @@
 				if (saveTime->Checked) dv += "Page Status to ";
 				if (saveLength->Checked) dv += "DeviceType Version to ";
 				dv += lastTech;
-				lastTech = Regex::Match(vars, "(?<name>srt[_@][^\\s]+)\\s+F\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt[_@][^\\s]+)\\s+F\\d[^(crt)]*$")->Result("${name}");
+				lastTech = Regex::Match(vars, "(?<name>srt" + del + "[^\\s]+)\\s+F\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt" + del + "[^\\s]+)\\s+F\\d[^(crt)]*$")->Result("${name}");
 				dv += " " + lastTech + " ";
-				dv += Regex::Match(vars, "(?<name>srt[_@\.][^\\s]+)\\s+[A-Z]\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt[_@\.][^\\s]+)\\s+[A-Z]\\d[^(crt)]*$")->Result("${name}");
+				dv += Regex::Match(vars, "(?<name>srt" + del + "[^\\s]+)\\s+[A-Z]\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt" + del + "[^\\s]+)\\s+[A-Z]\\d[^(crt)]*$")->Result("${name}");
 			}
 
 			// финальное сохранение
@@ -850,10 +857,10 @@
 			StatusLabel->Text = "Готово!";
 			Update();
 		}
-		catch ( Exception^ e )
+		//catch ( Exception^ e )
 		{
-			ShowError(429, "Ошибка обработки файла.\n\nПодробнее:\n" + e->ToString());
-			ResetAll(false);
+			//ShowError(429, "Ошибка обработки файла.\n\nПодробнее:\n" + e->ToString());
+			//ResetAll(false);
 		}
 	}
 	
@@ -958,8 +965,9 @@
 	{
 		sets->Clear();
 		sets->Set("Delimiter", delimeter->Text);
-		sets->Set("Replace", repl->Checked);
+		sets->Set("ReplaceDelimiter", repl->Checked);
 		sets->Set("AutoRun", autoRun->Checked);
+		sets->Set("ReplaceCS", replaceOther->Checked);
 		sets->Save("SPSS");
 	}
 
