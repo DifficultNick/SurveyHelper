@@ -3509,7 +3509,7 @@ private:
 		PHChanged = false;
 
 		if ( ReturnBack ) Defaults->SetAll();
-		RefreshButton->Focus();
+		dataGridView1->Focus();
 	}
 
 
