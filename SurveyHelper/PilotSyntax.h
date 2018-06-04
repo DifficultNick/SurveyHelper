@@ -158,9 +158,6 @@
 			this->tableLayoutPanel7->SuspendLayout();
 			this->panel3->SuspendLayout();
 			this->SuspendLayout();
-			// 
-			// tableLayoutPanel2
-			// 
 			this->tableLayoutPanel2->ColumnCount = 2;
 			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				100)));
@@ -182,12 +179,9 @@
 			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 22)));
 			this->tableLayoutPanel2->Size = System::Drawing::Size(635, 304);
 			this->tableLayoutPanel2->TabIndex = 1;
-			// 
-			// groupBox1
-			// 
 			this->groupBox1->Controls->Add(this->tableLayoutPanel3);
 			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
 			this->groupBox1->Location = System::Drawing::Point(3, 40);
 			this->groupBox1->Name = L"groupBox1";
@@ -195,9 +189,6 @@
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Настройки";
-			// 
-			// tableLayoutPanel3
-			// 
 			this->tableLayoutPanel3->ColumnCount = 1;
 			this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 				100)));
@@ -209,7 +200,7 @@
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel8, 0, 0);
 			this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel1, 0, 4);
 			this->tableLayoutPanel3->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+			this->tableLayoutPanel3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->tableLayoutPanel3->Location = System::Drawing::Point(3, 16);
 			this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
@@ -223,9 +214,6 @@
 			this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 			this->tableLayoutPanel3->Size = System::Drawing::Size(439, 195);
 			this->tableLayoutPanel3->TabIndex = 0;
-			// 
-			// tableLayoutPanel9
-			// 
 			this->tableLayoutPanel9->ColumnCount = 2;
 			this->tableLayoutPanel9->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				229)));
@@ -241,9 +229,6 @@
 			this->tableLayoutPanel9->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel9->Size = System::Drawing::Size(439, 29);
 			this->tableLayoutPanel9->TabIndex = 10;
-			// 
-			// replaceOther
-			// 
 			this->replaceOther->AutoSize = true;
 			this->replaceOther->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->replaceOther->Location = System::Drawing::Point(3, 9);
@@ -252,9 +237,6 @@
 			this->replaceOther->TabIndex = 4;
 			this->replaceOther->Text = L"Заменить \"{c#}\" на:";
 			this->replaceOther->UseVisualStyleBackColor = true;
-			// 
-			// other
-			// 
 			this->other->Dock = System::Windows::Forms::DockStyle::Left;
 			this->other->Location = System::Drawing::Point(232, 3);
 			this->other->Name = L"other";
@@ -262,9 +244,6 @@
 			this->other->TabIndex = 5;
 			this->other->Text = L"Другое";
 			this->toolTip1->SetToolTip(this->other, L"Список статусов через запятую");
-			// 
-			// tableLayoutPanel6
-			// 
 			this->tableLayoutPanel6->ColumnCount = 2;
 			this->tableLayoutPanel6->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				229)));
@@ -280,9 +259,6 @@
 			this->tableLayoutPanel6->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel6->Size = System::Drawing::Size(439, 28);
 			this->tableLayoutPanel6->TabIndex = 8;
-			// 
-			// excelExp
-			// 
 			this->excelExp->AutoSize = true;
 			this->excelExp->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->excelExp->Location = System::Drawing::Point(3, 8);
@@ -291,9 +267,6 @@
 			this->excelExp->TabIndex = 6;
 			this->excelExp->Text = L"Экспортировать в Excel";
 			this->excelExp->UseVisualStyleBackColor = true;
-			// 
-			// panel1
-			// 
 			this->panel1->Controls->Add(this->vals);
 			this->panel1->Controls->Add(this->labs);
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -302,9 +275,6 @@
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(210, 28);
 			this->panel1->TabIndex = 7;
-			// 
-			// vals
-			// 
 			this->vals->AutoSize = true;
 			this->vals->Location = System::Drawing::Point(77, 6);
 			this->vals->Name = L"vals";
@@ -312,9 +282,6 @@
 			this->vals->TabIndex = 1;
 			this->vals->Text = L"Значения";
 			this->vals->UseVisualStyleBackColor = true;
-			// 
-			// labs
-			// 
 			this->labs->AutoSize = true;
 			this->labs->Checked = true;
 			this->labs->Location = System::Drawing::Point(3, 6);
@@ -324,9 +291,6 @@
 			this->labs->TabStop = true;
 			this->labs->Text = L"Метки";
 			this->labs->UseVisualStyleBackColor = true;
-			// 
-			// renvar
-			// 
 			this->renvar->AutoSize = true;
 			this->renvar->Checked = true;
 			this->renvar->CheckState = System::Windows::Forms::CheckState::Checked;
@@ -337,9 +301,6 @@
 			this->renvar->TabIndex = 3;
 			this->renvar->Text = L"Переименовать переменные pre_sex и pre_age_1";
 			this->renvar->UseVisualStyleBackColor = true;
-			// 
-			// tableLayoutPanel4
-			// 
 			this->tableLayoutPanel4->ColumnCount = 2;
 			this->tableLayoutPanel4->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				229)));
@@ -355,9 +316,6 @@
 			this->tableLayoutPanel4->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel4->Size = System::Drawing::Size(439, 28);
 			this->tableLayoutPanel4->TabIndex = 4;
-			// 
-			// selstat
-			// 
 			this->selstat->AutoSize = true;
 			this->selstat->Checked = true;
 			this->selstat->CheckState = System::Windows::Forms::CheckState::Checked;
@@ -368,9 +326,6 @@
 			this->selstat->TabIndex = 4;
 			this->selstat->Text = L"Выбрать статусы:";
 			this->selstat->UseVisualStyleBackColor = true;
-			// 
-			// stats
-			// 
 			this->stats->Dock = System::Windows::Forms::DockStyle::Left;
 			this->stats->Location = System::Drawing::Point(232, 3);
 			this->stats->Name = L"stats";
@@ -378,9 +333,6 @@
 			this->stats->TabIndex = 5;
 			this->stats->Text = L"18";
 			this->toolTip1->SetToolTip(this->stats, L"Список статусов через запятую");
-			// 
-			// tableLayoutPanel5
-			// 
 			this->tableLayoutPanel5->ColumnCount = 2;
 			this->tableLayoutPanel5->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				229)));
@@ -396,9 +348,6 @@
 			this->tableLayoutPanel5->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel5->Size = System::Drawing::Size(439, 28);
 			this->tableLayoutPanel5->TabIndex = 5;
-			// 
-			// saveTime
-			// 
 			this->saveTime->AutoSize = true;
 			this->saveTime->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->saveTime->Location = System::Drawing::Point(232, 8);
@@ -407,9 +356,6 @@
 			this->saveTime->TabIndex = 7;
 			this->saveTime->Text = L"Оставить Start и End";
 			this->saveTime->UseVisualStyleBackColor = true;
-			// 
-			// cutvars
-			// 
 			this->cutvars->AutoSize = true;
 			this->cutvars->Checked = true;
 			this->cutvars->CheckState = System::Windows::Forms::CheckState::Checked;
@@ -420,9 +366,6 @@
 			this->cutvars->TabIndex = 6;
 			this->cutvars->Text = L"Отрезать технические переменные";
 			this->cutvars->UseVisualStyleBackColor = true;
-			// 
-			// tableLayoutPanel8
-			// 
 			this->tableLayoutPanel8->ColumnCount = 2;
 			this->tableLayoutPanel8->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				229)));
@@ -438,9 +381,6 @@
 			this->tableLayoutPanel8->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel8->Size = System::Drawing::Size(435, 28);
 			this->tableLayoutPanel8->TabIndex = 7;
-			// 
-			// delimeter
-			// 
 			this->delimeter->Location = System::Drawing::Point(231, 2);
 			this->delimeter->Margin = System::Windows::Forms::Padding(2);
 			this->delimeter->MaxLength = 1;
@@ -450,9 +390,6 @@
 			this->delimeter->Text = L"_";
 			this->delimeter->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->toolTip1->SetToolTip(this->delimeter, L"Разделитель");
-			// 
-			// repl
-			// 
 			this->repl->AutoSize = true;
 			this->repl->Checked = true;
 			this->repl->CheckState = System::Windows::Forms::CheckState::Checked;
@@ -462,9 +399,6 @@
 			this->repl->TabIndex = 0;
 			this->repl->Text = L"Заменить \"@\" на";
 			this->repl->UseVisualStyleBackColor = true;
-			// 
-			// tableLayoutPanel1
-			// 
 			this->tableLayoutPanel1->ColumnCount = 2;
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				229)));
@@ -480,9 +414,6 @@
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 			this->tableLayoutPanel1->Size = System::Drawing::Size(439, 26);
 			this->tableLayoutPanel1->TabIndex = 9;
-			// 
-			// saveLength
-			// 
 			this->saveLength->AutoSize = true;
 			this->saveLength->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->saveLength->Location = System::Drawing::Point(232, 6);
@@ -491,9 +422,6 @@
 			this->saveLength->TabIndex = 1;
 			this->saveLength->Text = L"Оставить Length";
 			this->saveLength->UseVisualStyleBackColor = true;
-			// 
-			// saveResp
-			// 
 			this->saveResp->AutoSize = true;
 			this->saveResp->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->saveResp->Location = System::Drawing::Point(3, 6);
@@ -502,9 +430,6 @@
 			this->saveResp->TabIndex = 0;
 			this->saveResp->Text = L"Оставить Respondent";
 			this->saveResp->UseVisualStyleBackColor = true;
-			// 
-			// panel2
-			// 
 			this->panel2->BackColor = System::Drawing::SystemColors::AppWorkspace;
 			this->tableLayoutPanel2->SetColumnSpan(this->panel2, 2);
 			this->panel2->Controls->Add(this->tableLayoutPanel7);
@@ -514,15 +439,12 @@
 			this->panel2->Name = L"panel2";
 			this->panel2->Size = System::Drawing::Size(635, 22);
 			this->panel2->TabIndex = 1;
-			// 
-			// tableLayoutPanel7
-			// 
 			this->tableLayoutPanel7->BackColor = System::Drawing::Color::White;
 			this->tableLayoutPanel7->ColumnCount = 2;
 			this->tableLayoutPanel7->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				51.20148F)));
+				51.20148)));
 			this->tableLayoutPanel7->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				48.79852F)));
+				48.79852)));
 			this->tableLayoutPanel7->Controls->Add(this->StatusLabel, 0, 0);
 			this->tableLayoutPanel7->Controls->Add(this->progressBar1, 1, 0);
 			this->tableLayoutPanel7->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -532,9 +454,6 @@
 			this->tableLayoutPanel7->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->tableLayoutPanel7->Size = System::Drawing::Size(635, 22);
 			this->tableLayoutPanel7->TabIndex = 0;
-			// 
-			// StatusLabel
-			// 
 			this->StatusLabel->AutoSize = true;
 			this->StatusLabel->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->StatusLabel->ForeColor = System::Drawing::Color::Gray;
@@ -544,9 +463,6 @@
 			this->StatusLabel->Size = System::Drawing::Size(319, 13);
 			this->StatusLabel->TabIndex = 0;
 			this->StatusLabel->Text = L"Выберите файл";
-			// 
-			// progressBar1
-			// 
 			this->progressBar1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->progressBar1->Location = System::Drawing::Point(328, 3);
 			this->progressBar1->Name = L"progressBar1";
@@ -554,9 +470,6 @@
 			this->progressBar1->Style = System::Windows::Forms::ProgressBarStyle::Continuous;
 			this->progressBar1->TabIndex = 1;
 			this->toolTip1->SetToolTip(this->progressBar1, L"Процесс выполнения");
-			// 
-			// panel3
-			// 
 			this->panel3->Controls->Add(this->button1);
 			this->panel3->Controls->Add(this->FilePath);
 			this->panel3->Dock = System::Windows::Forms::DockStyle::Fill;
@@ -564,9 +477,6 @@
 			this->panel3->Name = L"panel3";
 			this->panel3->Size = System::Drawing::Size(445, 31);
 			this->panel3->TabIndex = 2;
-			// 
-			// button1
-			// 
 			this->button1->Location = System::Drawing::Point(337, 5);
 			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
@@ -575,9 +485,6 @@
 			this->button1->Text = L"Обзор";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &PilotSyntax::button1_Click);
-			// 
-			// FilePath
-			// 
 			this->FilePath->Location = System::Drawing::Point(3, 6);
 			this->FilePath->Margin = System::Windows::Forms::Padding(2);
 			this->FilePath->Name = L"FilePath";
@@ -585,9 +492,6 @@
 			this->FilePath->TabIndex = 0;
 			this->FilePath->TextChanged += gcnew System::EventHandler(this, &PilotSyntax::FilePath_TextChanged);
 			this->FilePath->DoubleClick += gcnew System::EventHandler(this, &PilotSyntax::FilePath_DoubleClick);
-			// 
-			// panel4
-			// 
 			this->panel4->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->panel4->BackColor = System::Drawing::Color::White;
 			this->panel4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
@@ -595,9 +499,6 @@
 			this->panel4->Name = L"panel4";
 			this->panel4->Size = System::Drawing::Size(164, 151);
 			this->panel4->TabIndex = 4;
-			// 
-			// button2
-			// 
 			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->button2->Enabled = false;
 			this->button2->Location = System::Drawing::Point(492, 6);
@@ -608,9 +509,6 @@
 			this->button2->Text = L"Создать!";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &PilotSyntax::button2_Click);
-			// 
-			// autoRun
-			// 
 			this->autoRun->AutoSize = true;
 			this->autoRun->Checked = true;
 			this->autoRun->CheckState = System::Windows::Forms::CheckState::Checked;
@@ -622,18 +520,9 @@
 			this->autoRun->Text = L"Открыть по завершении";
 			this->toolTip1->SetToolTip(this->autoRun, L"Открыть файл .sps при успешном выполнении");
 			this->autoRun->UseVisualStyleBackColor = true;
-			// 
-			// toolTip1
-			// 
 			this->toolTip1->IsBalloon = true;
-			// 
-			// openFileDialog1
-			// 
 			this->openFileDialog1->DefaultExt = L"sps";
 			this->openFileDialog1->Filter = L"Файл spss-синтаксиса|*.sps";
-			// 
-			// PilotSyntax
-			// 
 			this->AllowDrop = true;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -728,9 +617,10 @@
 			String^ del;
 			auto delRes = Regex::Match(s, "\npre_age(.)1");
 			// ищем настоящий разделитель
-			if (delRes->Length > 0)
+			if (!!delRes && delRes->Length > 0)
 				del = delRes->Groups[1]->Value;
 			else del = repl->Checked ? delimeter->Text : "@";
+			ShowMessage(del);
 			String^ vars = s->Remove(vrInd);
 			String^ fp = Regex::Replace(FilePath->Text, "\\.sps$", "");
 			String^ fn = Regex::Replace(Path::GetFileName(FilePath->Text), "\\.sps", "");
@@ -816,7 +706,7 @@
 			{
 				StatusLabel->Text = "Замена @...";
 				Update();
-				res = res->Replace("@", del);
+				res = res->Replace("@", delimeter->Text);
 			}
 
 			// замена {c#}
