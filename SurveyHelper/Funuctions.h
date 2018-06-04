@@ -740,7 +740,7 @@ static String^ GetQuestionId(String^ s)
 
 	try
 	{
-		int i = Min(res->IndexOf('\t'), res->IndexOf(' '));
+		/*int i = Min(res->IndexOf('\t'), res->IndexOf(' '));
 
 		i = Min(i, res->IndexOf('.'));
 
@@ -749,7 +749,15 @@ static String^ GetQuestionId(String^ s)
 
 		if (!ContainsNumber(res)) return "";
 
-		if (res[res->Length - 1] == '.') res = res->Remove(res->Length - 1);
+		if (res[res->Length - 1] == '.') res = res->Remove(res->Length - 1);*/
+		auto match = Regex::Match(res, "^\\s*([\\w\\.]{1,9})(\\.|\\s)");
+		if (match->Length > 0)
+		{
+			res = match->Groups[1]->Value->Replace(".", "_");
+			res = Regex::Replace(res, "_+$", "");
+			return res;
+		}
+		return "";
 	}
 	catch (Exception^ e)
 	{
