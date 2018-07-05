@@ -421,6 +421,7 @@ static String^ Translate(String^ str)
 // òðàíñëèò-çàìåíà ñèìâîëîâ
 static String^ ImprovePropertyLanguage(String^ s)
 {
+	if (String::IsNullOrEmpty(s)) return s;
 	String^ rus = "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞß";
 	rus += rus->ToLower();
 	String^ eng = "ABBGDEEZZIYKLMHOPPCTYFXCCSSQQQAUA";

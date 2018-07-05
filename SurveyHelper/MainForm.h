@@ -3109,7 +3109,7 @@ private:
 					 answers->AddPageTag = adParent->Checked;
 					 if (pageHeader->Text != _PageHeader) answers->PageHeader = FirstUp->Checked ? RiseFirstLetter(pageHeader->Text) : pageHeader->Text;
 
-					 if ( QuestionHeader->Text != _QuestionHeader ) answers->Header = (ClearHeader) ? QuestionHeader->Text->Remove(0, answers->ParentId->Length)->Trim() : QuestionHeader->Text;
+					 if ( QuestionHeader->Text != _QuestionHeader ) answers->Header = (ClearHeader && parentIdText->Length > 0) ? QuestionHeader->Text->Remove(0, parentIdText->Length)->Trim() : QuestionHeader->Text;
 					 atrs += " Id=\"";
 					 if ( !String::IsNullOrEmpty(parentIdText) ) atrs += parentIdText;
 					 else
@@ -3184,7 +3184,7 @@ private:
 					 }
 
 					 if ( PageId->Text != nullptr && PageId->Text != _QuestionId ) uni->AnswerListId = PageId->Text;
-					 if ( QuestionHeader->Text != _QuestionHeader ) uni->DummyHeader = (ClearHeader) ? QuestionHeader->Text->Remove(0, uni->QuestionId->Length)->Trim() : QuestionHeader->Text;
+					 if ( QuestionHeader->Text != _QuestionHeader ) uni->DummyHeader = (ClearHeader && parentIdText->Length > 0) ? QuestionHeader->Text->Remove(0, parentIdText->Length)->Trim() : QuestionHeader->Text;
 					 if ( QuestionTypes->Enabled && QuestionTypes->SelectedIndex != -1 )  atrs = " Type=\"" + QuestionTypes->SelectedItem->ToString() + "\"";
 
 					 uni->DummyAtributes = atrs;
@@ -3237,7 +3237,7 @@ private:
 					 block->AnswerBlock->AddPageTag = adParent->Checked;
 					 if ( pageHeader->Text != _PageHeader )
 					 {
-						 String^ tmp = ClearHeader ? (pageHeader->Text->Remove(0, block->AnswerBlock->ParentId->Length)->Trim()) : pageHeader->Text;
+						 String^ tmp = ClearHeader && parentIdText->Length > 0 ? (pageHeader->Text->Remove(0, parentIdText->Length)->Trim()) : pageHeader->Text;
 						 block->AnswerBlock->PageHeader = FirstUp->Checked ? RiseFirstLetter(tmp) : tmp;
 					 }
 					 if ( QType != "" ) atrs += " Type=\"" + QType + "\"";
