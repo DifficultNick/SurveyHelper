@@ -427,6 +427,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 			for each (XmlNode^ child in childs)
 			{
+				if (child->NodeType == XmlNodeType::Comment) continue;
 				txt = "";
 				// Page		
 				if (child->Name == "Page" || child->Name == "Question")
@@ -455,7 +456,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 					else if (child->SelectNodes("Text")[0]) txt = child->SelectNodes("Text")[0]->InnerText;
 					if (!child->Attributes["Id"]) return "Не удалось определить Id элемента";
 					if (txt == "") return "Не удалось определить метку для элемента " + child->Attributes["Id"]->Value + " переменной " + vn;
-					if (!child->PreviousSibling || child->PreviousSibling->Name != "Answer" && child->PreviousSibling->Name != "Item") res += "val lab \n";
+					if (!child->PreviousSibling || child->PreviousSibling->Name != "Answer" && child->PreviousSibling->Name != "Item" && child->PreviousSibling->NodeType != XmlNodeType::Comment) res += "val lab \n";
 					res += child->Attributes["Id"]->Value + " '" + txt->Replace("'", "\"")->Trim() + "'\n";
 					continue;
 				}
@@ -575,6 +576,7 @@ public ref class SurveyConverter : public System::Windows::Forms::Form
 
 			for each (XmlNode^ child in childs)
 			{
+				if (child->NodeType == XmlNodeType::Comment) continue;
 				// Page		
 				if (child->Name == "Page" || child->Name == "Question")
 				{
