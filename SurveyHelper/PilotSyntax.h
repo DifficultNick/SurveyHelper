@@ -748,6 +748,10 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				ResetAll(false);
 				return;
 			}
+			String^ fileHandle = "currPathSurveyProject1";
+			auto match = Regex::Match(s, "FILE HANDLE\\s*(\\w+)[^\\w]");
+			if (match->Groups->Count > 0)
+				fileHandle = match->Groups[1]->Value;
 			s = Regex::Replace(s, "(?<pre>FILE HANDLE\\s*[^'\"]*NAME\\s*=\\s*['\"])([^'\"]*)(?<post>['\"][^\n]*\n)", "${pre}" + txtP + "${post}");
 
 			int eof = s->IndexOf("\n**** OPENS.");
@@ -792,14 +796,14 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 			}
 
 			// финальное сохранение
-			res += "\n\nsave outfile \"currentPath/" + fn + "_Client.sav\"" + dv + ".";
-			res += "\nget file \"currentPath/" + fn + "_Client.sav\".";
+			res += "\n\nsave outfile \"" + fileHandle + "/" + fn + "_Client.sav\"" + dv + ".";
+			res += "\nget file \"" + fileHandle + "/" + fn + "_Client.sav\".";
 
 			// export
 			if (excelExp->Checked)
 			{
 				res += "\n";
-				res += "\n\nSAVE TRANSLATE OUTFILE=\"currentPath/" + fn + "_Client.xlsx\"\n";
+				res += "\n\nSAVE TRANSLATE OUTFILE=\"" + fileHandle + "/" + fn + "_Client.xlsx\"\n";
 				res += "/TYPE = XLS\n";
 				res += "/VERSION = 12\n";
 				res += "/MAP\n";
@@ -807,7 +811,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				res += "/FIELDNAMES\n";
 				res += "/CELLS = " + (labs->Checked ? "LABELS" : "VALUES") + ".";
 			}
-			res += "\n\n" + s->Remove(0, eof + 1);
+			res += "\n\n" + res->Remove(0, eof + 1);
 
 			progressBar1->Value = 55;
 
