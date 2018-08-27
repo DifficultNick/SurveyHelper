@@ -1167,7 +1167,6 @@ static String^ GetDefaultBrowserPath()
 static void OpenUrl(String^ url, bool isFile = true)
 {
 	String^ s = isFile ? "file:///" : "";
-	ShowMessage(GetDefaultBrowserPath());
 	Run(GetDefaultBrowserPath(), s + url);
 }
 
