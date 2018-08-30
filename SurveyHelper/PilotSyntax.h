@@ -821,14 +821,22 @@ private: System::Windows::Forms::CheckBox^  removeOpens;
 			if (excelExp->Checked)
 			{
 				res += "\n";
-				res += "\n\nSAVE TRANSLATE OUTFILE=\"" + fileHandle + "/" + fn + "_Client.xlsx\"\n";
+				/*res += "\n\nSAVE TRANSLATE OUTFILE=\"" + fileHandle + "/" + fn + "_Client.xlsx\"\n";
 				res += "/TYPE = XLS\n";
 				res += "/VERSION = 12\n";
 				res += "/MAP\n";
 				res += "/REPLACE\n";
 				res += "/FIELDNAMES\n";
-				res += "/CELLS = " + (labs->Checked ? "LABELS" : "VALUES") + ".";
+				res += "/CELLS = " + (labs->Checked ? "LABELS" : "VALUES") + ".";*/
+
+				String^ xlsxPath = txtP + "\\" + Path::GetFileNameWithoutExtension(fp) + "_Client.xlsx";
+
+				res += "\ninsert file = \"T:\\Разное\\Distr\\Macro\\SPSS\\smartexport.sps\".\n";
+				res += "smartexport cells = " + (labs->Checked ? "LABELS" : "VALUES") + " sps = \"" + fp + load + ".sps\" xls = \"" + xlsxPath + "\".";
 			}
+
+
+
 			res += "\n\n";
 
 			// удаление всего после *** Opens
