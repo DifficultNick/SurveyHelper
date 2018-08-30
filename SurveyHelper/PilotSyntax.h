@@ -25,6 +25,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 	private: System::Windows::Forms::CheckBox^  replaceOther;
 
 	private: System::Windows::Forms::TextBox^  other;
+private: System::Windows::Forms::CheckBox^  removeOpens;
 
 
 			 ProjectResources^ rsc = gcnew ProjectResources();
@@ -39,6 +40,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 		delimeter->Text = dd;
 		repl->Checked = sets->Get("ReplaceDelimiter", true);
 		autoRun->Checked = sets->Get("AutoRun", true);
+		removeOpens->Checked = sets->Get("RemoveOpens", true);
 		replaceOther->Checked = sets->Get("ReplaceCS", true);
 	}
 
@@ -144,6 +146,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->autoRun = (gcnew System::Windows::Forms::CheckBox());
 				 this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 				 this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+				 this->removeOpens = (gcnew System::Windows::Forms::CheckBox());
 				 this->tableLayoutPanel2->SuspendLayout();
 				 this->groupBox1->SuspendLayout();
 				 this->tableLayoutPanel3->SuspendLayout();
@@ -180,7 +183,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 				 this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 25)));
 				 this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 22)));
-				 this->tableLayoutPanel2->Size = System::Drawing::Size(635, 304);
+				 this->tableLayoutPanel2->Size = System::Drawing::Size(635, 328);
 				 this->tableLayoutPanel2->TabIndex = 1;
 				 // 
 				 // groupBox1
@@ -191,7 +194,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 					 static_cast<System::Byte>(204)));
 				 this->groupBox1->Location = System::Drawing::Point(3, 40);
 				 this->groupBox1->Name = L"groupBox1";
-				 this->groupBox1->Size = System::Drawing::Size(445, 214);
+				 this->groupBox1->Size = System::Drawing::Size(445, 238);
 				 this->groupBox1->TabIndex = 0;
 				 this->groupBox1->TabStop = false;
 				 this->groupBox1->Text = L"Настройки";
@@ -201,6 +204,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->tableLayoutPanel3->ColumnCount = 1;
 				 this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 100)));
+				 this->tableLayoutPanel3->Controls->Add(this->removeOpens, 0, 7);
 				 this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel9, 0, 6);
 				 this->tableLayoutPanel3->Controls->Add(this->tableLayoutPanel6, 0, 5);
 				 this->tableLayoutPanel3->Controls->Add(this->renvar, 0, 1);
@@ -213,7 +217,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 					 System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 				 this->tableLayoutPanel3->Location = System::Drawing::Point(3, 16);
 				 this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
-				 this->tableLayoutPanel3->RowCount = 7;
+				 this->tableLayoutPanel3->RowCount = 8;
 				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
@@ -221,7 +225,8 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 26)));
 				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
-				 this->tableLayoutPanel3->Size = System::Drawing::Size(439, 195);
+				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
+				 this->tableLayoutPanel3->Size = System::Drawing::Size(439, 219);
 				 this->tableLayoutPanel3->TabIndex = 0;
 				 // 
 				 // tableLayoutPanel9
@@ -239,14 +244,14 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->tableLayoutPanel9->Name = L"tableLayoutPanel9";
 				 this->tableLayoutPanel9->RowCount = 1;
 				 this->tableLayoutPanel9->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-				 this->tableLayoutPanel9->Size = System::Drawing::Size(439, 29);
+				 this->tableLayoutPanel9->Size = System::Drawing::Size(439, 28);
 				 this->tableLayoutPanel9->TabIndex = 10;
 				 // 
 				 // replaceOther
 				 // 
 				 this->replaceOther->AutoSize = true;
-				 this->replaceOther->Dock = System::Windows::Forms::DockStyle::Bottom;
-				 this->replaceOther->Location = System::Drawing::Point(3, 9);
+				 this->replaceOther->Dock = System::Windows::Forms::DockStyle::Top;
+				 this->replaceOther->Location = System::Drawing::Point(3, 3);
 				 this->replaceOther->Name = L"replaceOther";
 				 this->replaceOther->Size = System::Drawing::Size(223, 17);
 				 this->replaceOther->TabIndex = 4;
@@ -509,7 +514,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->tableLayoutPanel2->SetColumnSpan(this->panel2, 2);
 				 this->panel2->Controls->Add(this->tableLayoutPanel7);
 				 this->panel2->Dock = System::Windows::Forms::DockStyle::Fill;
-				 this->panel2->Location = System::Drawing::Point(0, 282);
+				 this->panel2->Location = System::Drawing::Point(0, 306);
 				 this->panel2->Margin = System::Windows::Forms::Padding(0);
 				 this->panel2->Name = L"panel2";
 				 this->panel2->Size = System::Drawing::Size(635, 22);
@@ -591,7 +596,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->panel4->Anchor = System::Windows::Forms::AnchorStyles::None;
 				 this->panel4->BackColor = System::Drawing::Color::White;
 				 this->panel4->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-				 this->panel4->Location = System::Drawing::Point(461, 71);
+				 this->panel4->Location = System::Drawing::Point(461, 83);
 				 this->panel4->Name = L"panel4";
 				 this->panel4->Size = System::Drawing::Size(164, 151);
 				 this->panel4->TabIndex = 4;
@@ -614,7 +619,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->autoRun->AutoSize = true;
 				 this->autoRun->Checked = true;
 				 this->autoRun->CheckState = System::Windows::Forms::CheckState::Checked;
-				 this->autoRun->Location = System::Drawing::Point(9, 259);
+				 this->autoRun->Location = System::Drawing::Point(9, 283);
 				 this->autoRun->Margin = System::Windows::Forms::Padding(9, 2, 2, 2);
 				 this->autoRun->Name = L"autoRun";
 				 this->autoRun->Size = System::Drawing::Size(150, 17);
@@ -632,12 +637,25 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				 this->openFileDialog1->DefaultExt = L"sps";
 				 this->openFileDialog1->Filter = L"Файл spss-синтаксиса|*.sps";
 				 // 
+				 // removeOpens
+				 // 
+				 this->removeOpens->AutoSize = true;
+				 this->removeOpens->Checked = true;
+				 this->removeOpens->CheckState = System::Windows::Forms::CheckState::Checked;
+				 this->removeOpens->Dock = System::Windows::Forms::DockStyle::Top;
+				 this->removeOpens->Location = System::Drawing::Point(3, 197);
+				 this->removeOpens->Name = L"removeOpens";
+				 this->removeOpens->Size = System::Drawing::Size(433, 17);
+				 this->removeOpens->TabIndex = 11;
+				 this->removeOpens->Text = L"Удалить всё, начиная с *** OPENS";
+				 this->removeOpens->UseVisualStyleBackColor = true;
+				 // 
 				 // PilotSyntax
 				 // 
 				 this->AllowDrop = true;
 				 this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-				 this->ClientSize = System::Drawing::Size(635, 304);
+				 this->ClientSize = System::Drawing::Size(635, 328);
 				 this->Controls->Add(this->tableLayoutPanel2);
 				 this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 				 this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
@@ -811,7 +829,13 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				res += "/FIELDNAMES\n";
 				res += "/CELLS = " + (labs->Checked ? "LABELS" : "VALUES") + ".";
 			}
-			res += "\n\n" + s->Remove(0, eof + 1);
+			res += "\n\n";
+
+			// удаление всего после *** Opens
+			if (!removeOpens->Checked)
+			{
+				res += s->Remove(0, eof + 1);
+			}
 			
 			progressBar1->Value = 55;
 
@@ -972,6 +996,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 		sets->Set("ReplaceDelimiter", repl->Checked);
 		sets->Set("AutoRun", autoRun->Checked);
 		sets->Set("ReplaceCS", replaceOther->Checked);
+		sets->Set("RemoveOpens", removeOpens->Checked);
 		sets->Save("SPSS");
 	}
 
