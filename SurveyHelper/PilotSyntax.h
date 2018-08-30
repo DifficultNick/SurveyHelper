@@ -798,7 +798,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 			// финальное сохранение
 			res += "\n\nsave outfile \"" + fileHandle + "/" + fn + "_Client.sav\"" + dv + ".";
 			res += "\nget file \"" + fileHandle + "/" + fn + "_Client.sav\".";
-
+			
 			// export
 			if (excelExp->Checked)
 			{
@@ -811,8 +811,8 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				res += "/FIELDNAMES\n";
 				res += "/CELLS = " + (labs->Checked ? "LABELS" : "VALUES") + ".";
 			}
-			res += "\n\n" + res->Remove(0, eof + 1);
-
+			res += "\n\n" + s->Remove(0, eof + 1);
+			
 			progressBar1->Value = 55;
 
 			// замена @
@@ -842,7 +842,7 @@ public ref class PilotSyntax : public System::Windows::Forms::Form
 				ShowWarning("В файле найдено " + nvalidVarList->Count + " повторяющихся переменных.\nПовторяющиеся имена скопированы в буфер обмена.");
 			}
 
-
+			
 
 			progressBar1->Value = 75;
 			StatusLabel->Text = "Сохранение файла...";
