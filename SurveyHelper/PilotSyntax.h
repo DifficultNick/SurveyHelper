@@ -113,6 +113,7 @@ private: System::Windows::Forms::CheckBox^  removeOpens;
 				 this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 				 this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
+				 this->removeOpens = (gcnew System::Windows::Forms::CheckBox());
 				 this->tableLayoutPanel9 = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->replaceOther = (gcnew System::Windows::Forms::CheckBox());
 				 this->other = (gcnew System::Windows::Forms::TextBox());
@@ -146,7 +147,6 @@ private: System::Windows::Forms::CheckBox^  removeOpens;
 				 this->autoRun = (gcnew System::Windows::Forms::CheckBox());
 				 this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 				 this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-				 this->removeOpens = (gcnew System::Windows::Forms::CheckBox());
 				 this->tableLayoutPanel2->SuspendLayout();
 				 this->groupBox1->SuspendLayout();
 				 this->tableLayoutPanel3->SuspendLayout();
@@ -228,6 +228,19 @@ private: System::Windows::Forms::CheckBox^  removeOpens;
 				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 28)));
 				 this->tableLayoutPanel3->Size = System::Drawing::Size(439, 219);
 				 this->tableLayoutPanel3->TabIndex = 0;
+				 // 
+				 // removeOpens
+				 // 
+				 this->removeOpens->AutoSize = true;
+				 this->removeOpens->Checked = true;
+				 this->removeOpens->CheckState = System::Windows::Forms::CheckState::Checked;
+				 this->removeOpens->Dock = System::Windows::Forms::DockStyle::Top;
+				 this->removeOpens->Location = System::Drawing::Point(3, 197);
+				 this->removeOpens->Name = L"removeOpens";
+				 this->removeOpens->Size = System::Drawing::Size(433, 17);
+				 this->removeOpens->TabIndex = 11;
+				 this->removeOpens->Text = L"Удалить всё, начиная с *** OPENS";
+				 this->removeOpens->UseVisualStyleBackColor = true;
 				 // 
 				 // tableLayoutPanel9
 				 // 
@@ -637,19 +650,6 @@ private: System::Windows::Forms::CheckBox^  removeOpens;
 				 this->openFileDialog1->DefaultExt = L"sps";
 				 this->openFileDialog1->Filter = L"Файл spss-синтаксиса|*.sps";
 				 // 
-				 // removeOpens
-				 // 
-				 this->removeOpens->AutoSize = true;
-				 this->removeOpens->Checked = true;
-				 this->removeOpens->CheckState = System::Windows::Forms::CheckState::Checked;
-				 this->removeOpens->Dock = System::Windows::Forms::DockStyle::Top;
-				 this->removeOpens->Location = System::Drawing::Point(3, 197);
-				 this->removeOpens->Name = L"removeOpens";
-				 this->removeOpens->Size = System::Drawing::Size(433, 17);
-				 this->removeOpens->TabIndex = 11;
-				 this->removeOpens->Text = L"Удалить всё, начиная с *** OPENS";
-				 this->removeOpens->UseVisualStyleBackColor = true;
-				 // 
 				 // PilotSyntax
 				 // 
 				 this->AllowDrop = true;
@@ -803,14 +803,14 @@ private: System::Windows::Forms::CheckBox^  removeOpens;
 				String^ lastTech = vars->Remove(0, vars->LastIndexOf("\npre_data") + 1);
 				lastTech = lastTech->Remove(lastTech->IndexOf(" "));
 				dv = " /drop GlobalID ";
-				if (saveResp->Checked) dv += "PanelResp ";
+				if (saveResp->Checked) dv += "RespUID ";
 				dv += "to ";
 				if (saveTime->Checked) dv += "Page Status to ";
 				if (saveLength->Checked) dv += "DeviceType Version to ";
 				dv += lastTech;
 				lastTech = Regex::Match(vars, "(?<name>srt" + del + "[^\\s]+)\\s+F\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt" + del + "[^\\s]+)\\s+F\\d[^(crt)]*$")->Result("${name}");
 				dv += " " + lastTech + " ";
-				dv += Regex::Match(vars, "(?<name>srt" + del + "[^\\s]+)\\s+[A-Z]\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt" + del + "[^\\s]+)\\s+[A-Z]\\d[^(crt)]*$")->Result("${name}");
+				//dv += Regex::Match(vars, "(?<name>srt" + del + "[^\\s]+)\\s+[A-Z]\\d")->Result("${name}") + " to " + Regex::Match(vars, "(?<name>crt" + del + "[^\\s]+)\\s+[A-Z]\\d[^(crt)]*$")->Result("${name}");
 			}
 
 			// финальное сохранение
@@ -1019,7 +1019,7 @@ private: System::Windows::Forms::CheckBox^  removeOpens;
 		if (!s->Contains("/VARIABLES")) return res;
 		String^ str = s->Remove(0, s->IndexOf("/VARIABLES"));
 		str = str->Remove(0, str->IndexOf("\n") + 1);
-		str = str->Remove(0, str->IndexOf("\n") + 1);
+		//str = str->Remove(0, str->IndexOf("\n") + 1);
 		str = str->Remove(str->IndexOf("\n."));
 		str = str->Replace("\n\n", "");
 		str = Regex::Replace(str, "\n?(?<name>[^\\s\n]+)\\s(?<type>[^\n]+)\n?", "${name},");
